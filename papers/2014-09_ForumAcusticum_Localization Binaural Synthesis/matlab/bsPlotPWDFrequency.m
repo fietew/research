@@ -32,14 +32,13 @@ P=db(P/max(max(abs(P(idx_fmin:idx_fmax,:)))));
 
 P(isinf(P)) = db_min; %note that this handles P=+/-inf we might not that what ge want
 
-surf(phi, fpw, P);
+imagesc(phi, fpw, P);
 set(gca,'XDir','reverse');
 set(gca,'YDir','normal');
 shading interp;
 view(0,90);
 xlabel('\(\phi\) / deg');
 ylabel('\(f\) / Hz');
-set(gca,'YScale','Log')
 set(gca,'CLim',[db_min db_max], ...
   'XTick',[-180; -120; -60; 0; 60; 120; 179], ...
   'XTickLabel',{'-180'; '-120'; '-60'; '0'; '60'; '120'; '180'});

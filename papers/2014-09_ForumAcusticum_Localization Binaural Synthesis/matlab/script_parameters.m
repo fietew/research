@@ -8,16 +8,12 @@ basepath = fileparts(mfilename('fullpath'));
 
 %% initialize
 % SFS Toolbox
-addpath('~/projects/sfstoolbox'); SFS_start;
-% SOFiA Toolbox
-addpath('~/projects/sofia-toolbox/main/SOFiA');
+SFS_start;
 % AM Toolbox
-addpath('~/projects/amtoolbox'); 
-addpath('~/projects/ltfat');
 ltfatstart;
 amtstart;
 ltfatsetdefaults('audspecgram','classic');
-%
+% some own matlab tools
 addpath(fullfile(basepath, 'tools'));
 
 %% SFS toolbox

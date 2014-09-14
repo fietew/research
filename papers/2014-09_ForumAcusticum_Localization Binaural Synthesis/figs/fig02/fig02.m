@@ -22,9 +22,6 @@ f2 = figure;
 bsPlotPWDTime(p_shift,kpw,tpw, true);
 ylim([-3,3]);
 
-% matlab2tikz
-addpath('../../../../tools/matlab/matlab2tikz/src');
-
 matlab2tikz( 'fig02-1.tex', ...
   'figurehandle', f1, ...
   'height', '\fheight', ...
