@@ -14,6 +14,7 @@ Usage
 The material for specific publications is stored under the papers directory. In
 order to generate a figure of one of the publications, switch to the figXX
 directory and execute the scripts in the following order (if existent):
+
 1. MATLAB script: fixXX.m
 2. gnuplot script: figXX.gnu
 3. include figXX.tex, figXX.png, figXX.pdf in your LaTeX document
