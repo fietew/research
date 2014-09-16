@@ -6,6 +6,8 @@ This is repository for additional material and figures of my publications.
 List of Publications
 --------------------
 
+BibTeX file for all publications can be at [here](papers/papers.bib)
+
 [A. Winter, F. Schultz, S. Spors. Localization Properties of Data-based Binaural Synthesis including Translatory Head-Movements. FORUM ACUSTICUM, 2014.](papers/2014-09_ForumAcusticum_Localization Binaural Synthesis)
 
 Usage
