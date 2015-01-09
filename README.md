@@ -39,3 +39,5 @@ listed websites.
 * LTFAT Toolbox( http://sourceforge.net/projects/ltfat/ )
 * SOFIA Toolbox ( https://code.google.com/p/sofia-toolbox/ )
 * MATLAB2TIKZ ( https://github.com/nschloe/matlab2tikz )
+
+Please also add the `./tools/matlab` directory to your MATLAB path.
