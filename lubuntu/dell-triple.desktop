@@ -1,0 +1,5 @@
+[Desktop Entry]
+Type=Application
+Name=dell-triple
+Exec=xrandr --output VIRTUAL1 --off --output DP2 --mode 1920x1200 --pos 0x80 --rotate normal --output DP1 --off --output HDMI2 --off --output HDMI1 --mode 1280x1024 --pos 1920x0 --rotate left --output VGA1 --mode 1280x1024 --pos -1280x256 --rotate normal
+Comment=Start xrandr with settings done in LXRandR
