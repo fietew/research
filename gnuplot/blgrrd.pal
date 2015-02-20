@@ -1,3 +1,7 @@
+# line colors
+#
+# AUTHOR: Hagen Wierstorf
+
 set style line 1  lc rgb '#0025ad' lt 1 lw 2
 set style line 2  lc rgb '#0042ad' lt 1 lw 2
 set style line 3  lc rgb '#0060ad' lt 1 lw 2 # --- blue
