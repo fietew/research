@@ -1,0 +1,176 @@
+\NeedsTeXFormat{LaTeX2e}[1994/06/01]
+\ProvidesPackage{soundfield}
+
+\RequirePackage{amsmath}  \RequirePackage{amssymb}  \RequirePackage{amsfonts}
+\RequirePackage{accents}
+\RequirePackage{etoolbox}
+\RequirePackage{kvoptions}
+\RequirePackage{pdftexcmds}
+\RequirePackage{suffix}
+\RequirePackage{pgf, pgffor}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Options
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\SetupKeyvalOptions{
+	family=sf,
+	prefix=sf@
+}
+
+\DeclareBoolOption[true]{threeD}
+\DeclareComplementaryOption{twoD}{threeD}
+\DeclareBoolOption[false]{showfrequency}
+\DeclareBoolOption[false]{showradius}
+\DeclareBoolOption[false]{showtime}
+
+\ProcessKeyvalOptions*
+
+\pgfkeys{/sf/.is family, %
+  sf,  %
+  modifier/.style = {modifier/enum=#1},
+  modifier/enum/.is choice,  %
+  modifier/current/.initial=\empty
+}
+
+% helper function to create a key representing a variable length list including brackets and delimiter
+% parameters:
+%   optional parameters (keyvalue pairs): left bracket, right bracket, delimiter, modifier
+%   keyname: name of key
+%
+% Examples:
+% afterwards elements can be added via: pgfkeys{sf, <keyname>={arg1,arg2,arg3}}
+%
+% all non-empty lists will be printed by calling: pgfkeys{sf, print}
+% all lists will be reset by calling: pgfkeys{sf, reset}
+\newcommand\sfnewlistkey[2][]{  %
+  \pgfkeys{  %
+    sf,  %
+    #2/.style={ #2/enum/.list={##1} },  %  interprete 'argument = {1,2,3}' as list
+    % initialize enum of valid elements
+    #2/enum/.is choice,
+    % 
+    #2/current/.initial=\empty,  %
+    #2/current/.code = {  %
+      \edef\currentvalue{##1}
+      \edef\listvalue{\pgfkeysvalueof{/sf/#2/current}}
+      \ifx\currentvalue\empty\else
+        \ifx\listvalue\empty\else
+          \pgfkeys{sf, #2/current/.append=\pgfkeysvalueof{/sf/#2/delimiter} }
+        \fi
+        \pgfkeys{sf, #2/current/.append={##1}}
+      \fi
+    },
+    #2/print/.code={  %
+      \edef\listvalue{\pgfkeysvalueof{/sf/#2/current}}
+      \ifx\listvalue\empty\else
+        \pgfkeys{ sf,  %
+          #2/current/.add={\pgfkeysvalueof{/sf/#2/brackets/left}}{\pgfkeysvalueof{/sf/#2/brackets/right}},
+          #2/current/.prefix=\pgfkeysvalueof{/sf/#2/modifier}
+        }
+      \fi
+      \pgfkeysvalueof{/sf/#2/current}
+    },
+    % add list to print
+    print/.append style={ #2/print  },  %
+    % append initial values to reset function
+    reset/.append style={ #2/current/.initial=\empty  }  %
+  }
+  
+  \pgfkeys{sf,  %
+    list/.cd, %
+    left bracket/.style = {/sf/#2/brackets/left/.initial={##1}},  %
+    right bracket/.style = {/sf/#2/brackets/right/.initial={##1}},  %
+    delimiter/.style = {/sf/#2/delimiter/.initial={##1}},  %
+    modifier/.style = {/sf/#2/modifier/.initial={##1}},   %
+    % default values
+    left bracket=,  %
+    right bracket=,  %
+    delimiter= {,},  %
+    modifier=,  %
+    % optional input
+    #1  %
+  }
+}
+% Define a possible choice for key
+% \sfnewkeychoice{<keyname>}{<choicename>}{<value>}
+\newcommand\sfnewkeychoice[3]{  %
+  \pgfkeys{sf, #1/enum/#2/.style={#1/current={#3}}}  %
+}
+% Link a choice for key to symbol
+% \sflinkkeychoice{<keyname>}{<choicename>}{<symbol>}
+\newcommand\sflinkkeychoice[3]{  %
+  \pgfkeys{sf, #1/enum/#2/.style={#1/current={#3}}}  %
+}
+
+% Define a new symbol
+% \sfnewsymbol[list of <key-value-pairs>]{<symbolname>}{<value>}
+\newcommand\sfnewsymbol[3][]{  %
+  \pgfkeys{sf, symbol/new={#2}{#3}{#1} } %
+}
+% Extend existing symbols by additional parameters speficied by key-value-pairs
+% \sfextendsymbol[list of <key-value-pairs>]{list of <symbol>}{<symbolsuffix>}
+%
+% Afterwards for each <symbol> specfied the following command is available:
+% \sf<symbolname><symbolsuffix>
+\newcommand\sfextendsymbol[3][]{  %
+  \pgfkeys{sf,  %
+    tmp/symbolname/.style={  %
+      tmp/symbolsuffix/.style={symbol/extend={##1}{####1}{#1}},  %
+      tmp/symbolsuffix/.list={#3}  %
+    },  %
+    tmp/symbolname/.list={#2}  %
+  }  %
+}
+
+\newcommand{\sfprint}[1][]{  %
+  \pgfkeys{sf, reset, #1, print, reset}
+}
+
+\newcommand\sfnewmodifier[2]{  %
+  \sfnewkeychoice{modifier}{#1}{#2}
+}
+
+%% INITIALIZATION  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Symbols
+\pgfkeys{
+  sf,  %
+  symbol/.style = {symbol/enum=#1},
+  symbol/enum/.is choice,  %
+  symbol/new/.style n args={3}{  %
+    symbol/newcommand={#1},  %
+    symbol/enum/#1/.initial=#2,  %
+    symbol/enum/#1/.style={current/symbol=\pgfkeysvalueof{/sf/symbol/enum/#1}, #3}  %
+  },  %
+  symbol/extend/.style n args={3}{  %
+    symbol/newcommand={#1#2},  %
+    symbol/enum/#1#2/.initial={\pgfkeysvalueof{/sf/symbol/enum/#1}},  %
+    symbol/enum/#1#2/.style={current/symbol=\pgfkeysvalueof{/sf/symbol/enum/#1#2}, #3}
+  }, %
+  symbol/newcommand/.code= {  %
+    \expandafter\newcommand\csname sf#1\endcsname[1][]{%
+      \sfprint[symbol=#1, ##1]  %
+    }  %
+  },  %
+  % current symbol for printing
+  current/symbol/.initial=\empty,  %
+  current/symbol/print/.code={  %
+    \pgfkeysvalueof{/sf/current/modifier}  %
+    {\pgfkeysvalueof{/sf/current/symbol}}  %
+  }
+}
+
+\pgfkeys{  %
+  sf,  %
+  reset/.style={  %
+    current/symbol/.initial=\empty,  %
+    current/modifier/.initial=\empty,  %
+  },  %
+  print/.style={  %
+    current/symbol/print  %
+  },  %
+}
+
+%% List-Keys
+\sfnewlistkey[modifier={_}]{subscript}
+\sfnewlistkey[modifier={^}]{superscript}
