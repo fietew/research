@@ -1,6 +1,11 @@
 # line colors
 #
-# AUTHOR: Hagen Wierstorf
+# Copyright (c) Hagen Wierstorf
+#
+# You can redistribute the material and/or modify it under the terms of
+# Creative Commons Attribution 3.0 (CC BY 3.0)
+#
+# Link to License: https://creativecommons.org/licenses/by/3.0/
 
 set style line 1  lc rgb '#0025ad' lt 1 lw 2
 set style line 2  lc rgb '#0042ad' lt 1 lw 2
