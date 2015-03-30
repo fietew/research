@@ -19,9 +19,17 @@ function exhaustive_evaluation(func, param_names, param_values, params)
 %
 %   exhaustive_evaluation(func, param_names, param_values, params)
 
-for idx=1:size(param_values,1)
-  params = assignfield_recursive(params, param_names, param_values(idx,:));
-  func(params);
+% check for parallel computing toolbox
+if license('test', 'distrib_computing_toolbox')
+  parfor idx=1:size(param_values,1)
+    tmp = assignfield_recursive(params, param_names, param_values(idx,:));
+    func(tmp);
+  end
+else
+  for idx=1:size(param_values,1)
+    tmp = assignfield_recursive(params, param_names, param_values(idx,:));
+    func(tmp);
+  end
 end
 
 end
