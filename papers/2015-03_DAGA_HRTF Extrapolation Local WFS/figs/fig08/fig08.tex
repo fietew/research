@@ -1,0 +1,104 @@
+%*****************************************************************************
+% Copyright (c) 2015      Fiete Winter                                       *
+%                         Institut fuer Nachrichtentechnik                   *
+%                         Universitaet Rostock                               *
+%                         Richard-Wagner-Strasse 31, 18119 Rostock, Germany  *
+%                                                                            *
+% This file is part of the supplementary material for Fiete Winter's         *
+% scientific work and publications                                           *
+%                                                                            *
+% You can redistribute the material and/or modify it  under the terms of the *
+% GNU  General  Public  License as published by the Free Software Foundation *
+% , either version 3 of the License,  or (at your option) any later version. *
+%                                                                            *
+% This Material is distributed in the hope that it will be useful, but       *
+% WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY *
+% or FITNESS FOR A PARTICULAR PURPOSE.                                       *
+% See the GNU General Public License for more details.                       *
+%                                                                            *
+% You should  have received a copy of the GNU General Public License along   *
+% with this program. If not, see <http://www.gnu.org/licenses/>.             *
+%                                                                            *
+% http://github.com/fietew/publications           fiete.winter@uni-rostock.de*
+%*****************************************************************************
+
+\tikzstyle{loudspeaker} = [basic loudspeaker, draw, fill=white
+, minimum height=2mm 	    % height of the rectangle ("driver") part 
+, minimum width=1mm		    % width of the rectangle
+, inner sep=0pt
+, relative cone width=1	% height of trapezoid ("cone") part, relative to minimum width (default: 1)
+, relative cone height=2	    % width of trapezoid, relative to minimum height (default: 2)
+]
+
+\tikzstyle{active} = [fill=activecolor]
+\tikzstyle{focus} = [draw, fill=white, circle, minimum size=2mm, inner sep=0pt]
+\tikzstyle{source} = [draw, fill=black, circle, minimum size=2mm, inner sep=0pt]
+\tikzstyle{driving_left} = [color=blue, thick, -latex, bend right=40]
+\tikzstyle{driving_right} = [color=blue, thick, -latex, bend left=40]
+\tikzstyle{hrtf_left} = [color=red!50!black, thick, bend right=90]
+\tikzstyle{hrtf_right} = [color=red!50!black, thick, bend left=90]
+
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
+
+
+
+\begin{tikzpicture}
+
+\pgfmathsetmacro{\R}{3.0}
+
+\pgfmathsetmacro{\Rpw}{\R*1.5}
+\pgfmathsetmacro{\alphapw}{135}
+
+\begin{pgfonlayer}{foreground}
+  % head
+  \node[yshift=0.05cm] (head) at (0,0) {\includegraphics[scale=40]{head}};
+  \coordinate (leftear) at ($(head) + (-0.53,-0.05)$);
+  \coordinate (rightear) at ($(head) + (0.55,-0.05)$);
+  % point source
+  \node[source, thick] (ps) at (\alphapw:\Rpw) {};
+  \node[above left] at (ps) {$\pspos$};
+  % HRTF
+  \draw<1>[color=black, thick, -latex, bend right=50] (ps) edge node[pos=0.25, left]{$ \tilde H_{\mathrm L}(\pspos, \omega)$ } (leftear);
+  \draw<1>[color=black, thick, -latex, bend left=120] (ps) edge node[pos=0.25, above right]{$ \tilde H_{\mathrm R}(\pspos, \omega)$ } (rightear);  
+  
+  % Driving Functions
+  \foreach \phi in {20,40, ...,360} {
+  	\draw<1> node (speaker\phi) at (\phi:\R) [focus, active,rotate=\phi-180]{};
+    \draw<2-> node (speaker\phi) at (\phi:\R) [loudspeaker, active,rotate=\phi-180]{};
+  };
+  
+  \node[right=5pt] at (speaker40) {$\lspos*$};
+  
+  \foreach \phi in {140, 160, 180} {
+    \draw<2->[driving_left] (ps) edge (speaker\phi);
+  }
+  \draw<2->[driving_left, dashed] (ps) edge (speaker200);
+  
+  \foreach \phi in {80, 100, 120} {
+    \draw<2->[driving_right] (ps) edge (speaker\phi);
+  }
+  \draw<2->[driving_right, dashed] (ps) edge (speaker60);
+  
+  %% HRTFs
+  \foreach \phi in {80, 100, ..., 180} {
+    \draw<3>[hrtf_left] (speaker\phi) edge (leftear);
+    \draw<3>[hrtf_right] (speaker\phi) edge (rightear);
+  }
+  \foreach \phi in {60,200} {
+    \draw<3>[hrtf_left, dashed] (speaker\phi) edge (leftear);
+    \draw<3>[hrtf_right, dashed] (speaker\phi) edge (rightear);
+  }
+  
+  \node at (-2.7, -4) {$ \displaystyle \hrtf*(\pspos, \omega) = $};
+  \node<3-> at (-1, -4) {$ \displaystyle \sum_{n=0}^{\lsnumber-1} $};
+  \node<2->[color=blue] at (0.35, -4) {$ \displaystyle  \lsdriving[\lspos*]$};
+  \node<3->[color=red!50!black] at (2.6, -4) {$ \displaystyle \hrtf(\lspos*, \omega)$};
+  
+\end{pgfonlayer}
+
+\path[use as bounding box] (-6, -6) rectangle (6, 5.2);
+
+
+\end{tikzpicture}

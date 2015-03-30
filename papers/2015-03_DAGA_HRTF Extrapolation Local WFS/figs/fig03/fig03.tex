@@ -1,0 +1,115 @@
+%*****************************************************************************
+% Copyright (c) 2015      Fiete Winter                                       *
+%                         Institut fuer Nachrichtentechnik                   *
+%                         Universitaet Rostock                               *
+%                         Richard-Wagner-Strasse 31, 18119 Rostock, Germany  *
+%                                                                            *
+% This file is part of the supplementary material for Fiete Winter's         *
+% scientific work and publications                                           *
+%                                                                            *
+% You can redistribute the material and/or modify it  under the terms of the *
+% GNU  General  Public  License as published by the Free Software Foundation *
+% , either version 3 of the License,  or (at your option) any later version. *
+%                                                                            *
+% This Material is distributed in the hope that it will be useful, but       *
+% WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY *
+% or FITNESS FOR A PARTICULAR PURPOSE.                                       *
+% See the GNU General Public License for more details.                       *
+%                                                                            *
+% You should  have received a copy of the GNU General Public License along   *
+% with this program. If not, see <http://www.gnu.org/licenses/>.             *
+%                                                                            *
+% http://github.com/fietew/publications           fiete.winter@uni-rostock.de*
+%*****************************************************************************
+
+\tikzstyle{loudspeaker} = [basic loudspeaker, draw, fill=white
+, minimum height=2mm 	    % height of the rectangle ("driver") part 
+, minimum width=1mm		    % width of the rectangle
+, inner sep=0pt
+, relative cone width=1	% height of trapezoid ("cone") part, relative to minimum width (default: 1)
+, relative cone height=2	    % width of trapezoid, relative to minimum height (default: 2)
+]
+
+\tikzstyle{active} = [fill=activecolor]
+\tikzstyle{focus} = [draw, fill=white, circle, minimum size=2mm, inner sep=0pt]
+\tikzstyle{source} = [draw, fill=black, circle, minimum size=1mm, inner sep=0pt]
+
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
+
+\begin{tikzpicture}
+
+\pgfmathsetmacro{\Rl}{1.5}
+\pgfmathsetmacro{\Rllabel}{\Rl+0.2}
+\pgfmathsetmacro{\Rltmp}{0.75*\Rl}
+
+\pgfmathsetmacro{\R}{3.0}
+\pgfmathsetmacro{\Rlabel}{\R+0.2}
+\pgfmathsetmacro{\Rtmp}{0.6*\R + 0.4*\Rl}
+
+\pgfmathsetmacro{\Rcoord}{\R*1.2}
+
+\pgfmathsetmacro{\Rpw}{\Rcoord*1.1}
+\pgfmathsetmacro{\Rpwtmp}{0.75*\R + 0.25*\Rl}
+\pgfmathsetmacro{\alphapw}{135}
+
+%% loudspeakers domain
+\begin{pgfonlayer}{background}
+  \draw[thick, fill=loudspeakercircle] (0,0) circle (\R);
+\end{pgfonlayer}
+
+\begin{pgfonlayer}{foreground}
+  \draw[-latex] (340:\R0) -- +(340:-0.2*\R0) node [above, at end] {$\lsnormal$};
+  
+  \foreach \phi in {20,40, ...,260} {
+  	\draw node (speaker\phi) at (\phi:\R) [loudspeaker, active,rotate=\phi-180]{};
+  };
+  \foreach \phi in {280,300,...,360} {
+    \draw node (speaker\phi) at (\phi:\R) [loudspeaker, rotate=\phi-180]{};
+  };
+
+  \draw[-latex] (0,0) -- (240:\R) node [sloped, below, near end] {$\lsradius$};
+  \draw[-latex] (0:\Rtmp) arc (0:240:\Rtmp) node [pos=0.85, right] {$\lsazimuth$};
+  \node[below left] at (240:\R) {$\lspos$};
+  % \draw[<->] (300:\Rlabel) arc (300:320:\Rlabel) node [sloped, pos=0.5, below] {$\lsdelta$};
+\end{pgfonlayer}
+
+%% local domain
+\begin{pgfonlayer}{background}
+  \draw[thick, fill=focuscircle] (0,0) circle (\Rl);
+
+  \node[rotate=-90, yshift=0.05cm] at (0,0) {\includegraphics[scale=30]{head}};
+\end{pgfonlayer}
+
+\begin{pgfonlayer}{foreground}
+  \draw[-latex] (330:\Rl) -- +(330:-0.35*\Rl) node [left, at end] {$\localnormal$};
+
+  \foreach \phi in {60, 75, ...,210} {
+    \draw node (focus\phi) at (\phi:\Rl) [focus, active]{};
+  };
+  \foreach \phi in {225,240,...,405} {
+    \draw node (focus\phi) at (\phi:\Rl) [focus]{};
+  };
+
+  \draw[-latex] (0,0) -- (45:\Rl) node [sloped, above, pos=0.6] {$\localradius$};
+  \draw[-latex] (0:\Rltmp) arc (0:45:\Rltmp) node [pos=0.30, left] {$\localazimuth$};
+  \node[right] at (45:\Rl) {$\localpos$};
+  % \draw[<->] (285:\Rllabel) arc (285:300:\Rllabel) node [sloped, pos=0.5, below] {$\localdelta$};
+\end{pgfonlayer}
+
+% coordinate system
+\begin{pgfonlayer}{foreground}
+  \draw[thick, -latex] (-\Rcoord,0) -- (\Rcoord,0) node[at end, below] {$x$};
+  \draw[thick, -latex] (0,-\Rcoord) -- (0,\Rcoord) node[at end, left] {$y$};
+\end{pgfonlayer}
+
+%% plane wave
+\begin{pgfonlayer}{foreground}
+  \node[source, thick] at (\alphapw:\Rpw) {};
+  \node[above right] at (\alphapw:\Rpw) {$\pspos$};
+  \draw[thick, -latex] (0,0) -- (\alphapw:\Rpw);
+  % \draw[-latex] (0:\Rpwtmp) arc (0:\alphapw:\Rpwtmp) node [pos=0.85, below right] {$\pwazimuth$};
+\end{pgfonlayer}
+
+\end{tikzpicture}
