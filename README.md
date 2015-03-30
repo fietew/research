@@ -38,6 +38,8 @@ listed websites.
 * Auditory Modelling Toolbox ( http://amtoolbox.sourceforge.net/ )
 * LTFAT Toolbox( http://sourceforge.net/projects/ltfat/ )
 * SOFIA Toolbox ( https://code.google.com/p/sofia-toolbox/ )
+* Sound Field Synthesis Toolbox ( https://github.com/sfstoolbox/sfs )
 * MATLAB2TIKZ ( https://github.com/nschloe/matlab2tikz )
+* EKF/UKF Toolbox ( https://github.com/fietew/ekfukf )
 
 Please also add the `./tools/matlab` directory to your MATLAB path.
