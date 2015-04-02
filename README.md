@@ -46,3 +46,18 @@ listed websites.
 * EKF/UKF Toolbox ( https://github.com/fietew/ekfukf )
 
 Please also add the `./tools/matlab` directory to your MATLAB path.
+
+License
+------------
+
+The Software is released under [GNU General Public License, version 3].
+
+Funding
+------------
+
+My research is funded by the European Union’s Seventh Framework Programme for research,
+technological development and demonstration under grant agreement no 618075.
+
+![EU Flag](doc/img/eu-flag.gif) [![Tree](doc/img/tree.jpg)](http://cordis.europa.eu/fet-proactive/)
+
+[GNU General Public License, version 3]:http://www.gnu.org/licenses/gpl-3.0.html
