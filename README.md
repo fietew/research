@@ -26,6 +26,7 @@ directory and execute the scripts in the following order (if existent):
 
 Requirements
 ------------
+### Gnuplot
 
 ### LaTeX
 
