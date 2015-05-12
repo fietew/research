@@ -12,6 +12,8 @@ BibTeX file for all publications can be at [here](papers/papers.bib)
 
 [F. Winter, S. Spors. Parameter Analysis for Range Extrapolation of Head-Related Transfer Functions using Virtual Local Wave Field Synthesis. German Annual Conference on Acoustics (DAGA), 2015.](papers/2015-03_DAGA_HRTF Extrapolation Local WFS)
 
+[F. Winter, S. Spors. Physical Properties of Local Wave Field Synthesis Using Linear Loudspeaker Arrays. Proc. of 138th Aud. Eng. Soc. Conv., 2015.](papers/2015-05_AES138_Aliasing_Linear_Local_WFS)
+
 
 Usage
 -----
