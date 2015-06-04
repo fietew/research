@@ -14,6 +14,8 @@ BibTeX file for all publications can be at [here](papers/papers.bib)
 
 [F. Winter, S. Spors. Physical Properties of Local Wave Field Synthesis Using Linear Loudspeaker Arrays. Proc. of 138th Aud. Eng. Soc. Conv., 2015.](papers/2015-05_AES138_Aliasing_Linear_Local_WFS)
 
+[F. Winter, S. Spors. Physical Properties of Local Wave Field Synthesis Using Circular Loudspeaker Arrays. Proc. of the 10th European Congress and Exposition on Noise Control Engineering (EuroNoise), 2015.](papers/2015-05_EuroNoise_Aliasing_Circular_Local_WFS)
+
 
 Usage
 -----
