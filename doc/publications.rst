@@ -22,15 +22,8 @@
  * http://github.com/fietew/publications           fiete.winter@uni-rostock.de*
  ******************************************************************************
 
-Material
-========
-
-List of Publications
---------------------
-
-.. bibliography:: ../papers/papers.bib
-  :style: alpha
-  :all:
+Material for scientific publications
+====================================
 
 Requirements
 ------------
@@ -38,8 +31,17 @@ Requirements
 Gnuplot
 ~~~~~~~
 
+The code of this repository has been tested under Gnuplot 4.6 patchlevel 4.
+Special thanks go to Hagen Wierstorf for introducing me to Gnuplot. His
+`Gnuplotting Blog <http://www.gnuplotting.org/>`_ contains a lot of examples
+and information about Gnuplot.
+
 LaTeX
 ~~~~~
+
+I am using pdfLaTeX, but it might be possible to get the scipts running with
+other LaTeX compilers (I don't know at all). Here are some LaTeX packages
+listed, which you need.
 
 * TikZ
 * PGF-plots
@@ -69,8 +71,8 @@ toolbox.
 ============================  =====  ======= ======= ===== ========== =========
 :cite:`Winter2014-FA`           X       X       X      X        X
 :cite:`Winter2015-DAGA`                                X
-:cite:`Winter2015-AES`          X                      X        X
-:cite:`Winter2015-EuroNoise`    X                      X        X
+:cite:`Winter2015-AES`                                 X        X
+:cite:`Winter2015-EuroNoise`                           X        X
 ============================  =====  ======= ======= ===== ========== =========
 
 How to reproduce Figures
@@ -84,3 +86,10 @@ the figXX directory and execute the scripts in the following order
 1. MATLAB script: fixXX.m
 2. gnuplot script: figXX.gnu
 3. include figXX.tex, figXX.png, figXX.pdf in your LaTeX document
+
+List of Publications
+--------------------
+
+.. bibliography:: ../papers/papers.bib
+  :style: alpha
+  :all:
