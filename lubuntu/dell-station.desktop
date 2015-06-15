@@ -1,0 +1,5 @@
+[Desktop Entry]
+Type=Application
+Name=dell-station
+Exec=xrandr --output DP2 --mode 1920x1200 --pos 0x80 --rotate normal --output DP1 --off --output HDMI3 --off --output HDMI2 --mode 1280x1024 --pos 1920x0 --rotate left --output HDMI1 --off --output eDP1 --off --output VGA1 --off
+Comment=Start xrandr with settings done in LXRandR
