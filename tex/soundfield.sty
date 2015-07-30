@@ -176,6 +176,8 @@
 \sfnewsymbol{sphr}{r}
 \sfnewsymbol{sphphi}{\phi}
 \sfnewsymbol{sphtheta}{\vartheta}
+%% Sampling Distance
+\sfnewsymbol{delta}{\Delta}
 
 %% Time-Frequency Domain %%
 \sfnewsymbol{omega}{\omega}
@@ -242,14 +244,18 @@
 \sfnewkeychoice{subscript}{fs}{\mathrm{fs}}
 \sfnewkeychoice{subscript}{ls}{\mathrm{ls}}
 % extensions of symbols
-\sfextendsymbol[subscript=pw]{pos, normal, driving}{pw}
-\sfextendsymbol[subscript=ps]{pos, normal, driving}{ps}
-\sfextendsymbol[subscript=ls]{pos, normal, driving}{ls}
-\sfextendsymbol[subscript=fs]{pos, normal, driving}{fs}
+\sfextendsymbol[subscript=pw]{pos, normal, driving, sphtheta, sphphi}{pw}
+\sfextendsymbol[subscript=ps]{pos, normal, driving, sphtheta, sphphi}{ps}
+\sfextendsymbol[subscript=ls]{pos, normal, driving, sphtheta, sphphi}{ls}
+\sfextendsymbol[subscript=fs]{pos, normal, driving, sphtheta, sphphi}{fs}
 
 %% Reference Coordinates %%
 \sfnewkeychoice{subscript}{ref}{\mathrm{ref}}
 \sfextendsymbol[subscript=ref]{pos, sphr}{ref}
+
+%% Errors
+\sfnewkeychoice{subscript}{err}{\epsilon}
+\sfextendsymbol[subscript=err]{pressure}{err}
 
 %% Domains %%
 \sfnewkeychoice{subscript}{virtual}{\mathrm{s}}
@@ -261,7 +267,9 @@
 % extensions of symbols
 \sfextendsymbol[subscript=scatter]{pressure}{sc}
 \sfextendsymbol[subscript=incoming]{pressure}{in}
-\sfextendsymbol[subscript=sec]{pos, normal, sphr, sphphi, greens, select, driving, set, setboundary, area, volume, areadiff, volumediff}{sec}
+\sfextendsymbol[subscript=sec]{pos, normal, sphr, sphphi, greens, 
+select, 
+driving, set, setboundary, area, volume, areadiff, volumediff, delta}{sec}
 \sfextendsymbol[subscript=local]{pos, normal, driving, select, set, setboundary, area, volume, areadiff, volumediff}{local}
 
 %% HRTF %%
