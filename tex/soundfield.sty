@@ -107,18 +107,18 @@
   \pgfkeys{sf, reset, #1, print, reset}
 }
 
-\newcommand\sfnewmodifier[2]{  %
-  \sfnewkeychoice{modifier}{#1}{#2}
+\newcommand\sfnewprefix[2]{  %
+  \sfnewkeychoice{prefix}{#1}{#2}
 }
 
 %% INITIALIZATION  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%% Modifiers
+%% Prefix
 \pgfkeys{
   sf,  %
-  modifier/.style = {modifier/enum=#1},
-  modifier/enum/.is choice,  %
-  modifier/current/.initial=\empty
+  prefix/.style = { prefix/enum=#1 },
+  prefix/enum/.is choice,  %
+  prefix/current/.initial=\empty
 }
 
 %% Reset and Print
@@ -126,7 +126,7 @@
   sf,  %
   reset/.style={  %
     symbol/current/.initial=\empty,  %
-    modifier/current/.initial=\empty,  %
+    prefix/current/.initial=\empty,  %
   },  %
   print/.style={  %
     symbol/current/print  %
@@ -155,7 +155,7 @@
   % current symbol for printing
   symbol/current/.initial=\empty,  %
   symbol/current/print/.code={  %
-    \pgfkeysvalueof{/sf/modifier/current}  %
+    \pgfkeysvalueof{/sf/prefix/current}  %
     {\pgfkeysvalueof{/sf/symbol/current}}  %
   }
 }
@@ -164,14 +164,12 @@
 
 %%%% List of Modifiers %%%%
 
-\sfnewmodifier{partial}{\frac{\partial}{\partial}}
-
 %%%% List of Symbols %%%%
-\sfnewmodifier{vec}{\mathbf}
-\sfnewmodifier{alternative}{\uppercase}
+\sfnewprefix{vec}{\mathbf}
+\sfnewprefix{alternative}{\uppercase}
 %% Vectors %%
-\sfnewsymbol[modifier=vec]{pos}{x}  % position vector
-\sfnewsymbol[modifier=vec]{normal}{n}  % unit vector
+\sfnewsymbol[prefix=vec]{pos}{x}  % position vector
+\sfnewsymbol[prefix=vec]{normal}{n}  % unit vector
 %% Coordinates
 \sfnewsymbol{sphr}{r}
 \sfnewsymbol{sphphi}{\phi}
@@ -183,6 +181,9 @@
 \sfnewsymbol{omega}{\omega}
 \sfnewsymbol{f}{f}
 \sfnewsymbol{t}{t}
+
+%% Spatio-Frequency Domain %%
+\sfnewsymbol{wavenumber}{\frac{\omega}{c}}
 
 %% Sound Field Synthesis %%
 \sfnewsymbol{pressure}{P}  % sound pressure
@@ -202,38 +203,39 @@
 
 %% Integrals
 % differential operators
-\sfnewmodifier{differential}{\mathrm d}
-\sfnewmodifier{partial}{\partial}
+\sfnewprefix{differential}{\mathrm d}
+\sfnewprefix{partial}{\partial}
+\sfnewsymbol{laplace}{\Delta}
 % areas and boundaries
 \sfnewsymbol{set}{\Omega}
-\sfextendsymbol[modifier=partial]{set}{boundary}
+\sfextendsymbol[prefix=partial]{set}{boundary}
 
 \sfnewsymbol{boundary}{\partial \Omega}
 \sfnewsymbol{volume}{V}
 \sfnewsymbol{area}{A}
 % differentials
-\sfextendsymbol[modifier=differential]{volume}{diff}
-\sfextendsymbol[modifier=differential]{area}{diff}
+\sfextendsymbol[prefix=differential]{volume}{diff}
+\sfextendsymbol[prefix=differential]{area}{diff}
 
 %% Constants %%
-\sfnewmodifier{const}{\mathrm}
+\sfnewprefix{const}{\mathrm}
 %
-\sfnewsymbol[modifier=const]{euler}{e}
-\sfnewsymbol[modifier=const]{im}{j}
-\sfnewsymbol[modifier=const]{speedofsound}{c}
+\sfnewsymbol[prefix=const]{euler}{e}
+\sfnewsymbol[prefix=const]{im}{j}
+\sfnewsymbol[prefix=const]{speedofsound}{c}
 
 %%%% List of Transforms %%%%
 %% Cartesian Coordinates
-\sfnewmodifier{pwd}{\tilde}  % plane wave decompostion
-\sfextendsymbol[modifier=pwd]{normal, greens, driving, hrtf, virtualsource}{pwd}
+\sfnewprefix{pwd}{\tilde}  % plane wave decompostion
+\sfextendsymbol[prefix=pwd]{normal, greens, driving, hrtf, virtualsource}{pwd}
 %% Cylindrical Coordinates
-\sfnewmodifier{cht}{\accentset{\circ}}  % cylindrical harmonics transform
+\sfnewprefix{cht}{\accentset{\circ}}  % cylindrical harmonics transform
 %% Spherical Coordinates
-\sfnewmodifier{sht}{\accentset{\bullet}}  % spherical harmonics transform
+\sfnewprefix{sht}{\accentset{\bullet}}  % spherical harmonics transform
 
 %% Time 
-\sfnewmodifier{time}{\lowercase}
-\sfextendsymbol[modifier=time]{normal, greens, driving, hrtf, virtualsource}{time}
+\sfnewprefix{time}{\lowercase}
+\sfextendsymbol[prefix=time]{normal, greens, driving, hrtf, virtualsource}{time}
 
 %%%% List of subscripts %%%%
 \sfnewlistkey[modifier={_}]{subscript}
@@ -244,10 +246,10 @@
 \sfnewkeychoice{subscript}{fs}{\mathrm{fs}}
 \sfnewkeychoice{subscript}{ls}{\mathrm{ls}}
 % extensions of symbols
-\sfextendsymbol[subscript=pw]{pos, normal, driving, sphtheta, sphphi}{pw}
-\sfextendsymbol[subscript=ps]{pos, normal, driving, sphtheta, sphphi}{ps}
-\sfextendsymbol[subscript=ls]{pos, normal, driving, sphtheta, sphphi}{ls}
-\sfextendsymbol[subscript=fs]{pos, normal, driving, sphtheta, sphphi}{fs}
+\sfextendsymbol[subscript=pw]{pos, normal, driving}{pw}
+\sfextendsymbol[subscript=ps]{pos, normal, driving}{ps}
+\sfextendsymbol[subscript=ls]{pos, normal, driving}{ls}
+\sfextendsymbol[subscript=fs]{pos, normal, driving}{fs}
 
 %% Reference Coordinates %%
 \sfnewkeychoice{subscript}{ref}{\mathrm{ref}}
@@ -264,12 +266,16 @@
 \sfnewkeychoice{subscript}{wc}{\{\mathrm{0},l\}}
 \sfnewkeychoice{subscript}{incoming}{\mathrm{in}}
 \sfnewkeychoice{subscript}{scatter}{\mathrm{sc}}
+\sfnewkeychoice{subscript}{homogeneous}{\mathrm{hom}}
+\sfnewkeychoice{subscript}{inhomogeneous}{\mathrm{inh}}
+
 % extensions of symbols
 \sfextendsymbol[subscript=scatter]{pressure}{sc}
 \sfextendsymbol[subscript=incoming]{pressure}{in}
-\sfextendsymbol[subscript=sec]{pos, normal, sphr, sphphi, greens, 
-select, 
-driving, set, setboundary, area, volume, areadiff, volumediff, delta}{sec}
+\sfextendsymbol[subscript=homogeneous]{pressure}{hom}
+\sfextendsymbol[subscript=inhomogeneous]{pressure}{inh}
+\sfextendsymbol[subscript=sec]{pos, normal, sphr, sphphi, greens, select, 
+driving, set, setboundary, area, volume, areadiff, volumediff, laplace}{sec}
 \sfextendsymbol[subscript=local]{pos, normal, driving, select, set, setboundary, area, volume, areadiff, volumediff}{local}
 
 %% HRTF %%
@@ -285,6 +291,13 @@ driving, set, setboundary, area, volume, areadiff, volumediff, delta}{sec}
 \sfextendsymbol[subscript=twohalfD]{pressure, driving}{twohalfD}
 \sfextendsymbol[subscript=threeD]{greens, driving}{threeD}
 
+%% Boundary Conditions
+\sfnewkeychoice{subscript}{neumann}{\mathrm{N}}
+\sfnewkeychoice{subscript}{dirichlet}{\mathrm{D}}
+% extensions of symbols
+\sfextendsymbol[subscript=neumann]{greens}{N}
+\sfextendsymbol[subscript=dirichlet]{greens}{D}
+
 %%%% List of superscripts %%%%
 \sfnewlistkey[modifier={^}]{superscript}
 %% pratical aspects for loudspeaker array %%
@@ -292,3 +305,10 @@ driving, set, setboundary, area, volume, areadiff, volumediff, delta}{sec}
 \sfnewkeychoice{superscript}{truncated}{\mathrm{T}}
 %% time reversal/phase conjugation
 \sfnewkeychoice{superscript}{timereverse}{*}
+
+%%%% MISC %%%%
+\newcommand\sfgreensdipole[1][]{ %
+    \frac{\sfgreens[prefix=partial,#1]}{\sfnormal[prefix=partial,#1]}
+  }
+
+
