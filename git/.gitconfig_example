@@ -1,6 +1,6 @@
 [user]
-	name = Fiete Winter
-	email = fiete.winter@uni-rostock.de
+	name = John Doe
+	email = john.doe@whatever.yxz
 [alias]
 	s = status --short --untracked-files=no
 	sa = status --short
