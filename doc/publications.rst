@@ -25,8 +25,22 @@
 Material for scientific publications
 ====================================
 
-Requirements
-------------
+All publications are listed at the bottom of this page. The material for 
+specific publications is stored under the 
+`papers directory <https://github.com/fietew/publications/tree/master/papers>`_. 
+The figures of each paper can be found the respective sub-directory ``figs``. 
+For some publications, there is also a ``slides`` directory
+containing the scripts for some figures on the presentations slides. Both 
+should (in most cases at least) be enumerated in order of appearance in the 
+paper and the slides, respectively. In order to reproduced a figure, execute
+the scripts in the following order (if existent):
+
+1. MATLAB script: *.m
+2. gnuplot script: *.gnu
+3. include *.tex, *.png, *.pdf in your LaTeX document
+
+Requirements & Prerequities
+---------------------------
 
 Gnuplot
 ~~~~~~~
@@ -49,7 +63,7 @@ listed, which you need.
 MATLAB
 ~~~~~~
 
-The code of this repository has been tested under MATLABR2013b. Please add
+The code of this repository has been tested under MATLABR2015a. Please add
 the ``./tools/matlab`` directory to your MATLAB path. The software uses the
 following toolboxes, which you should download and add the their path to your
 MATLAB path. For specific installation instructions please take a look at the
