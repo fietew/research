@@ -3,34 +3,9 @@
 
 \RequirePackage{amsmath}  \RequirePackage{amssymb}  \RequirePackage{amsfonts}
 \RequirePackage{accents}
-\RequirePackage{etoolbox}
-\RequirePackage{kvoptions}
-\RequirePackage{pdftexcmds}
-\RequirePackage{suffix}
 \RequirePackage{pgf, pgffor}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Options
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\SetupKeyvalOptions{
-	family=sf,
-	prefix=sf@
-}
-
-\DeclareBoolOption[true]{threeD}
-\DeclareComplementaryOption{twoD}{threeD}
-\DeclareBoolOption[false]{showfrequency}
-\DeclareBoolOption[false]{showradius}
-\DeclareBoolOption[false]{showtime}
-
-\ProcessKeyvalOptions*
-
-\pgfkeys{/sf/.is family, %
-  sf,  %
-  modifier/.style = {modifier/enum=#1},
-  modifier/enum/.is choice,  %
-  modifier/current/.initial=\empty
-}
+\pgfkeys{/sf/.is family}
 
 % helper function to create a key representing a variable length list including brackets and delimiter
 % parameters:
@@ -38,10 +13,10 @@
 %   keyname: name of key
 %
 % Examples:
-% afterwards elements can be added via: pgfkeys{sf, <keyname>={arg1,arg2,arg3}}
+% afterwards elements can be added via: \pgfkeys{sf, <keyname>={arg1,arg2,arg3}}
 %
-% all non-empty lists will be printed by calling: pgfkeys{sf, print}
-% all lists will be reset by calling: pgfkeys{sf, reset}
+% all non-empty lists will be printed by calling: \pgfkeys{sf, print}
+% all lists will be reset by calling: \pgfkeys{sf, reset}
 \newcommand\sfnewlistkey[2][]{  %
   \pgfkeys{  %
     sf,  %
@@ -63,12 +38,18 @@
     #2/print/.code={  %
       \edef\listvalue{\pgfkeysvalueof{/sf/#2/current}}
       \ifx\listvalue\empty\else
-        \pgfkeys{ sf,  %
-          #2/current/.add={\pgfkeysvalueof{/sf/#2/brackets/left}}{\pgfkeysvalueof{/sf/#2/brackets/right}},
-          #2/current/.prefix=\pgfkeysvalueof{/sf/#2/modifier}
+        \pgfkeysvalueof{/sf/#2/modifier}
+        {  %
+        \pgfkeysvalueof{/sf/#2/brackets/left}
+        \pgfkeysvalueof{/sf/#2/current}
+        \pgfkeysvalueof{/sf/#2/brackets/right}
         }
+%        \pgfkeys{ sf,  %
+%          #2/current/.add={\pgfkeysvalueof{/sf/#2/brackets/left}}{\pgfkeysvalueof{/sf/#2/brackets/right}},
+%          #2/current/.prefix=\pgfkeysvalueof{/sf/#2/modifier}
+%        }
       \fi
-      \pgfkeysvalueof{/sf/#2/current}
+%      \pgfkeysvalueof{/sf/#2/current}
     },
     % add list to print
     print/.append style={ #2/print  },  %
@@ -94,12 +75,12 @@
 % Define a possible choice for key
 % \sfnewkeychoice{<keyname>}{<choicename>}{<value>}
 \newcommand\sfnewkeychoice[3]{  %
-  \pgfkeys{sf, #1/enum/#2/.style={#1/current={#3}}}  %
+  \pgfkeys{sf, #1/enum/#2/.style={#1/current=#3}}  %
 }
 % Link a choice for key to symbol
 % \sflinkkeychoice{<keyname>}{<choicename>}{<symbol>}
 \newcommand\sflinkkeychoice[3]{  %
-  \pgfkeys{sf, #1/enum/#2/.style={#1/current={#3}}}  %
+  \pgfkeys{sf, #1/enum/#2/.style={#1/current=#3}}  %
 }
 
 % Define a new symbol
@@ -132,6 +113,26 @@
 
 %% INITIALIZATION  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%% Modifiers
+\pgfkeys{
+  sf,  %
+  modifier/.style = {modifier/enum=#1},
+  modifier/enum/.is choice,  %
+  modifier/current/.initial=\empty
+}
+
+%% Reset and Print
+\pgfkeys{  %
+  sf,  %
+  reset/.style={  %
+    symbol/current/.initial=\empty,  %
+    modifier/current/.initial=\empty,  %
+  },  %
+  print/.style={  %
+    symbol/current/print  %
+  },  %
+}
+
 %% Symbols
 \pgfkeys{
   sf,  %
@@ -140,12 +141,11 @@
   symbol/new/.style n args={3}{  %
     symbol/newcommand={#1},  %
     symbol/enum/#1/.initial=#2,  %
-    symbol/enum/#1/.style={current/symbol=\pgfkeysvalueof{/sf/symbol/enum/#1}, #3}  %
+    symbol/enum/#1/.style={symbol/current=\pgfkeysvalueof{/sf/symbol/enum/#1}, #3}  %
   },  %
   symbol/extend/.style n args={3}{  %
     symbol/newcommand={#1#2},  %
-    symbol/enum/#1#2/.initial={\pgfkeysvalueof{/sf/symbol/enum/#1}},  %
-    symbol/enum/#1#2/.style={current/symbol=\pgfkeysvalueof{/sf/symbol/enum/#1#2}, #3}
+    symbol/enum/#1#2/.style={symbol/enum/#1, #3}
   }, %
   symbol/newcommand/.code= {  %
     \expandafter\newcommand\csname sf#1\endcsname[1][]{%
@@ -153,24 +153,146 @@
     }  %
   },  %
   % current symbol for printing
-  current/symbol/.initial=\empty,  %
-  current/symbol/print/.code={  %
-    \pgfkeysvalueof{/sf/current/modifier}  %
-    {\pgfkeysvalueof{/sf/current/symbol}}  %
+  symbol/current/.initial=\empty,  %
+  symbol/current/print/.code={  %
+    \pgfkeysvalueof{/sf/modifier/current}  %
+    {\pgfkeysvalueof{/sf/symbol/current}}  %
   }
 }
 
-\pgfkeys{  %
-  sf,  %
-  reset/.style={  %
-    current/symbol/.initial=\empty,  %
-    current/modifier/.initial=\empty,  %
-  },  %
-  print/.style={  %
-    current/symbol/print  %
-  },  %
-}
+%% SYMBOLS, SUBSCRIPTS, SUPERSCRIPTS, MODIFIERS  %%%%%%%%%%%%%%%%%
 
-%% List-Keys
+%%%% List of Modifiers %%%%
+
+\sfnewmodifier{partial}{\frac{\partial}{\partial}}
+
+%%%% List of Symbols %%%%
+\sfnewmodifier{vec}{\mathbf}
+\sfnewmodifier{alternative}{\uppercase}
+%% Vectors %%
+\sfnewsymbol[modifier=vec]{pos}{x}  % position vector
+\sfnewsymbol[modifier=vec]{normal}{n}  % unit vector
+%% Coordinates
+\sfnewsymbol{sphr}{r}
+\sfnewsymbol{sphphi}{\phi}
+\sfnewsymbol{sphtheta}{\vartheta}
+%% Sampling Distance
+\sfnewsymbol{delta}{\Delta}
+
+%% Time-Frequency Domain %%
+\sfnewsymbol{omega}{\omega}
+\sfnewsymbol{f}{f}
+\sfnewsymbol{t}{t}
+
+%% Sound Field Synthesis %%
+\sfnewsymbol{pressure}{P}  % sound pressure
+\sfnewsymbol{virtualsource}{S}  % virtual sound field
+\sfnewsymbol{driving}{D}  % driving function
+\sfnewsymbol{greens}{G}  % Green's Function
+\sfnewsymbol{hrtf}{H}  % head-related transfer function
+
+\sfnewsymbol{select}{a}
+\sfnewsymbol{window}{w}
+\sfnewsymbol[subscript=twohalfD]{correct}{c}
+
+%% Special Functions
+\sfnewsymbol{sphharmonics}{Y}
+\sfnewsymbol{sphbessel}{j}
+\sfnewsymbol{sphhankel}{h}
+
+%% Integrals
+% differential operators
+\sfnewmodifier{differential}{\mathrm d}
+\sfnewmodifier{partial}{\partial}
+% areas and boundaries
+\sfnewsymbol{set}{\Omega}
+\sfextendsymbol[modifier=partial]{set}{boundary}
+
+\sfnewsymbol{boundary}{\partial \Omega}
+\sfnewsymbol{volume}{V}
+\sfnewsymbol{area}{A}
+% differentials
+\sfextendsymbol[modifier=differential]{volume}{diff}
+\sfextendsymbol[modifier=differential]{area}{diff}
+
+%% Constants %%
+\sfnewmodifier{const}{\mathrm}
+%
+\sfnewsymbol[modifier=const]{euler}{e}
+\sfnewsymbol[modifier=const]{im}{j}
+\sfnewsymbol[modifier=const]{speedofsound}{c}
+
+%%%% List of Transforms %%%%
+%% Cartesian Coordinates
+\sfnewmodifier{pwd}{\tilde}  % plane wave decompostion
+\sfextendsymbol[modifier=pwd]{normal, greens, driving, hrtf, virtualsource}{pwd}
+%% Cylindrical Coordinates
+\sfnewmodifier{cht}{\accentset{\circ}}  % cylindrical harmonics transform
+%% Spherical Coordinates
+\sfnewmodifier{sht}{\accentset{\bullet}}  % spherical harmonics transform
+
+%% Time 
+\sfnewmodifier{time}{\lowercase}
+\sfextendsymbol[modifier=time]{normal, greens, driving, hrtf, virtualsource}{time}
+
+%%%% List of subscripts %%%%
 \sfnewlistkey[modifier={_}]{subscript}
+
+%% Source Types %%
+\sfnewkeychoice{subscript}{pw}{\mathrm{pw}}
+\sfnewkeychoice{subscript}{ps}{\mathrm{ps}}
+\sfnewkeychoice{subscript}{fs}{\mathrm{fs}}
+\sfnewkeychoice{subscript}{ls}{\mathrm{ls}}
+% extensions of symbols
+\sfextendsymbol[subscript=pw]{pos, normal, driving, sphtheta, sphphi}{pw}
+\sfextendsymbol[subscript=ps]{pos, normal, driving, sphtheta, sphphi}{ps}
+\sfextendsymbol[subscript=ls]{pos, normal, driving, sphtheta, sphphi}{ls}
+\sfextendsymbol[subscript=fs]{pos, normal, driving, sphtheta, sphphi}{fs}
+
+%% Aliasing %%
+\sfnewkeychoice{subscript}{aliasing}{\mathrm{al}}
+\sfextendsymbol[subscript=aliasing]{pos, normal, sphtheta, sphphi}{al}
+
+%% Reference Coordinates %%
+\sfnewkeychoice{subscript}{ref}{\mathrm{ref}}
+\sfextendsymbol[subscript=ref]{pos, sphr}{ref}
+
+%% Errors
+\sfnewkeychoice{subscript}{err}{\epsilon}
+\sfextendsymbol[subscript=err]{pressure}{err}
+
+%% Domains %%
+\sfnewkeychoice{subscript}{virtual}{\mathrm{s}}
+\sfnewkeychoice{subscript}{local}{l}
+\sfnewkeychoice{subscript}{sec}{0}
+\sfnewkeychoice{subscript}{wc}{\{\mathrm{0},l\}}
+\sfnewkeychoice{subscript}{incoming}{\mathrm{in}}
+\sfnewkeychoice{subscript}{scatter}{\mathrm{sc}}
+% extensions of symbols
+\sfextendsymbol[subscript=scatter]{pressure}{sc}
+\sfextendsymbol[subscript=incoming]{pressure}{in}
+\sfextendsymbol[subscript=sec]{pos, normal, sphr, sphphi, greens, 
+select, 
+driving, set, setboundary, area, volume, areadiff, volumediff, delta}{sec}
+\sfextendsymbol[subscript=local]{pos, normal, driving, select, set, setboundary, area, volume, areadiff, volumediff}{local}
+
+%% HRTF %%
+\sfnewkeychoice{subscript}{left}{\mathrm{L}}
+\sfnewkeychoice{subscript}{right}{\mathrm{R}}
+
+%% Dimensions %%
+\sfnewkeychoice{subscript}{twoD}{\mathrm{2D}}
+\sfnewkeychoice{subscript}{twohalfD}{\mathrm{2.5D}}
+\sfnewkeychoice{subscript}{threeD}{\mathrm{3D}}
+% extensions of symbols
+\sfextendsymbol[subscript=twoD]{greens, driving}{twoD}
+\sfextendsymbol[subscript=twohalfD]{pressure, driving}{twohalfD}
+\sfextendsymbol[subscript=threeD]{greens, driving}{threeD}
+
+%%%% List of superscripts %%%%
 \sfnewlistkey[modifier={^}]{superscript}
+%% pratical aspects for loudspeaker array %%
+\sfnewkeychoice{superscript}{sampled}{\mathrm{S}}
+\sfnewkeychoice{superscript}{truncated}{\mathrm{T}}
+%% time reversal/phase conjugation
+\sfnewkeychoice{superscript}{timereverse}{*}
