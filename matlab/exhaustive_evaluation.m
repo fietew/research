@@ -30,9 +30,9 @@ if nargin < 5
   parallel = true;
 end
 
-if nargout == 1
+ret = nargout == 1;
+if ret
   res = cell(size(param_values,1),1);
-  ret = true;
 end
 
 % check for parallel computing toolbox
