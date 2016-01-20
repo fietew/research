@@ -32,13 +32,14 @@ end
 
 if nargout == 1
   res = cell(size(param_values,1),1);
+  ret = true;
 end
 
 % check for parallel computing toolbox
 if license('test', 'distrib_computing_toolbox') && parallel
   parfor idx=1:size(param_values,1)
     tmp = assignfield_recursive(params, param_names, param_values(idx,:));
-    if nargout == 1
+    if ret
       res{idx} = func(tmp);
     else
       func(tmp);
@@ -47,7 +48,7 @@ if license('test', 'distrib_computing_toolbox') && parallel
 else
   for idx=1:size(param_values,1)
     tmp = assignfield_recursive(params, param_names, param_values(idx,:));
-    if nargout == 1
+    if ret
       res{idx} = func(tmp);
     else
       func(tmp);
