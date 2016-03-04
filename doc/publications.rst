@@ -25,13 +25,13 @@
 Material for scientific publications
 ====================================
 
-All publications are listed at the bottom of this page. The material for 
-specific publications is stored under the 
-`papers directory <https://github.com/fietew/publications/tree/master/papers>`_. 
-The figures of each paper can be found the respective sub-directory ``figs``. 
+All publications are listed at the bottom of this page. The material for
+specific publications is stored under the
+`papers directory <https://github.com/fietew/publications/tree/master/papers>`_.
+The figures of each paper can be found the respective sub-directory ``figs``.
 For some publications, there is also a ``slides`` directory
-containing the scripts for some figures on the presentations slides. Both 
-should (in most cases at least) be enumerated in order of appearance in the 
+containing the scripts for some figures on the presentations slides. Both
+should (in most cases at least) be enumerated in order of appearance in the
 paper and the slides, respectively. In order to reproduced a figure, execute
 the scripts in the following order (if existent):
 
@@ -80,14 +80,17 @@ If you just want to get the material of one specific publication, you may
 not need all the toolboxes. The table shows, which publication needs which
 toolbox.
 
-============================  =====  ======= ======= ===== ========== =========
- Publication                   AMT    LTFAT   SOFiA   SFS   MAT2TikZ   EKF/UKF
-============================  =====  ======= ======= ===== ========== =========
-:cite:`Winter2014-FA`           X       X       X      X        X
-:cite:`Winter2015-DAGA`                                X
-:cite:`Winter2015-AES`                                 X        X
-:cite:`Winter2015-EuroNoise`                           X        X
-============================  =====  ======= ======= ===== ========== =========
+============================  =====  ======= ======= ========= ========== =========
+ Publication                   AMT    LTFAT   SOFiA     SFS     MAT2TikZ   EKF/UKF
+============================  =====  ======= ======= ========= ========== =========
+:cite:`Winter2014-FA`           X       X       X        X          X
+:cite:`Winter2015-DAGA`                                  X
+:cite:`Winter2015-AES`                                   X          X
+:cite:`Winter2015-EuroNoise`                             X          X
+:cite:`Winter2016-TASL`                                `X`__
+============================  =====  ======= ======= ========= ========== =========
+
+.. __: https://github.com/sfstoolbox/sfs/tree/f14513a43aa59e4fbbe10f96fe1f737470beb96e
 
 How to reproduce Figures
 ------------------------
