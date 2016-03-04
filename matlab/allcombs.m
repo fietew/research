@@ -106,7 +106,7 @@ indices = fliplr(indices);
 % vectorize each indices matrix and repeat grouped indices
 indices = cellfun( @(idx) {idx(:)}, indices(ic) );
 % finally create cell array of all combinations
-combs = cellfun(@(c,idx) {reshape( c(idx(:)), [], 1)}, varargin, indices);
+combs = cellfun(@(c,idx) {reshape( c(idx(:)), [], 1)}, varargin(:), indices(:));
 combs = [combs{:}];
 
 end

@@ -1,4 +1,4 @@
-function exhaustive_evaluation(func, param_names, param_values, params, parallel)
+function res = exhaustive_evaluation(func, param_names, param_values, params, parallel)
 %
 % inputs:
 %   func         - function expecting 'params' as the only input argument, 
@@ -8,6 +8,11 @@ function exhaustive_evaluation(func, param_names, param_values, params, parallel
 %   params       - scalar structure containing all parameters
 %   parallel     - if the distributed computing toolbox is available
 %                  different tuples are processed in parallel (default: true)
+%
+% outputs:
+%   res          - optional cell array which each cell containing the return
+%                  value of the function specified by func. Note that the
+%                  function HAS to provide a return value.
 %
 % example:
 %   f = @(x) display(x);
@@ -19,22 +24,35 @@ function exhaustive_evaluation(func, param_names, param_values, params, parallel
 %   param_names = {'blub', 'test'}
 %   param_values = {2, 'hello world'; 'hihi', pi}
 %
-%   exhaustive_evaluation(func, param_names, param_values, params)
+%   res = exhaustive_evaluation(func, param_names, param_values, params)
 
-if ~exist( 'parallel', 'var' )
+if nargin < 5
   parallel = true;
+end
+
+ret = nargout == 1;
+if ret
+  res = cell(size(param_values,1),1);
 end
 
 % check for parallel computing toolbox
 if license('test', 'distrib_computing_toolbox') && parallel
   parfor idx=1:size(param_values,1)
     tmp = assignfield_recursive(params, param_names, param_values(idx,:));
-    func(tmp);
+    if ret
+      res{idx} = func(tmp);
+    else
+      func(tmp);
+    end
   end
 else
   for idx=1:size(param_values,1)
     tmp = assignfield_recursive(params, param_names, param_values(idx,:));
-    func(tmp);
+    if ret
+      res{idx} = func(tmp);
+    else
+      func(tmp);
+    end
   end
 end
 
