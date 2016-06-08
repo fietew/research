@@ -1,0 +1,207 @@
+% GNUPLOT: LaTeX picture with Postscript
+\begingroup
+  \makeatletter
+  \providecommand\color[2][]{%
+    \GenericError{(gnuplot) \space\space\space\@spaces}{%
+      Package color not loaded in conjunction with
+      terminal option `colourtext'%
+    }{See the gnuplot documentation for explanation.%
+    }{Either use 'blacktext' in gnuplot or load the package
+      color.sty in LaTeX.}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\includegraphics[2][]{%
+    \GenericError{(gnuplot) \space\space\space\@spaces}{%
+      Package graphicx or graphics not loaded%
+    }{See the gnuplot documentation for explanation.%
+    }{The gnuplot epslatex terminal needs graphicx.sty or graphics.sty.}%
+    \renewcommand\includegraphics[2][]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \@ifundefined{ifGPcolor}{%
+    \newif\ifGPcolor
+    \GPcolortrue
+  }{}%
+  \@ifundefined{ifGPblacktext}{%
+    \newif\ifGPblacktext
+    \GPblacktextfalse
+  }{}%
+  % define a \g@addto@macro without @ in the name:
+  \let\gplgaddtomacro\g@addto@macro
+  % define empty templates for all commands taking text:
+  \gdef\gplbacktext{}%
+  \gdef\gplfronttext{}%
+  \makeatother
+  \ifGPblacktext
+    % no textcolor at all
+    \def\colorrgb#1{}%
+    \def\colorgray#1{}%
+  \else
+    % gray or color?
+    \ifGPcolor
+      \def\colorrgb#1{\color[rgb]{#1}}%
+      \def\colorgray#1{\color[gray]{#1}}%
+      \expandafter\def\csname LTw\endcsname{\color{white}}%
+      \expandafter\def\csname LTb\endcsname{\color{black}}%
+      \expandafter\def\csname LTa\endcsname{\color{black}}%
+      \expandafter\def\csname LT0\endcsname{\color[rgb]{1,0,0}}%
+      \expandafter\def\csname LT1\endcsname{\color[rgb]{0,1,0}}%
+      \expandafter\def\csname LT2\endcsname{\color[rgb]{0,0,1}}%
+      \expandafter\def\csname LT3\endcsname{\color[rgb]{1,0,1}}%
+      \expandafter\def\csname LT4\endcsname{\color[rgb]{0,1,1}}%
+      \expandafter\def\csname LT5\endcsname{\color[rgb]{1,1,0}}%
+      \expandafter\def\csname LT6\endcsname{\color[rgb]{0,0,0}}%
+      \expandafter\def\csname LT7\endcsname{\color[rgb]{1,0.3,0}}%
+      \expandafter\def\csname LT8\endcsname{\color[rgb]{0.5,0.5,0.5}}%
+    \else
+      % gray
+      \def\colorrgb#1{\color{black}}%
+      \def\colorgray#1{\color[gray]{#1}}%
+      \expandafter\def\csname LTw\endcsname{\color{white}}%
+      \expandafter\def\csname LTb\endcsname{\color{black}}%
+      \expandafter\def\csname LTa\endcsname{\color{black}}%
+      \expandafter\def\csname LT0\endcsname{\color{black}}%
+      \expandafter\def\csname LT1\endcsname{\color{black}}%
+      \expandafter\def\csname LT2\endcsname{\color{black}}%
+      \expandafter\def\csname LT3\endcsname{\color{black}}%
+      \expandafter\def\csname LT4\endcsname{\color{black}}%
+      \expandafter\def\csname LT5\endcsname{\color{black}}%
+      \expandafter\def\csname LT6\endcsname{\color{black}}%
+      \expandafter\def\csname LT7\endcsname{\color{black}}%
+      \expandafter\def\csname LT8\endcsname{\color{black}}%
+    \fi
+  \fi
+  \setlength{\unitlength}{0.0500bp}%
+  \begin{picture}(4874.00,3968.00)%
+    \gplgaddtomacro\gplbacktext{%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(415,1984){\makebox(0,0)[r]{\strut{}\footnotesize $0$}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(415,2249){\makebox(0,0)[r]{\strut{}\footnotesize $2$}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(415,2513){\makebox(0,0)[r]{\strut{}\footnotesize $4$}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(415,2778){\makebox(0,0)[r]{\strut{}\footnotesize $6$}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(415,3042){\makebox(0,0)[r]{\strut{}\footnotesize $8$}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(415,3307){\makebox(0,0)[r]{\strut{}\footnotesize $10$}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(528,1827){\makebox(0,0){\strut{}}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(1005,1827){\makebox(0,0){\strut{}}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(1482,1827){\makebox(0,0){\strut{}}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(1959,1827){\makebox(0,0){\strut{}}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(2436,1827){\makebox(0,0){\strut{}}}%
+      \csname LTb\endcsname%
+      \put(107,2645){\rotatebox{-270}{\makebox(0,0){\strut{}\footnotesize $(\Delta_{\mathrm{max}} - \Delta_{\mathrm{min}})$/dB}}}%
+    }%
+    \gplgaddtomacro\gplfronttext{%
+      \csname LTb\endcsname%
+      \put(1713,3902){\makebox(0,0)[r]{\strut{}$R_l=1.75$~m}}%
+      \csname LTb\endcsname%
+      \put(1713,3682){\makebox(0,0)[r]{\strut{}$R_l=1.5$~m}}%
+      \csname LTb\endcsname%
+      \put(3624,3902){\makebox(0,0)[r]{\strut{}$R_l=1.25$~m}}%
+      \csname LTb\endcsname%
+      \put(3624,3682){\makebox(0,0)[r]{\strut{}$R_l=1.00$~m}}%
+      \csname LTb\endcsname%
+      \put(528,3373){\makebox(0,0)[l]{\strut{}\footnotesize $f=200$ Hz}}%
+    }%
+    \gplgaddtomacro\gplbacktext{%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(2588,1984){\makebox(0,0)[r]{\strut{}}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(2588,2249){\makebox(0,0)[r]{\strut{}}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(2588,2513){\makebox(0,0)[r]{\strut{}}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(2588,2778){\makebox(0,0)[r]{\strut{}}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(2588,3042){\makebox(0,0)[r]{\strut{}}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(2588,3307){\makebox(0,0)[r]{\strut{}}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(2701,1827){\makebox(0,0){\strut{}}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(3178,1827){\makebox(0,0){\strut{}}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(3655,1827){\makebox(0,0){\strut{}}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(4132,1827){\makebox(0,0){\strut{}}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(4609,1827){\makebox(0,0){\strut{}}}%
+    }%
+    \gplgaddtomacro\gplfronttext{%
+      \csname LTb\endcsname%
+      \put(2701,3373){\makebox(0,0)[l]{\strut{}\footnotesize $f=300$ Hz}}%
+    }%
+    \gplgaddtomacro\gplbacktext{%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(415,440){\makebox(0,0)[r]{\strut{}\footnotesize $0$}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(415,705){\makebox(0,0)[r]{\strut{}\footnotesize $2$}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(415,970){\makebox(0,0)[r]{\strut{}\footnotesize $4$}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(415,1234){\makebox(0,0)[r]{\strut{}\footnotesize $6$}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(415,1499){\makebox(0,0)[r]{\strut{}\footnotesize $8$}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(415,1764){\makebox(0,0)[r]{\strut{}\footnotesize $10$}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(528,283){\makebox(0,0){\strut{}\footnotesize $0$}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(1005,283){\makebox(0,0){\strut{}\footnotesize $0.25$}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(1482,283){\makebox(0,0){\strut{}\footnotesize $0.5$}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(1959,283){\makebox(0,0){\strut{}\footnotesize $0.75$}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(2436,283){\makebox(0,0){\strut{}\footnotesize $1$}}%
+      \csname LTb\endcsname%
+      \put(107,1102){\rotatebox{-270}{\makebox(0,0){\strut{}\footnotesize $(\Delta_{\mathrm{max}} - \Delta_{\mathrm{min}})$/dB}}}%
+      \put(1482,63){\makebox(0,0){\strut{}$R_c/R_l$}}%
+    }%
+    \gplgaddtomacro\gplfronttext{%
+      \csname LTb\endcsname%
+      \put(528,1830){\makebox(0,0)[l]{\strut{}\footnotesize $f=500$ Hz}}%
+    }%
+    \gplgaddtomacro\gplbacktext{%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(2588,440){\makebox(0,0)[r]{\strut{}}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(2588,705){\makebox(0,0)[r]{\strut{}}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(2588,970){\makebox(0,0)[r]{\strut{}}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(2588,1234){\makebox(0,0)[r]{\strut{}}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(2588,1499){\makebox(0,0)[r]{\strut{}}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(2588,1764){\makebox(0,0)[r]{\strut{}}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(2701,283){\makebox(0,0){\strut{}\footnotesize $0$}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(3178,283){\makebox(0,0){\strut{}\footnotesize $0.25$}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(3655,283){\makebox(0,0){\strut{}\footnotesize $0.5$}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(4132,283){\makebox(0,0){\strut{}\footnotesize $0.75$}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(4609,283){\makebox(0,0){\strut{}\footnotesize $1$}}%
+      \csname LTb\endcsname%
+      \put(3655,63){\makebox(0,0){\strut{}$R_c/R_l$}}%
+    }%
+    \gplgaddtomacro\gplfronttext{%
+      \csname LTb\endcsname%
+      \put(2701,1830){\makebox(0,0)[l]{\strut{}\footnotesize $f=750$ Hz}}%
+    }%
+    \gplbacktext
+    \put(0,0){\includegraphics{fig}}%
+    \gplfronttext
+  \end{picture}%
+\endgroup

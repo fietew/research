@@ -1,0 +1,138 @@
+%*****************************************************************************
+% Copyright (c) 2016      Fiete Winter                                       *
+%                         Institut fuer Nachrichtentechnik                   *
+%                         Universitaet Rostock                               *
+%                         Richard-Wagner-Strasse 31, 18119 Rostock, Germany  *
+%                                                                            *
+% This file is part of the supplementary material for Fiete Winter's         *
+% scientific work and publications                                           *
+%                                                                            *
+% You can redistribute the material and/or modify it  under the terms of the *
+% GNU  General  Public  License as published by the Free Software Foundation *
+% , either version 3 of the License,  or (at your option) any later version. *
+%                                                                            *
+% This Material is distributed in the hope that it will be useful, but       *
+% WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY *
+% or FITNESS FOR A PARTICULAR PURPOSE.                                       *
+% See the GNU General Public License for more details.                       *
+%                                                                            *
+% You should  have received a copy of the GNU General Public License along   *
+% with this program. If not, see <http://www.gnu.org/licenses/>.             *
+%                                                                            *
+% http://github.com/fietew/publications           fiete.winter@uni-rostock.de*
+%*****************************************************************************
+
+\tikzstyle{loudspeaker} = [basic loudspeaker, draw, fill=white
+, minimum height=1.0mm 	    % height of the rectangle ("driver") part 
+, minimum width=0.5mm		    % width of the rectangle
+, inner sep=0pt
+, relative cone width=1	% height of trapezoid ("cone") part, relative to 
+%minimum width (default: 1)
+, relative cone height=2	    % width of trapezoid, relative to minimum height 
+%(default: 2)
+]
+
+\tikzstyle{active} = [fill=activecolor]
+\tikzstyle{focus} = [draw, fill=white, circle, minimum size=2mm, inner sep=0pt]
+\tikzstyle{point} = [draw, fill=black, circle, minimum size=1.0mm, inner 
+sep=0pt]
+
+\tikzstyle{corner} = [opacity=0.5]
+\tikzstyle{corner1} = [corner, color=blue]
+\tikzstyle{corner2} = [corner, color=red]
+\tikzstyle{corner3} = [corner, color=teal]
+\tikzstyle{corner4} = [corner, color=mauve]
+
+\tikzstyle{line1} = [color=blue]
+\tikzstyle{line2} = [color=red]
+\tikzstyle{line3} = [color=teal]
+\tikzstyle{line4} = [color=mauve]
+
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
+
+\begin{tikzpicture}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% loudspeakers %%%
+\pgfmathsetmacro{\N}{64}  % number of loudspeakers
+\pgfmathsetmacro{\Nseg}{\N/4}  % number of loudspeaker per linear segment
+\pgfmathsetmacro{\NsegM}{\Nseg-1}
+\pgfmathsetmacro{\L}{3.0}  % length of linear segment
+\pgfmathsetmacro{\Ldelta}{\L/(\NsegM)}  % distance between adjacent loudspeakers
+% distance of linear segment to coordinates' origin
+\pgfmathsetmacro{\R}{\L/2+1/sqrt(2)*\Ldelta}
+
+%%% virtual point source %%
+\pgfmathsetmacro{\Rs}{3.0}  % distance from origin
+\pgfmathsetmacro{\phis}{50}  % azimuth
+\pgfmathsetmacro{\Rlabel}{\R+0.2}  % position of position label
+\pgfmathsetmacro{\Rphilabel}{0.5*\R}  % position of azimuth label
+\pgfmathsetmacro{\Rtmp}{0.4*\R}
+
+%%% misc. %%%
+\pgfmathsetmacro{\Rcoord}{1.5*\R}  % length of coordinate axes
+\pgfmathsetmacro{\Rout}{1.15*\R}  % outer distance of colored lines
+\pgfmathsetmacro{\Rin}{1.10*\R}  % inner distance of colored lines
+\pgfmathsetmacro{\Rcross}{0.6*\R}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% loudspeakers domain %%
+% listening area
+\draw[thick, fill=focuscircle] (-\R,-\R) rectangle (\R,\R);
+\foreach[count=\sdx] \phi in {0, 90, 180, 270} {
+  
+  \begin{pgfonlayer}{background}
+    \coordinate (segment) at (\phi:\R);  % reference pos. of loudspeakers
+    \coordinate (segmentshifted) at (\phi:1.15*\R);  % reference pos. of numbers
+    % draw loudspeaker symbols
+    \foreach \idx in {0,1,...,\NsegM}{
+      \node (speaker\phi\idx) at 
+      ($(segment)+(\phi+90:-\L/2+\idx*\Ldelta)$) 
+      [loudspeaker,active,anchor=cone,rotate=\phi-180]{};
+    };
+  \end{pgfonlayer}
+
+%%% crossfade illustration %%%
+  \coordinate (corner) at ($(\phi:\R)+(\phi+90:\R)$);
+  % rectangle for corner area
+  \fill[corner\sdx] (corner) rectangle +($(\phi:\Rcross)+(\phi+90:\Rcross)$);
+  
+  % first crossfade illustration
+  \coordinate (sinestart) at ($(corner) + (\phi:\Rcross)$);
+  \coordinate (sinemid) at (\phi:\R+0.5*\Rcross);
+  \coordinate (sineend) at ($(\phi:\R)+(\phi-90:\R)$);    
+  \fill[corner\sdx, rotate=\phi+90] 
+    (sineend) cos (sinemid) sin (sinestart) -- (corner);
+  
+  % second crossfade illustration
+  \coordinate (sinestart) at ($(\phi+90:\R)+(\phi+90:\Rcross)+(\phi:\R)$);
+  \coordinate (sinemid) at (\phi+90:\R+0.5*\Rcross);
+  \coordinate (sineend) at ($(\phi+90:\R)+(\phi+180:\R)$);  
+  \fill[corner\sdx, rotate=\phi+180]    
+    (sineend) cos (sinemid) sin (sinestart) -- (corner);
+};
+
+%%% colored lines %%%
+\draw[ultra thick, line1] (-\R,\Rin) -- (\Rin,\Rin) -- (\Rin,-\R);
+\draw[ultra thick, line2] (\R,\Rout) -- (-\Rout,\Rout) -- (-\Rout,-\R);
+\draw[ultra thick, line3] (-\Rin,\R) -- (-\Rin,-\Rin) -- (\R,-\Rin);
+\draw[ultra thick, line4] (-\R,-\Rout) -- (\Rout,-\Rout) -- (\Rout,\R);
+
+%%% virtual sound field %%%
+\draw (0,0) -- (\phis:\Rs);
+\node[point] at (\phis:\Rs){};
+\node[right=3pt] at (\phis:\Rs){$\sfposs$};
+\draw[-latex] (0:\Rphilabel) arc (0:\phis:\Rphilabel);
+\node[right] at (0.5*\phis:\Rphilabel) {$\sfsphphi[subscript=s]$};
+
+%%% coordinate axes %%%
+\draw[thick, -latex] (-\Rcoord,0) -- (\Rcoord,0) node[at end, below] {$x$};
+\draw[thick, -latex] (0,-\Rcoord) -- (0,\Rcoord) node[at end, left] {$y$};
+
+%%% reference point %%%
+\node[point] at (0,0){};
+\node[below right] at (0,0){$\sfposref$};
+
+\end{tikzpicture}
