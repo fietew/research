@@ -1,0 +1,104 @@
+%*****************************************************************************
+% Copyright (c) 2016      Fiete Winter                                       *
+%                         Institut fuer Nachrichtentechnik                   *
+%                         Universitaet Rostock                               *
+%                         Richard-Wagner-Strasse 31, 18119 Rostock, Germany  *
+%                                                                            *
+% This file is part of the supplementary material for Fiete Winter's         *
+% scientific work and publications                                           *
+%                                                                            *
+% You can redistribute the material and/or modify it  under the terms of the *
+% GNU  General  Public  License as published by the Free Software Foundation *
+% , either version 3 of the License,  or (at your option) any later version. *
+%                                                                            *
+% This Material is distributed in the hope that it will be useful, but       *
+% WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY *
+% or FITNESS FOR A PARTICULAR PURPOSE.                                       *
+% See the GNU General Public License for more details.                       *
+%                                                                            *
+% You should  have received a copy of the GNU General Public License along   *
+% with this program. If not, see <http://www.gnu.org/licenses/>.             *
+%                                                                            *
+% http://github.com/fietew/publications           fiete.winter@uni-rostock.de*
+%*****************************************************************************
+
+\tikzstyle{loudspeaker} = [basic loudspeaker, draw, fill=white
+, minimum height=1.0mm    % height of the rectangle ("driver") part 
+, minimum width=0.5mm     % width of the rectangle
+, inner sep=0pt
+, relative cone width=1   % height of trapezoid ("cone") part, relative to 
+% minimum width (default: 1)
+, relative cone height=2  % width of trapezoid, relative to minimum height 
+%(default: 2)
+]
+
+\tikzstyle{active} = [fill=activecolor]
+\tikzstyle{focus} = [draw, fill=white, circle, minimum size=2mm, inner sep=0pt]
+\tikzstyle{point} = [draw, fill=black, circle, minimum size=1.5mm, inner 
+sep=0pt]
+
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
+
+\begin{tikzpicture}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% loudspeakers %%%
+\pgfmathsetmacro{\N}{32} % number of loudspeakers
+\pgfmathsetmacro{\Nseg}{\N/4}  % number of loudspeaker per linear segment
+\pgfmathsetmacro{\NsegM}{\Nseg-1}
+\pgfmathsetmacro{\L}{2.0} % length of linear segment
+\pgfmathsetmacro{\Ldelta}{\L/(\NsegM)}  % distance between adjacent loudspeakers
+% distance of linear segment to coordinates' origin
+\pgfmathsetmacro{\R}{\L/2+1/sqrt(2)*\Ldelta}
+
+%%% virtual point source %%%
+\pgfmathsetmacro{\Rs}{2.0}  % distance from origin
+\pgfmathsetmacro{\phis}{160}  % azimuth
+\pgfmathsetmacro{\Rlabel}{\R+0.2}  % position of position label
+\pgfmathsetmacro{\Rphilabel}{0.5*\R}  % position of azimuth label
+\pgfmathsetmacro{\Rtmp}{0.4*\R}
+
+%%% misc. %%%
+\pgfmathsetmacro{\Rcoord}{\R*1.2}  % length of coordinate axes
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% loudspeakers domain %%%
+\fill[fill=focuscircle] (-\R,-1.5*\R) rectangle (1.5*\R,\R);
+\draw (-\R,-1.5*\R) -- (-\R,\R) -- (1.5*\R,\R);
+\foreach[count=\sdx] \phi in {90, 180} {
+  \coordinate (segment) at (\phi:\R);  % reference pos. of loudspeakers
+  \coordinate (segmentshifted) at (\phi:1.15*\R);  % reference pos. of numbers
+  % draw loudspeaker symbols
+  \foreach \idx in {0,1,...,\NsegM}{
+    \node (speaker\phi\idx) at 
+    ($(segment)+(\phi+90:-\L/2+\idx*\Ldelta)$) 
+      [loudspeaker,active,anchor=cone,rotate=\phi-180]{};
+  };
+};
+\node[above=1mm,right] at (\R,\R) {$\hdots$};
+\node[anchor=east] at (-\R,-\R) {$\vdots$};
+% x0 and n0 label
+\node[left] at (speaker1804.west) {$\sfpossec'$};
+\draw[-latex] (speaker1804.cone) -- +(0.3,0) node[right, at end] 
+  {$\sfnormalsec'$};
+
+\begin{scope}[xshift=-\R cm, yshift=\R cm]
+%%% virtual sound field %%%
+  \draw[-latex] (0,0) -- (\phis:\Rs) node[sloped, midway, above] 
+  {$\sfcylr[subscript=s]'$};
+  \node[point] at (\phis:\Rs){};
+  \node[above=3pt] at (\phis:\Rs){$\sfposs'$};
+  \draw[-latex] (0:\Rphilabel) arc (0:\phis:\Rphilabel);
+  \node[right] at (0.25*\phis:\Rphilabel) {$\sfcylphi[subscript=s]'$};
+  
+%%% coordinate axes %%%
+  \draw[thick, -latex] (0,0) -- (2.5*\Rcoord,0) node[at end, below] {$x'$};
+  \draw[thick, -latex] (0,0) -- (0,1*\Rcoord) node[at end, left] {$y'$};
+\end{scope}
+%%% reference point %%%
+\node[point] at (0,0){};
+\node[right=3pt] at (0,0){$\sfposref'$};
+
+\end{tikzpicture}
