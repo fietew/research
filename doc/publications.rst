@@ -1,5 +1,5 @@
 .. ****************************************************************************
- * Copyright (c) 2015      Fiete Winter                                       *
+ * Copyright (c) 2015-2016 Fiete Winter                                       *
  *                         Institut fuer Nachrichtentechnik                   *
  *                         Universitaet Rostock                               *
  *                         Richard-Wagner-Strasse 31, 18119 Rostock, Germany  *
@@ -88,6 +88,7 @@ toolbox.
 :cite:`Winter2015-AES`                                   X          X
 :cite:`Winter2015-EuroNoise`                             X          X
 :cite:`Winter2016-TASL`                                `X`__
+:cite:`Winter2016-DAGA`                                  X
 ============================  =====  ======= ======= ========= ========== =========
 
 .. __: https://github.com/sfstoolbox/sfs/tree/f14513a43aa59e4fbbe10f96fe1f737470beb96e
@@ -108,5 +109,5 @@ List of Publications
 --------------------
 
 .. bibliography:: ../papers/papers.bib
-  :style: alpha
+  :style: unsrtalpha
   :all:
