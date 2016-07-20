@@ -1,10 +1,12 @@
 function S = assignfield_recursive(S, fieldname, fieldvalue)
-% Recursively determines whether the input is a field of the structure
+% Assigns values to nested fieldnames in struct
 %
 % input:
 %   S           - a scalar structure
-%   fieldname   - either a string or a cell array of strings with the names
-%                 of the fields (may contain dots defining sub-structures)
+%   fieldname   - either ones single string or a cell array of strings with 
+%                 the names of the fields (may contain dots defining sub-structures)
+%   fieldvalue  - corresponding values to which the respective field is set.
+%                 either one single value or a cell array of values
 %
 % output:
 %   S           - a scalar structure with new values assigned to it
@@ -13,42 +15,41 @@ function S = assignfield_recursive(S, fieldname, fieldvalue)
 %   test.blub.blub = 2;
 %   test.blub.bla = 2;
 %   assignfield_recursive(test,{'blub.bla', 'blub.blub'}, {1, 3})
+%
+%% ===== Check Input Arguments =================================================
 
+% convert single string into cell array of that one string
 if ~iscell(fieldname)
   fieldname = {fieldname};
-end  
-if ~iscellstr(fieldname)
-  error('fieldname has to contain string(s)');
 end
+% check if cell array of strings
+if ~iscellstr(fieldname)
+  error('%s: %s has to be a single string or a cell array of strings', ....
+    upper(mfilename), inputname(2));
+end
+% test existence of (sub-)fields
 test_existence = ~isfield_recursive(S, fieldname);
 if any(test_existence)
-  fprintf('Regarding the fieldnames:\n');
+  err_string = [];
   for idx=find(test_existence)
-    fprintf('%s\n', fieldname{idx});
+    err_string = sprintf('%s\n\t%s', err_string, fieldname{idx});
   end
-  error('These fields do not exist in %s!', inputname(1));
+  error('%s: The following fields do not exist in %s:%s', upper(mfilename), ...
+    inputname(1), err_string);
 end
-
+% convert single value into cell array of that one value
 if ~iscell(fieldvalue)
   fieldvalue = {fieldvalue};
 end
+% check sizes of fieldnames and fieldvalues
 if any(size(fieldname) ~= size(fieldvalue))
-  error('Dimension mismatch between %s and %s', inputname(2), inputname(3));
+  error('%s: Dimension mismatch between %s and %s!', upper(mfilename), ...
+    inputname(2), inputname(3));
 end
+
+%% ===== Computation ===========================================================
 
 for idx=1:numel(fieldname)
-  dots = find(fieldname{idx} == '.');  % find dots in fieldname
-
-  if isempty(dots)
-    % is there is no dot in the fieldname anymore the recursion terminates and 
-    % one can assign the value to the structure field
-    S.(fieldname{idx}) = fieldvalue{idx};
-  else
-    S.(fieldname{idx}(1:dots(1)-1)) = assignfield_recursive(...
-      S.(fieldname{idx}(1:dots(1)-1)), ...
-      fieldname{idx}(dots(1)+1:end), ...
-      fieldvalue{idx});
-  end
-end
-
+  % eval is necessary since the actual fieldname is unknown a-priori
+  eval(sprintf('S.%s = fieldvalue{idx};', fieldname{idx}));
 end
