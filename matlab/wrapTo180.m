@@ -1,5 +1,5 @@
 function x = wrapTo180(x)
-% wrap value to the interval [0,180)
+% wrap value to the interval [-180,180)
 
 %*****************************************************************************
 % Copyright (c) 2015      Fiete Winter                                       *
