@@ -29,11 +29,11 @@ All publications are listed at the bottom of this page. The material for
 specific publications is stored under the
 `papers directory <https://github.com/fietew/publications/tree/master/papers>`_.
 The figures of each paper can be found the respective sub-directory ``figs``.
-For some publications, there is also a ``slides`` directory
-containing the scripts for some figures on the presentations slides. Both
-should (in most cases at least) be enumerated in order of appearance in the
-paper and the slides, respectively. In order to reproduced a figure, execute
-the scripts in the following order (if existent):
+For some publications, there is also a ``slides`` or a ``poster_figs`` directory
+containing the scripts for some figures on the presentations slides or the
+poster, respectively. Both should (in most cases at least) be enumerated in 
+order of appearance. In order to reproduced a figure, execute the scripts in 
+the following order (if existent):
 
 1. MATLAB script: *.m
 2. gnuplot script: *.gnu
@@ -80,30 +80,24 @@ If you just want to get the material of one specific publication, you may
 not need all the toolboxes. The table shows, which publication needs which
 toolbox.
 
-============================  =====  ======= ======= ========= ========== =========
- Publication                   AMT    LTFAT   SOFiA     SFS     MAT2TikZ   EKF/UKF
-============================  =====  ======= ======= ========= ========== =========
-:cite:`Winter2014-FA`           X       X       X        X          X
-:cite:`Winter2015-DAGA`                                  X
-:cite:`Winter2015-AES`                                   X          X
-:cite:`Winter2015-EuroNoise`                             X          X
-:cite:`Winter2016-TASL`                                `X`__
-:cite:`Winter2016-DAGA`                                  X
-============================  =====  ======= ======= ========= ========== =========
+============================  =====  ======= ======= ============= ========== =========
+ Publication                   AMT    LTFAT   SOFiA       SFS      MAT2TikZ   EKF/UKF
+============================  =====  ======= ======= ============= ========== =========
+:cite:`Winter2014-FA`           X       X       X         X            X
+:cite:`Winter2015-DAGA`                                   X
+:cite:`Winter2015-AES`                                    X            X
+:cite:`Winter2015-EuroNoise`                              X            X
+:cite:`Winter2016-TASL`                               |f14513|_
+:cite:`Winter2016-DAGA`                                   X
+:cite:`Winter2016-EUSIPCO`                             |2.2.1|_
+============================  =====  ======= ======= ============= ========== =========
 
-.. __: https://github.com/sfstoolbox/sfs/tree/f14513a43aa59e4fbbe10f96fe1f737470beb96e
 
-How to reproduce Figures
-------------------------
+.. |f14513| replace:: X
+.. |2.2.1| replace:: X
 
-The material for a specific publications is stored under the ``papers``
-directory. In order to generate a figure of one of the publications, switch to
-the figXX directory and execute the scripts in the following order
-(if existent):
-
-1. MATLAB script: fixXX.m
-2. gnuplot script: figXX.gnu
-3. include figXX.tex, figXX.png, figXX.pdf in your LaTeX document
+.. _f14513: https://github.com/sfstoolbox/sfs/tree/f14513a43aa59e4fbbe10f96fe1f737470beb96e
+.. _2.2.1: http://dx.doi.org/10.5281/zenodo.60606
 
 List of Publications
 --------------------
