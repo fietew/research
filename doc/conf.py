@@ -22,6 +22,51 @@ import shlex
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #sys.path.insert(0, os.path.abspath('.'))
 
+# -- Custom Styles for BibTex ---------------------------------------------
+
+from pybtex.style.formatting.unsrtalpha import Style
+from pybtex.style.template import (
+    join, words, together, field, optional, first_of,
+    names, sentence, tag, optional_field, href
+)
+from pybtex.plugin import register_plugin
+
+class CustomWebRefs(Style):
+
+
+    def format_web_refs(self, e):
+        return sentence [
+            optional [ self.format_url(e) ],
+            optional [ self.format_doi(e) ],
+            ]
+
+    def format_url(self, e):
+        return words [
+            '[',
+            href [
+                field('url'),
+                'URL'
+                ],
+            ']'
+        ]
+        
+    def format_doi(self, e):
+        # based on urlbst format.doi
+        return words [
+            '[',
+            href [
+                join [
+                    'https://doi.org/',
+                    field('doi')
+                    ],
+                'DOI'
+                ],
+            ']'
+        ]
+
+register_plugin('pybtex.style.formatting', 'customwebrefs', CustomWebRefs)
+
+
 # -- General configuration ------------------------------------------------
 
 # If your documentation needs a minimal Sphinx version, state it here.

@@ -25,9 +25,10 @@
 Welcome to Fiete Winter's Research!
 ===================================
 
-This repository contains additional material and figures of my publications. My
-research is part of the `Two!Ears project <http://www.twoears.eu>`_. This
-project has received fundingby the European Union’s `Seventh Framework Programme
+This repository contains additional material and figures of my publications.
+From Dec. 2013 to Dec. 2016, my research was part of the
+`Two!Ears project <http://www.twoears.eu>`_. This project has received funding
+by the European Union’s `Seventh Framework Programme
 <http://cordis.europa.eu/fet-proactive/>`_ for research, technological
 development and demonstration under grant agreement no 618075.
 
@@ -42,4 +43,5 @@ Contents
    :maxdepth: 0
 
    publications
+   material
    license
