@@ -1,0 +1,125 @@
+%*****************************************************************************
+% Copyright (c) 2017      Fiete Winter                                       *
+%                         Institut fuer Nachrichtentechnik                   *
+%                         Universitaet Rostock                               *
+%                         Richard-Wagner-Strasse 31, 18119 Rostock, Germany  *
+%                                                                            *
+% This file is part of the supplementary material for Fiete Winter's         *
+% scientific work and publications                                           *
+%                                                                            *
+% You can redistribute the material and/or modify it  under the terms of the *
+% GNU  General  Public  License as published by the Free Software Foundation *
+% , either version 3 of the License,  or (at your option) any later version. *
+%                                                                            *
+% This Material is distributed in the hope that it will be useful, but       *
+% WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY *
+% or FITNESS FOR A PARTICULAR PURPOSE.                                       *
+% See the GNU General Public License for more details.                       *
+%                                                                            *
+% You should  have received a copy of the GNU General Public License along   *
+% with this program. If not, see <http://www.gnu.org/licenses/>.             *
+%                                                                            *
+% http://github.com/fietew/publications           fiete.winter@uni-rostock.de*
+%*****************************************************************************
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Styles
+
+\tikzstyle{block} = [
+  draw, 
+  rectangle, 
+  minimum width=1.25cm, 
+  minimum height=0.55cm, 
+  inner sep=2pt
+]
+\tikzstyle{op} = [draw, circle, minimum size=0.3cm, inner sep=0pt]
+\tikzstyle{branch} = [circle, fill=black, minimum size=1mm, inner sep=0pt, node 
+distance = 1cm]
+\tikzstyle{connect} = [-latex, draw]
+\tikzstyle{dotted}= [dash pattern=on 0.0 mm off 1.0mm, line width 
+=0.5mm, line cap =round, shorten >= 2, shorten <=2]
+
+% loudspeaker
+\tikzstyle{loudspeaker} = [
+  basic loudspeaker, 
+  draw=black!70, 
+  fill=white, 
+  minimum height=5pt,
+  minimum width=2.5pt,
+  inner sep=0.5pt,
+  relative cone width=1.5,
+  relative cone height=2.5
+]
+
+\begin{tikzpicture}[node distance = 1.2cm]
+
+\pgfmathsetmacro{\xoffset}{0.20}
+\pgfmathsetmacro{\yoffset}{0.70}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Nodes
+
+\node[block, minimum width=1.25cm, minimum height=3cm] (wfs1) {WFS};
+\node[block, minimum width=1.25cm, minimum height=3cm, right=2.25cm of wfs1] 
+(wfs2) 
+{WFS};
+
+\foreach \idx/\ratio in {1/0.875, 2/0.625, N_s/0.125}
+{
+  \pgfmathsetmacro{\ratioinv}{1-\ratio}
+  
+  \coordinate(wfs1_in\idx) at 
+    ($\ratio*(wfs1.north west) + \ratioinv*(wfs1.south west)$);
+  % source signals
+  \node[left=0.5cm of wfs1_in\idx, anchor=east] (source\idx) 
+    {\scriptsize $s^{(\idx)}[n]$};
+}
+\path (source1) -- node[pos=0.5]{\huge$\vdots$} (sourceN_s);
+
+\foreach \idx/\ratio in {1/0.850, 2/0.650, 3/0.450, tmp/0.250, N_{fs}/0.050}
+{
+  \pgfmathsetmacro{\ratioinv}{1-\ratio}
+  
+  \coordinate(wfs1_out\idx) at 
+    ($\ratio*(wfs1.north east) + \ratioinv*(wfs1.south east)$);
+  \coordinate(wfs2_in\idx) at 
+    ($\ratio*(wfs2.north west) + \ratioinv*(wfs2.south west)$);
+}
+\path (wfs1_outtmp) -- node[above, pos=0.5]{\huge$\vdots$} (wfs2_intmp);
+
+\foreach \idx/\ratio in {1/0.900, 2/0.700, 3/0.500, L/0.100}
+{
+  \pgfmathsetmacro{\ratioinv}{1-\ratio}
+  
+  \coordinate(wfs2_out\idx) at 
+    ($\ratio*(wfs2.north east) + \ratioinv*(wfs2.south east)$);
+  % loudspeakers
+  \node[loudspeaker,right=0.5cm of wfs2_out\idx, anchor=west] 
+    (driving\idx) {};
+  \node[right=0.05 of driving\idx] 
+    {\scriptsize $\sfdriving[prefix=time][\sfpossec^{(\idx)}, n]$};
+}
+\path (driving2) -- node[pos=0.5]{\huge$\vdots$} (drivingL);
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Connections
+
+\foreach \idx in {1,2,N_s}{
+  \draw[connect] (source\idx) -- (wfs1_in\idx);
+}
+
+\foreach \idx/\ratio in {1, 2, 3, N_{fs}}
+{  
+  \draw[connect] (wfs1_out\idx) -- (wfs2_in\idx) node[above, pos=0.5]
+    {\scriptsize 
+    $\sfdriving[prefix=time,subscript=fs]^{\mathrm{WFS}}[\sfposfs^{(\idx)}, 
+    n]$};
+}
+
+\foreach \idx in {1,2,3,L}
+{
+  % loudspeakers
+  \draw[connect] (wfs2_out\idx) -- (driving\idx);
+}
+
+\end{tikzpicture}

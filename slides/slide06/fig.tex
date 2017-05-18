@@ -1,0 +1,75 @@
+%*****************************************************************************
+% Copyright (c) 2017      Fiete Winter                                       *
+%                         Institut fuer Nachrichtentechnik                   *
+%                         Universitaet Rostock                               *
+%                         Richard-Wagner-Strasse 31, 18119 Rostock, Germany  *
+%                                                                            *
+% This file is part of the supplementary material for Fiete Winter's         *
+% scientific work and publications                                           *
+%                                                                            *
+% You can redistribute the material and/or modify it  under the terms of the *
+% GNU  General  Public  License as published by the Free Software Foundation *
+% , either version 3 of the License,  or (at your option) any later version. *
+%                                                                            *
+% This Material is distributed in the hope that it will be useful, but       *
+% WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY *
+% or FITNESS FOR A PARTICULAR PURPOSE.                                       *
+% See the GNU General Public License for more details.                       *
+%                                                                            *
+% You should  have received a copy of the GNU General Public License along   *
+% with this program. If not, see <http://www.gnu.org/licenses/>.             *
+%                                                                            *
+% http://github.com/fietew/publications           fiete.winter@uni-rostock.de*
+%*****************************************************************************
+
+% loudspeaker
+\tikzstyle{loudspeaker} = [
+  basic loudspeaker, 
+  draw=black!70, 
+  fill=white, 
+  minimum height=3pt,
+  minimum width=1.5pt,
+  inner sep=0.5pt,
+  relative cone width=1.5,
+  relative cone height=2.5
+]
+
+\definecolor{activecolor}{RGB}{150, 150, 150}
+\definecolor{area}{RGB}{236, 236, 236}
+\definecolor{local}{RGB}{254, 204, 0}
+
+\begin{tikzpicture}
+
+\pgfmathsetmacro{\deltax}{0.8}
+\pgfmathsetmacro{\ys}{3.0}
+
+\node[circle, fill=activecolor, inner sep=0, minimum width=0.25cm] (source) at 
+(0,\ys) {};
+
+\path[fill=local] (-5,0) rectangle (5,-2.5);
+\draw (-5,0) -- (5,0);
+
+\foreach \dist in {1,2,...,5}{
+  \draw[activecolor, thick] ($(source.center)+(0:\dist)$) arc 
+    (0:-180:\dist);
+}
+
+\only<2>{%
+  \foreach \ldx in {-6,-5,...,6}{%
+    
+    \pgfmathsetmacro{\xo}{\ldx*\deltax}
+    \node[loudspeaker, fill=activecolor, rotate=-90, anchor=cone] 
+      (loudspeaker\ldx) at (\xo,0) {};
+  }
+  
+  \foreach \ldx in {-4,-3,...,4}{%
+  
+    \pgfmathsetmacro{\xo}{\ldx*\deltax}
+    \pgfmathsetmacro{\rso}{sqrt(\xo*\xo+\ys*\ys)}
+    \pgfmathsetmacro{\rt}{5-\rso}
+    \draw[thick, red] 
+      ($(loudspeaker\ldx.cone)+(0:\rt)$) arc (0:-180:\rt);
+  }
+}
+
+\end{tikzpicture}
