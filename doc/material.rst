@@ -89,11 +89,14 @@ toolbox.
 :cite:`Winter2016-TASL`                               |f14513|_
 :cite:`Winter2016-DAGA`                                   X
 :cite:`Winter2016-EUSIPCO`                             |2.2.1|_
+:cite:`Winter2017-DAGA`                                |2.3.0|_
 ============================  =====  ======= ======= ============= ========== =========
 
 
-.. |f14513| replace:: X
-.. |2.2.1| replace:: X
+.. |f14513| replace:: f14513
+.. |2.2.1| replace:: v2.2.1
+.. |2.3.0| replace:: v2.3.0
 
 .. _f14513: https://github.com/sfstoolbox/sfs/tree/f14513a43aa59e4fbbe10f96fe1f737470beb96e
 .. _2.2.1: http://dx.doi.org/10.5281/zenodo.60606
+.. _2.3.0: http://dx.doi.org/10.5281/zenodo.345435

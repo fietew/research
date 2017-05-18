@@ -93,7 +93,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'Fiete Winter\'s Research'
-copyright = '2015, Fiete Winter'
+copyright = '2015-2017, Fiete Winter'
 author = 'Fiete Winter'
 
 # The version info for the project you're documenting, acts as replacement for
