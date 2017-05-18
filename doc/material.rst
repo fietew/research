@@ -90,6 +90,7 @@ toolbox.
 :cite:`Winter2016-DAGA`                                   X
 :cite:`Winter2016-EUSIPCO`                             |2.2.1|_
 :cite:`Winter2017-DAGA`                                |2.3.0|_
+:cite:`Winter2017-AESb`
 ============================  =====  ======= ======= ============= ========== =========
 
 
