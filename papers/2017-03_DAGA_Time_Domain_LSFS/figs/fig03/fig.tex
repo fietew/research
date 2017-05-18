@@ -1,139 +1,149 @@
-%*****************************************************************************
-% Copyright (c) 2017      Fiete Winter                                       *
-%                         Institut fuer Nachrichtentechnik                   *
-%                         Universitaet Rostock                               *
-%                         Richard-Wagner-Strasse 31, 18119 Rostock, Germany  *
-%                                                                            *
-% This file is part of the supplementary material for Fiete Winter's         *
-% scientific work and publications                                           *
-%                                                                            *
-% You can redistribute the material and/or modify it  under the terms of the *
-% GNU  General  Public  License as published by the Free Software Foundation *
-% , either version 3 of the License,  or (at your option) any later version. *
-%                                                                            *
-% This Material is distributed in the hope that it will be useful, but       *
-% WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY *
-% or FITNESS FOR A PARTICULAR PURPOSE.                                       *
-% See the GNU General Public License for more details.                       *
-%                                                                            *
-% You should  have received a copy of the GNU General Public License along   *
-% with this program. If not, see <http://www.gnu.org/licenses/>.             *
-%                                                                            *
-% http://github.com/fietew/publications           fiete.winter@uni-rostock.de*
-%*****************************************************************************
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Styles
-
-\tikzstyle{block} = [
-  draw, 
-  rectangle, 
-  %minimum width=1.15cm, 
-  minimum height=0.55cm, 
-  inner sep=2pt
-]
-\tikzstyle{op} = [draw, circle, minimum size=0.3cm, inner sep=0pt]
-\tikzstyle{branch} = [circle, fill=black, minimum size=1mm, inner sep=0pt, node 
-distance = 1cm]
-\tikzstyle{connect} = [-latex, draw]
-\tikzstyle{dotted}= [dash pattern=on 0.0 mm off 1.0mm, line width 
-=0.5mm, line cap =round, shorten >= 2, shorten <=2]
-
 % loudspeaker
 \tikzstyle{loudspeaker} = [
   basic loudspeaker, 
   draw=black!70, 
   fill=white, 
-  minimum height=5pt,
-  minimum width=2.5pt,
+  minimum height=3pt,
+  minimum width=1.5pt,
   inner sep=0.5pt,
   relative cone width=1.5,
   relative cone height=2.5
 ]
 
-\begin{tikzpicture}[node distance = 1.2cm]
+\definecolor{activecolor}{RGB}{150, 150, 150}
+\definecolor{area}{RGB}{236, 236, 236}
+\definecolor{local}{RGB}{254, 204, 0}
 
-\pgfmathsetmacro{\xoffset}{0.20}
-\pgfmathsetmacro{\yoffset}{0.20}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Nodes
-
-% source signal
-\node(signal) {$s[n]$};
-
-% optional pre-filter
-\node[block, dashed, below=0.5cm of signal] (prefilter) 
-  {$\sffilterpre[prefix=time][n]$};
-\node[below=0.05 of prefilter] {option I};
-
-% delayline
-\node[block, right=0.5cm of prefilter, minimum width=5cm] 
-  (delayline) {(fractional) delayline};
-\foreach \idx/\ratio in {1/0.125, 2/0.375, 3/0.625, L/0.875}
-{
-  \pgfmathsetmacro{\ratioinv}{1-\ratio}
-  % inputs of delayline
-  \coordinate(delayline_in\idx) at 
-    ($\ratio*(delayline.north east) + \ratioinv*(delayline.north west)$); 
-  % outputs of delayline
-  \coordinate(delayline_out\idx) at 
-    ($\ratio*(delayline.south east) + \ratioinv*(delayline.south west)$);
+\tikzset{
+  mark coordinate/.style args={(#1) at #2}{
+    postaction={
+      decorate,
+      decoration={
+        markings,
+        mark=at position #2 with {\coordinate (#1);}
+      }
+    }
+  }
 }
 
-\foreach \idx/\odx/\mdx in {1/0/0,2/1/1,3/2/0,L/4/1}
-{
-  % weight and delays
-  \node[above=0.3cm of delayline_in\idx, yshift=2.0*\mdx*\yoffset cm] 
-    (weightdelay\odx) {%
-      \scriptsize 
-      $(w,\tau)(\sfpossec^{(\idx)})$
-    };
-  % contributions from other sound sources
-  \node[op] (add\idx) at
-    ($(delayline_out\idx) + (0,-0.5) + (0, -\odx*\yoffset)$) 
-      {\scriptsize +};
-  % optional post-filter
-  \node[block, dashed, below=1.0cm of add\idx, 
-    yshift=\odx*\yoffset cm] 
-    (postfilter\idx) {\rotatebox{90}{$\sffilterpre[prefix=time][n]$}};
-  % loudspeakers
-  \node[loudspeaker,below=0.3cm of postfilter\idx, anchor=west,rotate=-90] 
-    (driving\idx) {};
-  \node[below=0.2cm of driving\idx] 
-    {\scriptsize $\sfdriving[prefix=time][\sfpossec^{(\idx)}, n]$};
-}
-\node[right=2cm of add3] (sources) {\shortstack{other\\$N_s-1$\\sources}};
-
-\node[left=0.05 of postfilter1] {option II};
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Connections
-
-% signal
-\draw[connect] (signal) -- (prefilter);
-
-% delayline
-\draw[connect] (prefilter) -- (delayline);
-
-\foreach \idx/\odx in {1/0,2/1,3/2, L/4}
-{
-  % 
-  \draw[connect] (weightdelay\odx) -- (delayline_in\idx);
-  % add
-  \draw[connect] (delayline_out\idx) -- (add\idx);
-  \draw[connect] ($(sources.west) + (0,2*\yoffset) + (0,-\odx*\yoffset)$) -- 
-    (add\idx);
-  % post-filter
-  \draw[connect] (add\idx) -- (postfilter\idx);
-  % loudspeakers
-  \draw[connect] (postfilter\idx) -- (driving\idx);
+\tikzset{
+  mark node/.style args={(#1) at #2 with #3}{
+    postaction={
+      decorate,
+      decoration={
+        markings,
+        mark=at position #2 with {\node[#3](#1) {};}
+      }
+    }
+  }
 }
 
-% dots
-\foreach \label in {delayline_in,postfilter,driving}
-{
-  \path (\label 3) -- node[above,pos=0.5]{\Large$\hdots$} (\label L);
+\tikzset{
+  add loudspeakers/.style args={#1}{
+    postaction={
+      decorate,
+      decoration={
+        markings,
+        mark=between positions 0 and 1 step 1/#1 with {%
+          \node[loudspeaker,
+          fill=activecolor,
+          transform shape,
+          rotate=90,
+          anchor=cone] {};
+        },
+      }
+    }
+  }
 }
+
+\tikzset{
+  add focused/.style args={#1}{
+    postaction={
+      decorate,
+      decoration={
+        markings,
+        mark=between positions 0 and 1 step 1/#1 with {%
+          \node[circle,
+            fill=activecolor,
+            draw=black,
+            thin,
+            inner sep=0,
+            minimum width=0.15cm] {};
+        },
+      }
+    }
+  }
+}
+
+\begin{tikzpicture}
+
+\node[circle, fill=black!50, minimum width=0.1] (source) at (-1,1) {};
+\node[below=0.25cm of source, anchor=north west] 
+  {$\sfvirtualsource(\sfpos,\sfomega)$};
+\foreach \R in {0.3, 0.6, 0.9}
+{
+  \draw[draw=black!50] ($(source)+(-30:\R)$) arc (-30:50:\R);
+}
+
+\draw[draw=black!60,%
+  thick,%
+  add loudspeakers=30,
+  fill=area,%
+  mark coordinate=(d0tmp) at 26.5/30,
+  mark coordinate=(Otmp) at 4/30,
+  mark coordinate=(g0tmp) at 23/30,
+  mark node=(normaltmp) at 1/30 with {%
+    sloped,%
+    minimum height=0.5cm,%
+    anchor=south west,%
+    inner sep=0cm,%
+    pos=0%
+  }
+  ]
+  plot[scale=7.0, smooth cycle] file {../figs/fig04/fig.csv};
+
+\node[right of=d0tmp] (dO) {$\sfboundary$};
+\draw[-latex'] (dO) to[out=135,in=45] (d0tmp);
+
+\node[above=0.25cm of Otmp] {$\sfset$};
+
+\draw[-latex'] (normaltmp.south west) --
+  node[above, at end] {$\sfnormalsec(\sfpossec)$} (normaltmp.north west);
+  
+\node[below left of=normaltmp, node distance=0.75cm] {$\sfpossec$};
+
+\begin{scope}[xshift=2.25cm,yshift=1.0cm]
+  \begin{scope}
+    \clip plot [anchor=south west, scale=4.0, smooth cycle] file 
+      {../figs/fig04/fig.csv};
+    \node[anchor=south west, inner sep=0] at (0,0)  
+      {\includegraphics[scale=0.8]{../figs/fig04/soundfield}};
+  \end{scope}
+  \draw[draw=black!60, 
+    thick, 
+    mark coordinate=(Oltmp) at 0.55,
+    add focused=20,
+    mark node=(nltmp) at 14/20 with {%
+      sloped,%
+      minimum height=0.5cm,%
+      anchor=south west,%
+      inner sep=0cm,%
+      pos=0%
+    }
+    ]
+    plot [scale=4.0, smooth cycle] file {../figs/fig04/fig.csv};
+  \draw[-latex'] (nltmp.south west) --
+    node[below, at end] {$\sfnormalfs(\sfposfs)$} (nltmp.north west);
+  \node[above left of=nltmp, node distance=0.75cm] {$\sfposfs$};
+  \node[below of=Oltmp] {$\sfsetlocal$};
+\end{scope}
+
+% sound field of loudspeaker
+\foreach \R in {0.2, 0.4, 0.6}
+{
+  \draw[draw=black] ($(g0tmp)+(10:\R)$) arc (10:-120:\R);
+}
+\node[above=0.2cm of g0tmp, anchor=south east,inner sep=0] {$\sfgreens(\sfpos|
+  \sfpossec,\sfomega)$};
 
 \end{tikzpicture}
