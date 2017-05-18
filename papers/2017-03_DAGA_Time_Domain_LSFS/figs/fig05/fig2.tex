@@ -1,0 +1,145 @@
+%*****************************************************************************
+% Copyright (c) 2017      Fiete Winter                                       *
+%                         Institut fuer Nachrichtentechnik                   *
+%                         Universitaet Rostock                               *
+%                         Richard-Wagner-Strasse 31, 18119 Rostock, Germany  *
+%                                                                            *
+% This file is part of the supplementary material for Fiete Winter's         *
+% scientific work and publications                                           *
+%                                                                            *
+% You can redistribute the material and/or modify it  under the terms of the *
+% GNU  General  Public  License as published by the Free Software Foundation *
+% , either version 3 of the License,  or (at your option) any later version. *
+%                                                                            *
+% This Material is distributed in the hope that it will be useful, but       *
+% WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY *
+% or FITNESS FOR A PARTICULAR PURPOSE.                                       *
+% See the GNU General Public License for more details.                       *
+%                                                                            *
+% You should  have received a copy of the GNU General Public License along   *
+% with this program. If not, see <http://www.gnu.org/licenses/>.             *
+%                                                                            *
+% http://github.com/fietew/publications           fiete.winter@uni-rostock.de*
+%*****************************************************************************
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Styles
+
+\tikzstyle{block} = [
+  draw, 
+  rectangle, 
+  %minimum width=1.25cm, 
+  minimum height=0.55cm, 
+  inner sep=2pt
+]
+\tikzstyle{op} = [draw, circle, minimum size=0.3cm, inner sep=0pt]
+\tikzstyle{branch} = [circle, fill=black, minimum size=1mm, inner sep=0pt, node 
+distance = 1cm]
+\tikzstyle{connect} = [-latex, draw]
+\tikzstyle{dotted}= [dash pattern=on 0.0 mm off 1.0mm, line width 
+=0.5mm, line cap =round, shorten >= 2, shorten <=2]
+
+% loudspeaker
+\tikzstyle{loudspeaker} = [
+  basic loudspeaker, 
+  draw=black!70, 
+  fill=white, 
+  minimum height=5pt,
+  minimum width=2.5pt,
+  inner sep=0.5pt,
+  relative cone width=1.5,
+  relative cone height=2.5
+]
+
+\begin{tikzpicture}[node distance = 1.2cm]
+
+\pgfmathsetmacro{\xoffset}{0.20}
+\pgfmathsetmacro{\yoffset}{0.20}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Nodes
+
+% source signal
+\node(signal) {$s[n]$};
+
+% optional pre-filter
+\node[block, dashed, below=0.5cm of signal] (prefilter) {$\hat 
+  h_{\mathrm{pre}}[n]$};
+\node[below=0.05 of prefilter] {option I};
+
+% delayline
+\node[block, right=0.5cm of prefilter, minimum width=5cm] 
+  (delayline) {(fractional) delayline};
+\foreach \idx/\ratio in {1/0.125, 2/0.375, 3/0.625, L/0.875}
+{
+  \pgfmathsetmacro{\ratioinv}{1-\ratio}
+  % inputs of delayline
+  \coordinate(delayline_in\idx) at 
+    ($\ratio*(delayline.north east) + \ratioinv*(delayline.north west)$); 
+  % outputs of delayline
+  \coordinate(delayline_out\idx) at 
+    ($\ratio*(delayline.south east) + \ratioinv*(delayline.south west)$);
+}
+
+\foreach \idx/\odx/\mdx in {1/0/0,2/1/1, 3/2/0, L/4/1}
+{
+  % weight and delays
+  \node[above=0.3cm of delayline_in\idx, yshift=2.0*\mdx*\yoffset cm] 
+    (weightdelay\odx) 
+      {\scriptsize $(w,\tau)(\sfpossec^{(\idx)},\sfposfs)$ };
+  % contributions from other sound sources
+  \node[op] (add\idx) at
+    ($(delayline_out\idx) + (0,-1.3) + (0, -\odx*\yoffset)$) {\scriptsize +};
+  % sum over all focussed sources
+  \node[rectangle, draw, above=0.25cm of add\idx, yshift=\odx*\yoffset cm] 
+    (sum\idx) {\footnotesize $\sum$};
+  % optional post-filter
+  \node[block, dashed, below=1.0cm of add\idx, 
+    yshift=\odx*\yoffset cm] 
+    (postfilter\idx) {\rotatebox{90}{$\hat h_{\mathrm{pre}}[n]$}};
+  % loudspeakers
+  \node[loudspeaker, below=0.3cm of postfilter\idx, anchor=west, rotate=-90]
+    (driving\idx) {};
+  \node[below=0.2cm of driving\idx] 
+    {\scriptsize $\sfdriving[prefix=time][\sfpossec^{(\idx)}, n]$};
+}
+\node[right=2cm of add3] (sources) {\shortstack{other\\$\sfNs-1$\\sources}};
+
+\node[left=0.05 of postfilter1] {option II};
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Connections
+
+% signal
+\draw[connect] (signal) -- (prefilter);
+
+% delayline
+\draw[connect] (prefilter) -- (delayline);
+
+\foreach \idx/\odx in {1/0,2/1, 3/2, L/4}
+{
+  % 
+  \foreach \deltax in {0.15,0,-0.15}{
+    \draw[connect] ($(weightdelay\odx.south) + (\deltax,0)$) -- 
+      ($(delayline_in\idx) + (\deltax,0)$);
+    \draw[connect] ($(delayline_out\idx) + (\deltax,0)$) -- 
+      ($(sum\idx.north) + (\deltax,0)$);
+  }
+  % add
+  \draw[connect] ($(sources.west) + (0,2*\yoffset) + (0,-\odx*\yoffset)$) -- 
+    (add\idx);
+  % summation
+  \draw[connect] (sum\idx) -- (add\idx);
+  % post-filter
+  \draw[connect] (add\idx) -- (postfilter\idx);
+  % loudspeakers
+  \draw[connect] (postfilter\idx) -- (driving\idx);
+}
+
+% dots
+\foreach \label in {delayline_in, sum, postfilter,driving}
+{
+  \path (\label 3) -- node[above,pos=0.5]{\Large$\hdots$} (\label L);
+}
+
+\end{tikzpicture}
