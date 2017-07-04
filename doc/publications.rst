@@ -30,36 +30,38 @@ Scientific Papers
 
 .. rubric:: 2017
 
-.. bibliography:: ../papers/papers.bib
+.. bibliography:: ../publications.bib
   :style: customwebrefs
-  :all:
-  :filter: (type != 'misc') and (year == '2017')
+  :filter: (type != 'misc') and (type != 'unpublished') and (year == '2017')
 
 .. rubric:: 2016
 
-.. bibliography:: ../papers/papers.bib
+.. bibliography:: ../publications.bib
   :style: customwebrefs
-  :all:
-  :filter: (type != 'misc') and (year == '2016')
+  :filter: (type != 'misc') and (type != 'unpublished') and (year == '2016')
 
 .. rubric:: 2015
 
-.. bibliography:: ../papers/papers.bib
+.. bibliography:: ../publications.bib
   :style: customwebrefs
-  :all:
-  :filter: (type != 'misc') and (year == '2015')
+  :filter: (type != 'misc') and (type != 'unpublished') and (year == '2015')
 
 .. rubric:: 2014
 
-.. bibliography:: ../papers/papers.bib
+.. bibliography:: ../publications.bib
   :style: customwebrefs
-  :all:
-  :filter: (type != 'misc') and (year == '2014')
+  :filter: (type != 'misc') and (type != 'unpublished') and (year == '2014')
+
+Talks
+-----
+
+.. bibliography:: ../publications.bib
+  :style: customwebrefs
+  :filter: type == 'unpublished'
 
 Miscellaneous
 -------------
 
-.. bibliography:: ../papers/papers.bib
+.. bibliography:: ../publications.bib
   :style: customwebrefs
-  :all:
   :filter: type == 'misc'
