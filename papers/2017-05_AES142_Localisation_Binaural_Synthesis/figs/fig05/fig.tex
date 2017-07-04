@@ -1,0 +1,204 @@
+% GNUPLOT: LaTeX picture with Postscript
+\begingroup
+\newcommand{\ft}[0]{\footnotesize}
+  \makeatletter
+  \providecommand\color[2][]{%
+    \GenericError{(gnuplot) \space\space\space\@spaces}{%
+      Package color not loaded in conjunction with
+      terminal option `colourtext'%
+    }{See the gnuplot documentation for explanation.%
+    }{Either use 'blacktext' in gnuplot or load the package
+      color.sty in LaTeX.}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\includegraphics[2][]{%
+    \GenericError{(gnuplot) \space\space\space\@spaces}{%
+      Package graphicx or graphics not loaded%
+    }{See the gnuplot documentation for explanation.%
+    }{The gnuplot epslatex terminal needs graphicx.sty or graphics.sty.}%
+    \renewcommand\includegraphics[2][]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \@ifundefined{ifGPcolor}{%
+    \newif\ifGPcolor
+    \GPcolortrue
+  }{}%
+  \@ifundefined{ifGPblacktext}{%
+    \newif\ifGPblacktext
+    \GPblacktextfalse
+  }{}%
+  % define a \g@addto@macro without @ in the name:
+  \let\gplgaddtomacro\g@addto@macro
+  % define empty templates for all commands taking text:
+  \gdef\gplbacktext{}%
+  \gdef\gplfronttext{}%
+  \makeatother
+  \ifGPblacktext
+    % no textcolor at all
+    \def\colorrgb#1{}%
+    \def\colorgray#1{}%
+  \else
+    % gray or color?
+    \ifGPcolor
+      \def\colorrgb#1{\color[rgb]{#1}}%
+      \def\colorgray#1{\color[gray]{#1}}%
+      \expandafter\def\csname LTw\endcsname{\color{white}}%
+      \expandafter\def\csname LTb\endcsname{\color{black}}%
+      \expandafter\def\csname LTa\endcsname{\color{black}}%
+      \expandafter\def\csname LT0\endcsname{\color[rgb]{1,0,0}}%
+      \expandafter\def\csname LT1\endcsname{\color[rgb]{0,1,0}}%
+      \expandafter\def\csname LT2\endcsname{\color[rgb]{0,0,1}}%
+      \expandafter\def\csname LT3\endcsname{\color[rgb]{1,0,1}}%
+      \expandafter\def\csname LT4\endcsname{\color[rgb]{0,1,1}}%
+      \expandafter\def\csname LT5\endcsname{\color[rgb]{1,1,0}}%
+      \expandafter\def\csname LT6\endcsname{\color[rgb]{0,0,0}}%
+      \expandafter\def\csname LT7\endcsname{\color[rgb]{1,0.3,0}}%
+      \expandafter\def\csname LT8\endcsname{\color[rgb]{0.5,0.5,0.5}}%
+    \else
+      % gray
+      \def\colorrgb#1{\color{black}}%
+      \def\colorgray#1{\color[gray]{#1}}%
+      \expandafter\def\csname LTw\endcsname{\color{white}}%
+      \expandafter\def\csname LTb\endcsname{\color{black}}%
+      \expandafter\def\csname LTa\endcsname{\color{black}}%
+      \expandafter\def\csname LT0\endcsname{\color{black}}%
+      \expandafter\def\csname LT1\endcsname{\color{black}}%
+      \expandafter\def\csname LT2\endcsname{\color{black}}%
+      \expandafter\def\csname LT3\endcsname{\color{black}}%
+      \expandafter\def\csname LT4\endcsname{\color{black}}%
+      \expandafter\def\csname LT5\endcsname{\color{black}}%
+      \expandafter\def\csname LT6\endcsname{\color{black}}%
+      \expandafter\def\csname LT7\endcsname{\color{black}}%
+      \expandafter\def\csname LT8\endcsname{\color{black}}%
+    \fi
+  \fi
+    \setlength{\unitlength}{0.0500bp}%
+    \ifx\gptboxheight\undefined%
+      \newlength{\gptboxheight}%
+      \newlength{\gptboxwidth}%
+      \newsavebox{\gptboxtext}%
+    \fi%
+    \setlength{\fboxrule}{0.5pt}%
+    \setlength{\fboxsep}{1pt}%
+\begin{picture}(9014.00,4534.00)%
+    \gplgaddtomacro\gplbacktext{%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(481,2645){\makebox(0,0)[r]{\strut{}\ft $-6$}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(481,3180){\makebox(0,0)[r]{\strut{}\ft $0$}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(481,3715){\makebox(0,0)[r]{\strut{}\ft $6$}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(528,2220){\makebox(0,0){\strut{}}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(1169,2220){\makebox(0,0){\strut{}}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(1810,2220){\makebox(0,0){\strut{}}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(2451,2220){\makebox(0,0){\strut{}}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(3092,2220){\makebox(0,0){\strut{}}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(3733,2220){\makebox(0,0){\strut{}}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(4374,2220){\makebox(0,0){\strut{}}}%
+    }%
+    \gplgaddtomacro\gplfronttext{%
+      \csname LTb\endcsname%
+      \put(107,3180){\rotatebox{-270}{\makebox(0,0){\strut{}\ft avr / deg}}}%
+      \put(2451,4313){\makebox(0,0){\strut{}arithmetic mean (avr) of signed error}}%
+      \colorrgb{0.00,0.00,0.00}%
+      \put(4374,3822){\makebox(0,0)[r]{\strut{}\ft 2012}}%
+    }%
+    \gplgaddtomacro\gplbacktext{%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(4988,2645){\makebox(0,0)[r]{\strut{}\ft $2$}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(4988,3180){\makebox(0,0)[r]{\strut{}\ft $6$}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(4988,3715){\makebox(0,0)[r]{\strut{}\ft $10$}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(5035,2220){\makebox(0,0){\strut{}}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(5676,2220){\makebox(0,0){\strut{}}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(6317,2220){\makebox(0,0){\strut{}}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(6958,2220){\makebox(0,0){\strut{}}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(7599,2220){\makebox(0,0){\strut{}}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(8240,2220){\makebox(0,0){\strut{}}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(8881,2220){\makebox(0,0){\strut{}}}%
+    }%
+    \gplgaddtomacro\gplfronttext{%
+      \csname LTb\endcsname%
+      \put(4614,3180){\rotatebox{-270}{\makebox(0,0){\strut{}\ft std / deg}}}%
+      \put(6958,4313){\makebox(0,0){\strut{}standard deviation (std) of signed error}}%
+      \colorrgb{0.00,0.00,0.00}%
+      \put(8881,3822){\makebox(0,0)[r]{\strut{}\ft 2012}}%
+    }%
+    \gplgaddtomacro\gplbacktext{%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(481,818){\makebox(0,0)[r]{\strut{}\ft $-6$}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(481,1354){\makebox(0,0)[r]{\strut{}\ft $0$}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(481,1889){\makebox(0,0)[r]{\strut{}\ft $6$}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(528,393){\makebox(0,0){\strut{}\ft $-45$}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(1169,393){\makebox(0,0){\strut{}\ft $-30$}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(1810,393){\makebox(0,0){\strut{}\ft $-15$}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(2451,393){\makebox(0,0){\strut{}\ft $0$}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(3092,393){\makebox(0,0){\strut{}\ft $15$}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(3733,393){\makebox(0,0){\strut{}\ft $30$}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(4374,393){\makebox(0,0){\strut{}\ft $45$}}%
+    }%
+    \gplgaddtomacro\gplfronttext{%
+      \csname LTb\endcsname%
+      \put(107,1353){\rotatebox{-270}{\makebox(0,0){\strut{}\ft avr / deg}}}%
+      \put(2451,173){\makebox(0,0){\strut{}\ft $\phi_c$ / deg}}%
+      \colorrgb{0.00,0.00,0.00}%
+      \put(4374,1996){\makebox(0,0)[r]{\strut{}\ft 2017}}%
+    }%
+    \gplgaddtomacro\gplbacktext{%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(4988,818){\makebox(0,0)[r]{\strut{}\ft $2$}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(4988,1354){\makebox(0,0)[r]{\strut{}\ft $6$}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(4988,1889){\makebox(0,0)[r]{\strut{}\ft $10$}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(5035,393){\makebox(0,0){\strut{}\ft $-45$}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(5676,393){\makebox(0,0){\strut{}\ft $-30$}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(6317,393){\makebox(0,0){\strut{}\ft $-15$}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(6958,393){\makebox(0,0){\strut{}\ft $0$}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(7599,393){\makebox(0,0){\strut{}\ft $15$}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(8240,393){\makebox(0,0){\strut{}\ft $30$}}%
+      \colorrgb{0.50,0.50,0.50}%
+      \put(8881,393){\makebox(0,0){\strut{}\ft $45$}}%
+    }%
+    \gplgaddtomacro\gplfronttext{%
+      \csname LTb\endcsname%
+      \put(4614,1353){\rotatebox{-270}{\makebox(0,0){\strut{}\ft std / deg}}}%
+      \put(6958,173){\makebox(0,0){\strut{}\ft $\phi_c$ / deg}}%
+      \colorrgb{0.00,0.00,0.00}%
+      \put(8881,1996){\makebox(0,0)[r]{\strut{}\ft 2017}}%
+    }%
+    \gplbacktext
+    \put(0,0){\includegraphics{fig}}%
+    \gplfronttext
+  \end{picture}%
+\endgroup

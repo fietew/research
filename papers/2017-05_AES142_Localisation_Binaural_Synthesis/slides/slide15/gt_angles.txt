@@ -1,0 +1,25 @@
+# positions of the loudspeakers in Calypso
+# The angle is relative to 0deg from the listener point of view. The listener is
+# located at (0,1.5)m.
+# The measurement error of the angle values is around +-0.2deg.
+#
+# ls_number angle
+1	41.6
+2	38.3
+3	34.8
+4	30.8
+5	26.5
+6	21.8
+7	16.7
+8	11.4
+9	5.7
+10	0
+11	-5.7
+12	-11.4
+13	-16.8
+14	-22.0
+15	-26.8
+16	-31.2
+17	-35.3
+18	-38.9
+19	-42.2
