@@ -38,6 +38,7 @@ class CustomWebRefs(Style):
         return sentence [
             optional [ self.format_url(e) ],
             optional [ self.format_doi(e) ],
+            optional [ self.format_datadoi(e) ],
             ]
 
     def format_url(self, e):
@@ -60,6 +61,20 @@ class CustomWebRefs(Style):
                     field('doi')
                     ],
                 'DOI'
+                ],
+            ']'
+        ]
+        
+    def format_datadoi(self, e):
+        # based on urlbst format.doi
+        return words [
+            '[',
+            href [
+                join [
+                    'https://doi.org/',
+                    field('datadoi')
+                    ],
+                'DATA'
                 ],
             ']'
         ]
