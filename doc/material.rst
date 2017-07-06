@@ -34,9 +34,9 @@ poster, respectively. Both should (in most cases at least) be enumerated in
 order of appearance. In order to reproduced a figure, execute the scripts in
 the following order (if existent):
 
-1. MATLAB script: *.m
-2. gnuplot script: *.gnu
-3. include *.tex, *.png, *.pdf in your LaTeX document
+1. MATLAB script: \*.m
+2. gnuplot script: \*.gnu
+3. include \*.tex, \*.png, \*.pdf in your LaTeX document
 
 Requirements & Prerequities
 ---------------------------
@@ -44,7 +44,6 @@ Requirements & Prerequities
 Gnuplot
 ~~~~~~~
 
-The code of this repository has been tested under Gnuplot 4.6 patchlevel 4.
 Special thanks go to Hagen Wierstorf for introducing me to Gnuplot. His
 `Gnuplotting Blog <http://www.gnuplotting.org/>`_ contains a lot of examples
 and information about Gnuplot.
@@ -80,7 +79,8 @@ Specific Dependencies
 
 If you just want to get the material of one specific publication, you may
 not need all the requirements. The table shows, which publication needs which
-requirement.
+requirement. The shown versions or commits have to be interpreted as 
+"successfully tested under".
 
 +------------------------------+-------------------------------------------------------+---------+
 | Publication                  | MATLAB                                                | Gnuplot |
