@@ -24,15 +24,17 @@ import shlex
 
 # -- Custom Styles for BibTex ---------------------------------------------
 
-from pybtex.style.formatting.unsrtalpha import Style
+from pybtex.style.formatting.alpha import Style
+from pybtex.style.labels.alpha import LabelStyle
 from pybtex.style.template import (
     join, words, together, field, optional, first_of,
     names, sentence, tag, optional_field, href
 )
 from pybtex.plugin import register_plugin
 
-class CustomWebRefs(Style):
-
+class CustomStyle(Style):
+    
+    default_label_style = 'customlabels'
 
     def format_web_refs(self, e):
         return sentence [
@@ -78,8 +80,16 @@ class CustomWebRefs(Style):
                 ],
             ']'
         ]
+        
+class CustomLabelStyle(LabelStyle):
 
-register_plugin('pybtex.style.formatting', 'customwebrefs', CustomWebRefs)
+    # only year as label
+    def format_label(self, entry):
+        label = entry.fields["year"]
+        return label
+
+register_plugin('pybtex.style.formatting', 'customstyle', CustomStyle)
+register_plugin('pybtex.style.labels', 'customlabels', CustomLabelStyle)
 
 
 # -- General configuration ------------------------------------------------

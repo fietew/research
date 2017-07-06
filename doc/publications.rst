@@ -31,37 +31,37 @@ Scientific Papers
 .. rubric:: 2017
 
 .. bibliography:: ../publications.bib
-  :style: customwebrefs
+  :style: customstyle
   :filter: (type != 'misc') and (type != 'unpublished') and (year == '2017')
 
 .. rubric:: 2016
 
 .. bibliography:: ../publications.bib
-  :style: customwebrefs
+  :style: customstyle
   :filter: (type != 'misc') and (type != 'unpublished') and (year == '2016')
 
 .. rubric:: 2015
 
 .. bibliography:: ../publications.bib
-  :style: customwebrefs
+  :style: customstyle
   :filter: (type != 'misc') and (type != 'unpublished') and (year == '2015')
 
 .. rubric:: 2014
 
 .. bibliography:: ../publications.bib
-  :style: customwebrefs
+  :style: customstyle
   :filter: (type != 'misc') and (type != 'unpublished') and (year == '2014')
 
 Talks
 -----
 
 .. bibliography:: ../publications.bib
-  :style: customwebrefs
+  :style: customstyle
   :filter: type == 'unpublished'
 
 Miscellaneous
 -------------
 
 .. bibliography:: ../publications.bib
-  :style: customwebrefs
+  :style: customstyle
   :filter: type == 'misc'
