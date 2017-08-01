@@ -30,13 +30,17 @@ The material for specific publications is stored under the
 The figures of each paper can be found the respective sub-directory ``figs``.
 For some publications, there is also a ``slides`` or a ``poster_figs`` directory
 containing the scripts for some figures on the presentations slides or the
-poster, respectively. Both should (in most cases at least) be enumerated in
-order of appearance. In order to reproduced a figure, execute the scripts in
+poster, respectively. The figures are enumerated either based on their numbering
+in the paper, of the slide they appear on, or in order of appearance for the
+poster. In order to reproduced a figure, execute the scripts in
 the following order (if existent):
 
 1. MATLAB script: \*.m
 2. gnuplot script: \*.gnu
 3. include \*.tex, \*.png, \*.pdf in your LaTeX document
+
+For the third step, I recommend the ``import`` command from the 
+`LaTeX import package <https://www.ctan.org/pkg/import>`_.
 
 Requirements & Prerequities
 ---------------------------
@@ -46,17 +50,36 @@ Gnuplot
 
 Special thanks go to Hagen Wierstorf for introducing me to Gnuplot. His
 `Gnuplotting Blog <http://www.gnuplotting.org/>`_ contains a lot of examples
-and information about Gnuplot.
+and information about Gnuplot. You the following Gnuplot extensions
+
+* `ColorBrewer color schemes for gnuplot <https://github.com/aschn/gnuplot-colorbrewer>`_
+
+In order to use the extensions their directories have to be included into 
+Gnuplot's search path. This is done via the ``GNUPLOT_LIB``environment variable. 
+Under Linux (and possibly Mac) execute
+
+.. code-block:: shell
+
+    # gnuplot search path
+    export GNUPLOT_LIB=~/projects/gnuplot-colorbrewer:$GNUPLOT_LIB
+
+in a shell of your choice. You may also add this to your ``~/.bashrc`` or 
+something
+(depends on the shell your are using) to execute this automatically. For 
+Windows, see `here <https://www.computerhope.com/issues/ch000549.htm>`_. You 
+can check, if the path is correcty included via ``show loadpath`` in the 
+Gnuplot command prompt. Among other lines, this should display something like
+
+.. code-block:: shell
+
+    loadpath from GNUPLOT_LIB is "/home/bewater/projects/gnuplot-colorbrewer"
+
 
 LaTeX
 ~~~~~
 
 I am using pdfLaTeX, but it might be possible to get the scipts running with
-other LaTeX compilers (I don't know at all). Here are some LaTeX packages
-listed, which you need.
-
-* TikZ
-* PGF-plots
+other LaTeX compilers (I don't know at all).
 
 MATLAB
 ~~~~~~
