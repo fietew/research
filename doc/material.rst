@@ -22,16 +22,16 @@
  * http://github.com/fietew/publications           fiete.winter@uni-rostock.de*
  ******************************************************************************
 
-Material for scientific publications
-====================================
+Additional Material
+===================
 
-The material for specific publications is stored under the
-`papers directory <https://github.com/fietew/publications/tree/master/papers>`_.
-The figures of each paper can be found the respective sub-directory ``figs``.
+The material for specific publications is stored in the ``papers`` directory of 
+the `github repository <https://github.com/fietew/publications/>`_. 
+The figures of each paper can be found in the respective sub-directory ``figs``.
 For some publications, there is also a ``slides`` or a ``poster_figs`` directory
 containing the scripts for some figures on the presentations slides or the
 poster, respectively. The figures are enumerated either based on their numbering
-in the paper, of the slide they appear on, or in order of appearance for the
+in the paper, on the slide they appear on, or in order of appearance for the
 poster. In order to reproduced a figure, execute the scripts in
 the following order (if existent):
 
