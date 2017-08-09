@@ -22,19 +22,15 @@
  * http://github.com/fietew/publications           fiete.winter@uni-rostock.de*
  ******************************************************************************
 
-Welcome to the Research Homepage of Fiete Winter
-================================================
+Funding
+=======
 
-This website contains information about my scientific work including
-additional material and figures of my publications.
+From Dec. 2013 to Dec. 2016, my research was part of the
+`Two!Ears project <http://www.twoears.eu>`_. This project has received funding
+by the European Union’s `Seventh Framework Programme
+<http://cordis.europa.eu/fet-proactive/>`_ for research, technological
+development and demonstration under grant agreement no 618075.
 
-Contents
---------
-
-.. toctree::
-   :maxdepth: 0
-
-   publications
-   material
-   license
-   funding
+.. image:: img/twoears.png
+.. image:: img/eu-flag.gif
+.. image:: img/tree.jpg

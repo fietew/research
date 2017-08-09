@@ -41,6 +41,7 @@ class CustomStyle(Style):
             optional [ self.format_url(e) ],
             optional [ self.format_doi(e) ],
             optional [ self.format_datadoi(e) ],
+            optional [ self.format_slides(e) ],
             ]
 
     def format_url(self, e):
@@ -48,7 +49,7 @@ class CustomStyle(Style):
             '[',
             href [
                 field('url'),
-                'URL'
+                'PAPER'
                 ],
             ']'
         ]
@@ -77,6 +78,16 @@ class CustomStyle(Style):
                     field('datadoi')
                     ],
                 'DATA'
+                ],
+            ']'
+        ]
+        
+    def format_slides(self, e):
+        return words [
+            '[',
+            href [
+                field('slides'),
+                'SLIDES'
                 ],
             ']'
         ]

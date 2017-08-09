@@ -22,7 +22,17 @@
  * http://github.com/fietew/publications           fiete.winter@uni-rostock.de*
  ******************************************************************************
 
-License
-=======
+License Information
+===================
 
-The Software is released under GNU General Public License, version 3.
+The software is released under GNU General Public License, version 3, if not
+stated otherwise. 
+
+Any kind of artistic work (drawings, sketches, etc.) is released under 
+Creative Commons Attribution 4.0 International (CC BY 4.0). 
+
+The templates of the presentation slides and the poster are part of the 
+corporate design of the University of Rostock, Germany. Their usage is
+restricted to members of the university.
+
+Third-party material, e.g. university logos, are not covered by any licensing.
