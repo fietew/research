@@ -40,8 +40,7 @@ class CustomStyle(Style):
         return sentence [
             optional [ self.format_url(e) ],
             optional [ self.format_doi(e) ],
-            optional [ self.format_datadoi(e) ],
-            optional [ self.format_slides(e) ],
+            optional [ self.format_repo(e) ],
             ]
 
     def format_url(self, e):
@@ -63,31 +62,17 @@ class CustomStyle(Style):
                     'https://doi.org/',
                     field('doi')
                     ],
-                'DOI'
-                ],
-            ']'
-        ]
-        
-    def format_datadoi(self, e):
-        # based on urlbst format.doi
-        return words [
-            '[',
-            href [
-                join [
-                    'https://doi.org/',
-                    field('datadoi')
-                    ],
                 'DATA'
                 ],
             ']'
         ]
         
-    def format_slides(self, e):
+    def format_repo(self, e):
         return words [
             '[',
             href [
-                field('slides'),
-                'SLIDES'
+                field('repo'),
+                'REPO'
                 ],
             ']'
         ]
