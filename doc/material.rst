@@ -110,7 +110,7 @@ requirement. The shown versions or commits have to be interpreted as
 |                              +-----+-------+-------+-----------+-----------+---------+         |
 |                              | AMT | LTFAT | SOFiA | SFS       | MAT2TikZ  | EKF/UKF |         | 
 +==============================+=====+=======+=======+===========+===========+=========+=========+
-| :cite:`Winter2014-FA`        | X   | X     | X     | X         | X         |         |         |
+| :cite:`Winter2014-FA`        | X   | X     | X     | |1.1.0|_  | X         |         | |5.0.3|_|
 +------------------------------+-----+-------+-------+-----------+-----------+---------+---------+
 | :cite:`Winter2015-DAGA`      |     |       |       | |1.2.0|_  |           |         | |5.0.3|_|
 +------------------------------+-----+-------+-------+-----------+-----------+---------+---------+
@@ -134,6 +134,7 @@ requirement. The shown versions or commits have to be interpreted as
 +------------------------------+-----+-------+-------+-----------+-----------+---------+---------+
 
 .. |f14513| replace:: f14513
+.. |1.1.0| replace:: 1.1.0
 .. |1.2.0| replace:: 1.2.0
 .. |2.2.1| replace:: 2.2.1
 .. |2.3.0| replace:: 2.3.0
@@ -142,6 +143,7 @@ requirement. The shown versions or commits have to be interpreted as
 .. |5.0.3| replace:: 5.0.3
 
 .. _f14513: https://github.com/sfstoolbox/sfs/tree/f14513a43aa59e4fbbe10f96fe1f737470beb96e
+.. _1.1.0: http://dx.doi.org/10.5281/zenodo.16549
 .. _1.2.0: http://dx.doi.org/10.5281/zenodo.18230
 .. _2.2.1: http://dx.doi.org/10.5281/zenodo.60606
 .. _2.3.0: http://dx.doi.org/10.5281/zenodo.345435

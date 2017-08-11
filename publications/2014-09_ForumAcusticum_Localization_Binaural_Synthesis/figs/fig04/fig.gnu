@@ -74,7 +74,7 @@ do for [n in "23 10 5 3"]{
   nsht = n + 0;
 
   set yrange [-180:180]
-  stats getfilenamePW(azimuth, 'MB', nsht, npw) u 4 name "data"
+  stats getfilenamePW(azimuth, 'MB', nsht, npw) u 4 name "data" nooutput
 
   set yrange [ymin:ymax]
   set label 1 printNSHTTitle(nsht)
@@ -88,7 +88,7 @@ unset label 1
 set label 2 'DSB' at graph 0.5, graph 1.0 center front tc ls 101
 
 set yrange [-180:180]
-stats getfilenamePW(azimuth, 'DSB', 240, npw) u 4 name "data"
+stats getfilenamePW(azimuth, 'DSB', 240, npw) u 4 name "data" nooutput
 
 set yrange [ymin:ymax]
 set label 3 printMeanError(data_mean)
@@ -102,7 +102,7 @@ do for [n in "23 10 5 3"]{
   nsht = n + 0;
 
   set yrange [-180:180]
-  stats getfilenamePW(azimuth, 'MB', nsht, npw) u 4 name "data"
+  stats getfilenamePW(azimuth, 'MB', nsht, npw) u 4 name "data" nooutput
 
   set yrange [ymin:ymax]
   set label 3 printMeanError(data_mean)
@@ -113,7 +113,7 @@ do for [n in "23 10 5 3"]{
 unset label 1
 
 set yrange [-180:180]
-stats getfilenamePW(azimuth, 'DSB', 240, npw) u 4 name "data"
+stats getfilenamePW(azimuth, 'DSB', 240, npw) u 4 name "data" nooutput
 
 set yrange [ymin:ymax]
 set label 3 printMeanError(data_mean)
@@ -130,7 +130,7 @@ do for [azi in "0 30"]{
       nsht = n + 0;
 
       set yrange [-180:180]
-      stats getfilenamePS(1.0,azimuth, 'MB', db, nsht, npw) u 4 nooutput name "data"
+      stats getfilenamePS(1.0,azimuth, 'MB', db, nsht, npw) u 4 nooutput name "data" nooutput
 
       set yrange [ymin:ymax]
       set label 3 printMeanError(data_mean)

@@ -73,7 +73,7 @@ do for [npw in "10 15 18 24 360"] {
     tmp = npw + 0  # quick hack to convert strings to integers
 
     set yrange [-180:180]
-    stats [-90:90] getfilenamePS(1.0, azimuth, 'MB', db, nsht, tmp) u 4 name "data"
+    stats [-90:90] getfilenamePS(1.0, azimuth, 'MB', db, nsht, tmp) u 4 name "data" nooutput
 
     set yrange [ymin:ymax]
     set label 1 printNPWTitle(tmp)

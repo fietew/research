@@ -1,4 +1,4 @@
-# Ignore everything in this directory
-*
+# Ignore mat-files in this directory
+*.mat
 # Except this file
 !.gitignore
