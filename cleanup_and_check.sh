@@ -2,12 +2,6 @@
 
 directory=publications/
 
-# MATLAB
-# grep -rl "conf\s=\sSFS_config_example;" $directory | xargs sed -i "s/conf\s=\sSFS_config_example;/conf= SFS_config;/g"
-
-#execute m-files for testing
-# find  .  -iname "fig*.m"  -type f  -execdir bash -c "pwd && echo {} && gnuplot '{}'" \;
-
 # GNUPLOT
 # replace old palettes with external platters from gnuplot-colorbrewer
 grep -rl 'paired.pal' $directory | xargs sed -i 's/paired.pal/qualitative\/Paired.plt/g'
