@@ -58,7 +58,7 @@ set yrange [1:64]
 set ytics 16 offset 0.5,0
 
 # c-axis
-load 'blues.pal'
+load 'sequential/Blues.plt'
 set cbrange [-60:0]
 set cbtics 10
 set cbtics add ('\footnotesize $0$\,dB' 0)

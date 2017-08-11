@@ -76,7 +76,7 @@ set ytics 500 offset 0.5,0
 set ylabel '$f$ / Hz' offset 4.5,0
 
 # colorbar
-load 'blues.pal'
+load 'sequential/Blues.plt'
 set cbrange [-60:20]
 set cbtics 20 offset -0.5,0
 set cbtics add ('\footnotesize $0$\,dB' 0)
@@ -241,7 +241,7 @@ set ytics 1 offset 0.5,0
 set ylabel '$y$ / m' offset 4.0,0
 
 # c-axis
-load 'moreland.pal'
+load 'Moreland.plt'
 set cbrange [-1:1]
 set cbtics 1
 

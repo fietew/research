@@ -43,7 +43,7 @@ set xtics 1 offset 0,0.5
 set xlabel '$x$ / m' offset 0,1
 
 # c-axis
-load 'moreland.pal'
+load 'Moreland.plt'
 set cbrange [-1:1]
 set cbtics 1
 

@@ -29,7 +29,7 @@ set macros
 set loadpath '../../../../tools/gnuplot/'
 
 load 'border.cfg'
-load 'moreland.pal'
+load 'Moreland.plt'
 load 'array.cfg'
 
 set style line 11 lc rgb 'black' lt 2 lw 4 ps 0.75
@@ -61,7 +61,7 @@ set lmargin 6
 set rmargin 0
 set label 1 '\footnotesize $\localnumber=56, \localradius=30$cm' at 1.05,1.15 right front
 plot 'sound_field_lwfs_Nl56_R0.3.dat' binary matrix with image,\
-     'array.txt' @array_active w p,\
+     'array.txt' @array_active,\
      'virtual_array_Nl56_R0.3.txt' u 1:2 ls 11
 set border 1
 set format y ''
@@ -72,7 +72,7 @@ set rmargin 3
 set label 1 '\footnotesize $\localnumber=23, \localradius=30$cm'
 rM = 0.34938
 plot 'sound_field_lwfs_Nl23_R0.3.dat' binary matrix with image,\
-     'array.txt' @array_active w p,\
+     'array.txt' @array_active,\
      'virtual_array_Nl23_R0.3.txt' u 1:2 ls 11
 
 set colorbox vert user origin graph 1.05, 0.0 size graph 0.05,1.0
@@ -80,7 +80,7 @@ set lmargin 0
 set rmargin 6
 set label 1 '\footnotesize $\localnumber=56, \localradius=60$cm'
 plot 'sound_field_lwfs_Nl56_R0.6.dat' binary matrix with image,\
-     'array.txt' @array_active w p,\
+     'array.txt' @array_active,\
      'virtual_array_Nl56_R0.6.txt' u 1:2 ls 11
 unset multiplot
 

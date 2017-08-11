@@ -29,7 +29,7 @@ set macros
 set loadpath '../../../../tools/gnuplot/'
 
 load 'border.cfg'
-load 'moreland.pal'
+load 'Moreland.plt'
 load 'array.cfg'
 
 set style line 11 lc rgb 'black' lt 2 lw 4 ps 0.75
@@ -77,7 +77,7 @@ set multiplot layout 2,4 columnsfirst
 ################################################################################
 #### plot 1 #####
 # c-axis
-load 'moreland.pal'
+load 'Moreland.plt'
 set cbrange [-1:1]
 # labels
 set label 1 '\ft 1 kHz'
@@ -134,7 +134,7 @@ load 'plot_gt.cfg'
 
 #### plot 7 #####
 # c-axis
-load 'blues.pal'
+load 'sequential/Blues.plt'
 set cbrange [-60:0]
 # labels
 set label 1 '\ft broadband'

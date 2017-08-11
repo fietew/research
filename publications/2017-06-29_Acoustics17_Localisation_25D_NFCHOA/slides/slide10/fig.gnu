@@ -29,7 +29,7 @@ set macros
 set loadpath '../../../../tools/gnuplot/'
 
 load 'border.cfg'
-load 'moreland.pal'
+load 'Moreland.plt'
 load 'array.cfg'
 
 set style line 11 lc rgb 'black' lt 2 lw 4 ps 0.75
@@ -63,7 +63,7 @@ LABEL_Y = '\ft $y$ / m'
 # c-axis
 set cbrange [-60:0]
 set cbtics offset -0.5,0
-load 'greens.pal'
+load 'sequential/Greens.plt'
 # colorbar
 unset colorbox
 
@@ -92,7 +92,7 @@ set label 1 '\ft 2.5D Synthesis'
 @pos_bottom
 # plotting
 plot 'soundfield_posx0.00_posy0.00_nfchoa_nls3000_wo27_wmax-rE.dat' binary matrix with image, \
-     'array.txt' @array_active, \
+     'array_posx0.00_posy0.00_nfchoa_nls3000_wo27_wmax-rE.txt' @array_active, \
      'positions.txt' u 1:2 w p lc rgb "black" pt 9 ps 1.5, \
 
 ################################################################################

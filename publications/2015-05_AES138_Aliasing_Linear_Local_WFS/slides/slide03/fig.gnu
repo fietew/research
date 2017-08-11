@@ -29,7 +29,7 @@ set macros
 set loadpath '../../../../tools/gnuplot/'
 
 load 'border.cfg'
-load 'moreland.pal'
+load 'Moreland.plt'
 load 'array.cfg'
 load 'labels.cfg'
 load 'colorbar.cfg'

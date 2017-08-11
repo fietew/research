@@ -36,7 +36,7 @@ set output 'tmp.tex';
 
 unset key # deactivate legend
 
-load 'paired.pal'
+load 'qualitative/Paired.plt'
 # positioning
 load 'positions.cfg'
 SPACING_HORIZONTAL = 1.0

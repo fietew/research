@@ -78,7 +78,7 @@ set origin 0.025,0.1
 # labels
 set label 1 '\ft no bandlimitation'
 # c-axis
-load 'blues.pal'
+load 'sequential/Blues.plt'
 # positioning
 @pos_bottom_left
 # plotting
@@ -91,7 +91,7 @@ set origin 0.275,0.1
 # labels
 set label 1 '\ft $M=13$, rect.'
 # c-axis
-load 'reds.pal'
+load 'sequential/Reds.plt'
 # positioning
 @pos_bottom
 # plotting
@@ -105,7 +105,7 @@ set origin 0.525,0.1
 # labels
 set label 1 '\ft $M=13$, max-$r_E$'
 # c-axis
-load 'greens.pal'
+load 'sequential/Greens.plt'
 # positioning
 @pos_bottom
 # plotting

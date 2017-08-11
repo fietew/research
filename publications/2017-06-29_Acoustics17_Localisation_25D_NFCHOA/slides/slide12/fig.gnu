@@ -29,7 +29,7 @@ set macros
 set loadpath '../../../../tools/gnuplot/'
 
 load 'border.cfg'
-load 'moreland.pal'
+load 'Moreland.plt'
 load 'array.cfg'
 
 set style line 11 lc rgb 'black' lt 2 lw 4 ps 0.75
@@ -63,7 +63,7 @@ LABEL_Y = '\ft $y$ / m'
 # c-axis
 set cbrange [-60:0]
 set cbtics offset -0.5,0
-load 'greens.pal'
+load 'sequential/Greens.plt'
 # colorbar
 unset colorbox
 

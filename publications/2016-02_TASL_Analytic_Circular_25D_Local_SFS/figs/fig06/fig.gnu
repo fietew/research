@@ -44,7 +44,7 @@ set xlabel '$m$ / 1' offset 0,1
 
 # colorbar
 load 'colorbar.cfg'
-load 'blues.pal'
+load 'sequential/Blues.plt'
 set cbrange [-60:20]
 set cbtics 20 offset -0.5,0
 set cbtics add ('\footnotesize $0$\,dB' 0)

@@ -60,7 +60,7 @@ set ytics 1 offset -1,0
 set ylabel '$y$ / m' offset -2,0
 # colorbar
 load 'colorbar.cfg'
-load 'moreland.pal'  # colormap
+load 'Moreland.plt'  # colormap
 set cbrange [-1:1]  # mininum and maximum value of colorbar
 set cbtics 1
 unset colorbox

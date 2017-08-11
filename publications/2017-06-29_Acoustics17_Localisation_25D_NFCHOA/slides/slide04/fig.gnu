@@ -29,7 +29,7 @@ set macros
 set loadpath '../../../../tools/gnuplot/'
 
 load 'border.cfg'
-load 'moreland.pal'
+load 'Moreland.plt'
 load 'array.cfg'
 
 set style line 11 lc rgb 'black' lt 2 lw 4 ps 0.75
@@ -84,7 +84,7 @@ set label 1 '\ft no bandwidth limitation'
 # positioning
 @pos_top_left
 # c-axis
-load 'blues.pal'
+load 'sequential/Blues.plt'
 # plotting
 filename = 'posx0.00_posy0.00_pw_wo150_wmax-rE'
 plot 'soundfield_'.filename.'.dat' binary matrix with image, \
@@ -96,7 +96,7 @@ set label 1 '\ft $M=7$, rect.'
 # positioning
 @pos_top
 # c-axis
-load 'reds.pal'
+load 'sequential/Reds.plt'
 # plotting
 filename = 'posx0.00_posy0.00_pw_wo07_wrect'
 plot 'soundfield_'.filename.'.dat' binary matrix with image, \
@@ -119,7 +119,7 @@ set label 2 '\scriptsize bandlimited sound field'
 # positioning
 @pos_top_right
 # c-axis
-load 'greens.pal'
+load 'sequential/Greens.plt'
 # plotting
 filename = 'posx0.00_posy0.00_pw_wo13_wmax-rE'
 plot 'soundfield_'.filename.'.dat' binary matrix with image, \
@@ -132,7 +132,7 @@ set label 2 ''
 # positioning
 @pos_bottom_left
 # c-axis
-load 'blues.pal'
+load 'sequential/Blues.plt'
 # plotting
 filename = 'posx0.00_posy0.00_nfchoa_nls3000_wo150_wmax-rE'
 plot 'soundfield_'.filename.'.dat' binary matrix with image, \
@@ -143,7 +143,7 @@ set origin 0.275,0.1
 # positioning
 @pos_bottom
 # c-axis
-load 'reds.pal'
+load 'sequential/Reds.plt'
 # plotting
 filename = 'posx0.00_posy0.00_nfchoa_nls3000_wo07_wrect'
 plot 'soundfield_'.filename.'.dat' binary matrix with image, \
@@ -165,7 +165,7 @@ set label 2 '\scriptsize reproduced sound field'
 # positioning
 @pos_bottom_right
 # c-axis
-load 'greens.pal'
+load 'sequential/Greens.plt'
 # plotting
 filename = 'posx0.00_posy0.00_nfchoa_nls3000_wo13_wmax-rE'
 plot 'soundfield_'.filename.'.dat' binary matrix with image, \

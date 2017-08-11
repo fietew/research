@@ -67,7 +67,7 @@ load 'grid.cfg'
 # legend
 set key at graph 0.5, 1.0 bottom center vertical maxrows 2 width -2 samplen 2
 # palette
-load 'Set1.pal'
+load 'qualitative/Set1.plt'
 # margins
 set tmargin 4
 set bmargin 2

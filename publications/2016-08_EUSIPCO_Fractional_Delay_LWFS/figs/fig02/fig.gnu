@@ -34,7 +34,7 @@ load 'xyborder.cfg'
 set t epslatex size 8.7cm,9cm color colortext
 set output 'tmp.tex';
 
-load 'Set1.pal'
+load 'qualitative/Set1.plt'
 # variables
 N = 6  # number of spectra
 # axes

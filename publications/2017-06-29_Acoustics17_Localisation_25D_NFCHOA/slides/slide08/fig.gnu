@@ -37,7 +37,7 @@ set loadpath './../../gnuplot' '../../../../tools/gnuplot/'
 @lef
 set label 2 '\ft no bandlimitation'
 # palette
-load 'blues.pal'
+load 'sequential/Blues.plt'
 # plotting
 datafile = 'posx-1.00_posy0.00_ref'
 load 'hist.gnu'
@@ -45,7 +45,7 @@ load 'hist.gnu'
 @rig
 set label 2 '\ft $M=13$, rect'
 # palette
-load 'reds.pal'
+load 'sequential/Reds.plt'
 # plotting
 datafile = 'posx-1.00_posy0.00_pw_wo13_wrect'
 load 'hist.gnu'
@@ -54,7 +54,7 @@ load 'hist.gnu'
 @lef
 set label 2 '\ft $M=13$, max-$r_E$'
 # palette
-load 'greens.pal'
+load 'sequential/Greens.plt'
 # plotting
 datafile = 'posx-1.00_posy0.00_pw_wo13_wmax-rE'
 load 'hist.gnu'

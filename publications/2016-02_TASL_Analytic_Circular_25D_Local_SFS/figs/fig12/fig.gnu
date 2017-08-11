@@ -54,7 +54,7 @@ set ytics 1 offset 0.5,0
 set ylabel '$y_c$ / m' offset 4.0,0
 
 # c-axis
-load 'greens.pal'
+load 'sequential/Greens.plt'
 set cbrange [0:1.0]
 set cbtics 0.5
 set cbtics add ('\footnotesize $0$\,m' 0)

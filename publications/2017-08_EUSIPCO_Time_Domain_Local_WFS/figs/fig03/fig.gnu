@@ -65,7 +65,7 @@ set ytics 1 offset 0.5,0
 set ylabel offset 4.0,0
 LABEL_Y = '\ft $y$ / m'
 # c-axis
-load 'blues.pal'
+load 'sequential/Blues.plt'
 set cbrange [-60:0]
 set cbtics 20
 # colorbar

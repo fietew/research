@@ -61,7 +61,7 @@ set ytics 1 offset 0.5,0
 # legend
 set key at graph 1.0, 1.2 bottom center vertical maxrows 1 width 0 samplen 2
 # palette
-load 'Set1.pal'
+load 'qualitative/Set1.plt'
 
 ################################################################################
 

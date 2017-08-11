@@ -53,7 +53,7 @@ set ytics 1000 offset 0.5,0
 set ylabel '$f$ / Hz' offset 3.5,0
 
 # colorbar
-load 'blues.pal'
+load 'sequential/Blues.plt'
 load 'colorbar.cfg'
 set cbrange [-100:0]
 set cbtics 25 offset -0.5,0

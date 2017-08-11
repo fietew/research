@@ -34,7 +34,7 @@ set multiplot layout 2,2
 set loadpath '../../gnuplot/' '../../../../tools/gnuplot/'
 
 # palette
-load 'greens.pal'
+load 'sequential/Greens.plt'
 
 @top
 @lef

@@ -29,7 +29,7 @@ set macros
 set loadpath '../../../../tools/gnuplot/'
 
 load 'border.cfg'
-load 'moreland.pal'
+load 'Moreland.plt'
 load 'array.cfg'
 
 set style line 11 lc rgb 'black' lt 2 lw 4 ps 0.75
@@ -62,7 +62,7 @@ unset colorbox
 #### plot 1 #####
 set output 'fig1.png'
 # c-axis
-load 'blues.pal'
+load 'sequential/Blues.plt'
 # plotting
 filename = 'posx0.00_posy0.00_ref'
 plot 'soundfield_'.filename.'.dat' binary matrix with image, \
@@ -70,7 +70,7 @@ plot 'soundfield_'.filename.'.dat' binary matrix with image, \
 #### plot 2 #####
 set output 'fig2.png'
 # c-axis
-load 'greens.pal'
+load 'sequential/Greens.plt'
 # plotting
 filename = 'posx0.00_posy0.00_pw_wo13_wmax-rE'
 plot 'soundfield_'.filename.'.dat' binary matrix with image, \

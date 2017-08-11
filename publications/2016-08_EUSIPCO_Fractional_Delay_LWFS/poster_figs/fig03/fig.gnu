@@ -49,7 +49,7 @@ set ytics 0.2 offset 0,0
 # grid
 load 'grid.cfg'
 # styles
-load 'Set1.pal'
+load 'qualitative/Set1.plt'
 # margins
 set lmargin 12
 set rmargin 0

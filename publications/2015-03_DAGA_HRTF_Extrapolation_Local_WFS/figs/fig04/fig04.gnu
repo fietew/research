@@ -30,7 +30,7 @@ set loadpath '../../../../tools/gnuplot/'
 
 load 'grid.cfg'
 
-load 'blgrrd.pal'
+load 'BlGrRd.plt'
 load 'xyborder.cfg'
 
 unset key

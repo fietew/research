@@ -36,7 +36,7 @@ set output 'tmp.tex';
 
 unset key # deactivate legend
 
-load 'blgrrd.pal'
+load 'BlGrRd.plt'
 # variables
 N = 6  # number of spectra
 offset = 20 # offset of line in dB

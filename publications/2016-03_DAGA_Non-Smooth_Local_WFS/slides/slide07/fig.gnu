@@ -77,7 +77,7 @@ set xtics format ''
 # y-axis
 set ylabel '$y$ / m' offset 4.0,0
 # c-axis
-load 'moreland.pal'
+load 'Moreland.plt'
 set cbrange [-1:1]
 set cbtics 1
 # margins
@@ -136,7 +136,7 @@ set xtics format '\footnotesize $%g$'
 set ylabel '$y$ / m' offset 4.0,0
 set ytics format '\footnotesize $%g$'
 # c-axis
-load 'blues.pal'
+load 'sequential/Blues.plt'
 set cbrange [-40:-25]
 set cbtics 5
 # colorbar

@@ -68,7 +68,7 @@ set ytics 500 offset 0.5,0
 set ylabel '$f$ / Hz' offset 4.5,0
 
 # colorbar
-load 'blues.pal'
+load 'sequential/Blues.plt'
 set cbrange [-60:20]
 set cbtics 20 offset -0.5,0
 set cbtics add ('\footnotesize $0$\,dB' 0)
@@ -130,7 +130,7 @@ set format '\footnotesize $%g$'
 set tics scale 0.75 out nomirror
 
 # colorbar
-load 'moreland.pal'
+load 'Moreland.plt'
 set cbrange [-1:1]
 set cbtics 1
 
@@ -167,7 +167,7 @@ set lmargin 4.75
 set rmargin 0.25
 
 # colorbar
-load 'blues.pal'
+load 'sequential/Blues.plt'
 set cbrange [-60:20]
 set cbtics 20 offset -0.5,0
 set cbtics add ('\footnotesize $0$\,dB' 0)
@@ -225,7 +225,7 @@ set format '\footnotesize $%g$'
 set tics scale 0.75 out nomirror
 
 # colorbar
-load 'moreland.pal'
+load 'Moreland.plt'
 set cbrange [-1:1]
 set cbtics 1
 

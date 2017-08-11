@@ -29,7 +29,7 @@ set macros
 set loadpath '../../../../tools/gnuplot/'
 
 load 'border.cfg'
-load 'blgrrd.pal'
+load 'BlGrRd.plt'
 load 'labels.cfg'
 
 ################################################################################

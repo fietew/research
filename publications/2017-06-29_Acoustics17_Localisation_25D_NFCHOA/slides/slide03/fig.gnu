@@ -29,7 +29,7 @@ set macros
 set loadpath '../../../../tools/gnuplot/'
 
 load 'border.cfg'
-load 'moreland.pal'
+load 'Moreland.plt'
 load 'array.cfg'
 
 set style line 11 lc rgb 'black' lt 2 lw 4 ps 0.75
@@ -80,7 +80,7 @@ set origin 0.05,0.6
 # border
 load 'xyborder.cfg'
 # c-axis
-load 'blues.pal'
+load 'sequential/Blues.plt'
 # labels
 set label 1 '\ft no bandwidth limitation'
 # positioning
@@ -94,7 +94,7 @@ plot 'wm_posx0.00_posy0.00_ref.txt' u 1:2 w impulses ls 7 lw 2, \
 #### plot 2 #####
 set origin 0.275,0.6
 # c-axis
-load 'reds.pal'
+load 'sequential/Reds.plt'
 # labels
 set label 1 '\ft $M=7$, rect.'
 # positioning
@@ -118,7 +118,7 @@ plot 'wm_posx0.00_posy0.00_pw_wo13_wrect.txt' u 1:2 w impulses ls 7 lw 2, \
 #### plot 4 #####
 set origin 0.725,0.6
 # c-axis
-load 'greens.pal'
+load 'sequential/Greens.plt'
 # labels
 set label 1 '\ft $M=13$, max-$r_E$'
 set label 2 '\scriptsize window functions'
@@ -157,7 +157,7 @@ set label 2 ''
 # positioning
 @pos_bottom_left
 # c-axis
-load 'blues.pal'
+load 'sequential/Blues.plt'
 # plotting
 plot 'soundfield_posx0.00_posy0.00_ref.dat' binary matrix with image
 
@@ -166,7 +166,7 @@ set origin 0.275,0.2
 # positioning
 @pos_bottom
 # c-axis
-load 'reds.pal'
+load 'sequential/Reds.plt'
 # plotting
 plot 'soundfield_posx0.00_posy0.00_pw_wo07_wrect.dat' binary matrix with image
 
@@ -182,7 +182,7 @@ set origin 0.725,0.2
 # labels
 set label 2 '\scriptsize bandlimited sound field'
 # c-axis
-load 'greens.pal'
+load 'sequential/Greens.plt'
 # positioning
 @pos_bottom_right
 # plotting

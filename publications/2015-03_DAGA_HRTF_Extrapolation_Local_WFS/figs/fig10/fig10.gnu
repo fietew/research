@@ -29,7 +29,7 @@ set macros
 set loadpath '../../../../tools/gnuplot/'
 
 load 'border.cfg'
-load 'moreland.pal'
+load 'Moreland.plt'
 load 'array.cfg'
 
 set style line 11 lc rgb 'black' lt 2 lw 4 ps 0.75
@@ -71,14 +71,14 @@ set lmargin 1.5
 set rmargin 1.5
 set label 1 '\footnotesize 2.5D SFS'
 plot 'sound_field_hoa_ps.dat' binary matrix with image,\
-     'array.txt' @array_active w p
+     'array.txt' @array_active
 
 set lmargin 0
 set rmargin 3
 set cbrange [-1:1]
 set label 1 '\footnotesize Amplitudendifferenz'
 plot 'sound_field_comparison.dat' binary matrix with image,\
-     'array.txt' @array_active w p
+     'array.txt' @array_active
 unset multiplot
 
 set output # Closes the temporary output files.

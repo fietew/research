@@ -29,7 +29,7 @@ set macros
 set loadpath '../../../../tools/gnuplot/'
 
 load 'border.cfg'
-load 'moreland.pal'
+load 'Moreland.plt'
 load 'array.cfg'
 
 set style line 11 lc rgb 'black' lt 2 lw 4 ps 0.75
@@ -61,7 +61,7 @@ set lmargin 3
 set rmargin 0
 set label 1 '\footnotesize 1kHz' at 1.05,1.15 right front
 plot 'sound_field_wfs_f1000.dat' binary matrix with image,\
-     'array.txt' @array_active w p
+     'array.txt' @array_active
 set border 1
 set format y ''
 set ytics scale 0
@@ -71,13 +71,13 @@ set lmargin 1.5
 set rmargin 1.5
 set label 1 '\footnotesize 3kHz'
 plot 'sound_field_wfs_f3000.dat' binary matrix with image,\
-     'array.txt' @array_active w p
+     'array.txt' @array_active
 
 set lmargin 0
 set rmargin 3
 set label 1 '\footnotesize 5kHz'
 plot 'sound_field_wfs_f5000.dat' binary matrix with image,\
-     'array.txt' @array_active w p
+     'array.txt' @array_active
 unset multiplot
 
 set output # Closes the temporary output files.
