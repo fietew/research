@@ -25,8 +25,8 @@
 Additional Material
 ===================
 
-The material for specific publications is stored in the ``papers`` directory of 
-the `github repository <https://github.com/fietew/publications/>`_. 
+The material for specific publications is stored in the ``publications`` directory 
+of the `github repository <https://github.com/fietew/publications/>`_. 
 The figures of each paper can be found in the respective sub-directory ``figs``.
 For some publications, there is also a ``slides`` or a ``poster_figs`` directory
 containing the scripts for some figures on the presentations slides or the
@@ -132,6 +132,8 @@ requirement. The shown versions or commits have to be interpreted as
 +------------------------------+-----+-------+-------+-----------+-----------+---------+---------+
 | :cite:`Winter2017-Acoustics` |     |       |       | |7db339|_ |           |         | |5.0.3|_|
 +------------------------------+-----+-------+-------+-----------+-----------+---------+---------+
+| :cite:`Winter2017-EUSIPCO`   |     |       |       | |ef6c3a|_ |           |         | |5.0.3|_|
++------------------------------+-----+-------+-------+-----------+-----------+---------+---------+
 
 .. |f14513| replace:: f14513
 .. |1.1.0| replace:: 1.1.0
@@ -139,6 +141,7 @@ requirement. The shown versions or commits have to be interpreted as
 .. |2.2.1| replace:: 2.2.1
 .. |2.3.0| replace:: 2.3.0
 .. |7db339| replace:: 7db339
+.. |ef6c3a| replace:: ef6c3a
 
 .. |5.0.3| replace:: 5.0.3
 
@@ -148,6 +151,7 @@ requirement. The shown versions or commits have to be interpreted as
 .. _2.2.1: http://dx.doi.org/10.5281/zenodo.60606
 .. _2.3.0: http://dx.doi.org/10.5281/zenodo.345435
 .. _7db339: https://github.com/sfstoolbox/sfs-matlab/tree/7db3395da99713f3a94bfcff0c1ff666283d63ce
+.. _ef6c3a: https://github.com/sfstoolbox/sfs-matlab/tree/ef6c3ab0b7816a62f289eebc74af735d5370b9d3
 
 .. _5.0.3: http://www.gnuplot.info
 
