@@ -134,12 +134,15 @@ requirement. The shown versions or commits have to be interpreted as
 +------------------------------+-----+-------+-------+-----------+-----------+---------+---------+
 | :cite:`Winter2017-EUSIPCO`   |     |       |       | |ef6c3a|_ |           |         | |5.0.3|_|
 +------------------------------+-----+-------+-------+-----------+-----------+---------+---------+
+| :cite:`Winter2017-WASPAA`    |     |       |       | |2.4.1|_  |           |         | |5.0.3|_|
++------------------------------+-----+-------+-------+-----------+-----------+---------+---------+
 
 .. |f14513| replace:: f14513
 .. |1.1.0| replace:: 1.1.0
 .. |1.2.0| replace:: 1.2.0
 .. |2.2.1| replace:: 2.2.1
 .. |2.3.0| replace:: 2.3.0
+.. |2.4.1| replace:: 2.4.1
 .. |7db339| replace:: 7db339
 .. |ef6c3a| replace:: ef6c3a
 
@@ -150,6 +153,7 @@ requirement. The shown versions or commits have to be interpreted as
 .. _1.2.0: http://dx.doi.org/10.5281/zenodo.18230
 .. _2.2.1: http://dx.doi.org/10.5281/zenodo.60606
 .. _2.3.0: http://dx.doi.org/10.5281/zenodo.345435
+.. _2.4.1: http://dx.doi.org/10.5281/zenodo.894640
 .. _7db339: https://github.com/sfstoolbox/sfs-matlab/tree/7db3395da99713f3a94bfcff0c1ff666283d63ce
 .. _ef6c3a: https://github.com/sfstoolbox/sfs-matlab/tree/ef6c3ab0b7816a62f289eebc74af735d5370b9d3
 
