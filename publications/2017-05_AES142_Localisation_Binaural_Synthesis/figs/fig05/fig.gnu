@@ -5,7 +5,7 @@
 #                         Centre for Vision, Speech and Signal Processing    *
 #                         University of Surrey                               *
 #                         Guildford, GU2 7XH, UK                             *
-# Copyright (c) 2017      Fiete Winter                                       *
+# Copyright (c) 2013-2018 Fiete Winter                                       *
 #                         Institut fuer Nachrichtentechnik                   *
 #                         Universitaet Rostock                               *
 #                         Richard-Wagner-Strasse 31, 18119 Rostock, Germany  *

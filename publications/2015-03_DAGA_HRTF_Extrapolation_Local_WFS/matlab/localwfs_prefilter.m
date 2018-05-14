@@ -6,7 +6,7 @@ function H = localwfs_prefilter(f, conf)
 %                         Telekom Innovation Laboratories, TU Berlin         *
 %                         Ernst-Reuter-Platz 7, 10587 Berlin, Germany        *
 %                                                                            *
-% Copyright (c) 2015      Fiete Winter                                       *
+% Copyright (c) 2013-2018 Fiete Winter                                       *
 %                         Institut fuer Nachrichtentechnik                   *
 %                         Universitaet Rostock                               *
 %                         Richard-Wagner-Strasse 31, 18119 Rostock, Germany  *

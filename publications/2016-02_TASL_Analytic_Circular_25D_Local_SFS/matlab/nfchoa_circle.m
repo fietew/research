@@ -2,7 +2,7 @@ function nfchoa_circle(conf)
 % evaluates amplitude and phase error of the reproduced sound field on a circle
 
 %*****************************************************************************
-% Copyright (c) 2015      Fiete Winter                                       *
+% Copyright (c) 2013-2018 Fiete Winter                                       *
 %                         Institut fuer Nachrichtentechnik                   *
 %                         Universitaet Rostock                               *
 %                         Richard-Wagner-Strasse 31, 18119 Rostock, Germany  *

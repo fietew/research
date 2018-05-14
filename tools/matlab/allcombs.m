@@ -31,7 +31,7 @@ function combs = allcombs(varargin)
 %   combs = allcombs(A1, A2, ..., An, [1,2,1])  % A1 and A3 in one group
 
 %*****************************************************************************
-% Copyright (c) 2015      Fiete Winter                                       *
+% Copyright (c) 2013-2018 Fiete Winter                                       *
 %                         Institut fuer Nachrichtentechnik                   *
 %                         Universitaet Rostock                               *
 %                         Richard-Wagner-Strasse 31, 18119 Rostock, Germany  *

@@ -18,7 +18,7 @@ function [P, p] = bsRotatePWD(P, phi)
 %   see also: bsShiftPWD
 
 %*****************************************************************************
-% Copyright (c) 2014-2015 Fiete Winter                                       *
+% Copyright (c) 2013-2018 Fiete Winter                                       *
 %                         Institut fuer Nachrichtentechnik                   *
 %                         Universitaet Rostock                               *
 %                         Richard-Wagner-Strasse 31, 18119 Rostock, Germany  *

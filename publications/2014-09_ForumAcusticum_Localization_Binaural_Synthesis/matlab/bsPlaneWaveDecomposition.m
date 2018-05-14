@@ -23,7 +23,7 @@ function [P, p, kpw, fpw, tpw] = bsPlaneWaveDecomposition(source, params)
 %   see also: script_parameters, sofia_lebedev
 
 %*****************************************************************************
-% Copyright (c) 2014-2015 Fiete Winter, Frank Schultz, Sascha Spors          *
+% Copyright (c) 2013-2018 Fiete Winter, Frank Schultz, Sascha Spors          *
 %                         Institut fuer Nachrichtentechnik                   *
 %                         Universitaet Rostock                               *
 %                         Richard-Wagner-Strasse 31, 18119 Rostock, Germany  *

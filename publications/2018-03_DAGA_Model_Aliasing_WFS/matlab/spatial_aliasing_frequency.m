@@ -1,7 +1,7 @@
 function spatial_aliasing_frequency(conf)
 
 %*****************************************************************************
-% Copyright (c) 2018      Fiete Winter                                       *
+% Copyright (c) 2013-2018 Fiete Winter                                       *
 %                         Institut fuer Nachrichtentechnik                   *
 %                         Universitaet Rostock                               *
 %                         Richard-Wagner-Strasse 31, 18119 Rostock, Germany  *

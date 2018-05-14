@@ -2,7 +2,7 @@ function x = wrapTo180(x)
 % wrap value to the interval [-180,180)
 
 %*****************************************************************************
-% Copyright (c) 2015      Fiete Winter                                       *
+% Copyright (c) 2013-2018 Fiete Winter                                       *
 %                         Institut fuer Nachrichtentechnik                   *
 %                         Universitaet Rostock                               *
 %                         Richard-Wagner-Strasse 31, 18119 Rostock, Germany  *

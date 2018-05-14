@@ -3,7 +3,7 @@
 # helper script to plot magnitude spectrum of reproduced plane wave
 
 #*****************************************************************************
-# Copyright (c) 2017      Fiete Winter                                       *
+# Copyright (c) 2013-2018 Fiete Winter                                       *
 #                         Institut fuer Nachrichtentechnik                   *
 #                         Universitaet Rostock                               *
 #                         Richard-Wagner-Strasse 31, 18119 Rostock, Germany  *

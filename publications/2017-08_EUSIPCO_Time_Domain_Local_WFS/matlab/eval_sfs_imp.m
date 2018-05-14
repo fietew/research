@@ -2,7 +2,7 @@ function res = eval_sfs_imp(conf)
 % time domain driving signals of various (L)SFS techniques
 
 %*****************************************************************************
-% Copyright (c) 2017      Fiete Winter                                       *
+% Copyright (c) 2013-2018 Fiete Winter                                       *
 %                         Institut fuer Nachrichtentechnik                   *
 %                         Universitaet Rostock                               *
 %                         Richard-Wagner-Strasse 31, 18119 Rostock, Germany  *

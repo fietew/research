@@ -1,7 +1,7 @@
 % circular harmonics spectrum of 2D Green's function for two listener positions
 
 %*****************************************************************************
-% Copyright (c) 2015      Fiete Winter                                       *
+% Copyright (c) 2013-2018 Fiete Winter                                       *
 %                         Institut fuer Nachrichtentechnik                   *
 %                         Universitaet Rostock                               *
 %                         Richard-Wagner-Strasse 31, 18119 Rostock, Germany  *

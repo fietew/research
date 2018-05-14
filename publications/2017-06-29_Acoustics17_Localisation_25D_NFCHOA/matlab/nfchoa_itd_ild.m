@@ -3,7 +3,7 @@ function nfchoa_itd_ild( conf )
 % white noise. The Two!Ears Auditory Front End is required
 
 %*****************************************************************************
-% Copyright (c) 2017      Fiete Winter                                       *
+% Copyright (c) 2013-2018 Fiete Winter                                       *
 %                         Institut fuer Nachrichtentechnik                   *
 %                         Universitaet Rostock                               *
 %                         Richard-Wagner-Strasse 31, 18119 Rostock, Germany  *

@@ -8,7 +8,7 @@ function RR = get_translation(xt, Nse, f)
 % See also: nfchoa_translation
 
 %*****************************************************************************
-% Copyright (c) 2015      Fiete Winter                                       *
+% Copyright (c) 2013-2018 Fiete Winter                                       *
 %                         Institut fuer Nachrichtentechnik                   *
 %                         Universitaet Rostock                               *
 %                         Richard-Wagner-Strasse 31, 18119 Rostock, Germany  *
