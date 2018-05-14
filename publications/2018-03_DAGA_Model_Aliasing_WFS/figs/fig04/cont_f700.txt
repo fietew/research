@@ -1,0 +1,4 @@
+
+# Surface 0 of 1 surfaces
+
+# Curve title: "'linear_s4.00_N18_RcInf_Rl0.10_fal.dat' u 1:(-$2):3 binary matrix"
