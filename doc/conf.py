@@ -26,6 +26,7 @@ import shlex
 
 from pybtex.style.formatting.alpha import Style
 from pybtex.style.labels.alpha import LabelStyle
+from pybtex.style.sorting.author_year_title import SortingStyle
 from pybtex.style.template import (
     join, words, together, field, optional, first_of,
     names, sentence, tag, optional_field, href
@@ -35,6 +36,7 @@ from pybtex.plugin import register_plugin
 class CustomStyle(Style):
     
     default_label_style = 'customlabels'
+    default_sorting_style = 'customsorting'
 
     def format_web_refs(self, e):
         return sentence [
@@ -83,9 +85,40 @@ class CustomLabelStyle(LabelStyle):
     def format_label(self, entry):
         label = entry.fields["year"]
         return label
+        
+class CustomSortingStyle(SortingStyle):
+    
+    
+    month_indices = {
+        'January'   : '01',
+        'February'  : '02', 
+        'March'     : '03',
+        'April'     : '04',
+        'May'       : '05',
+        'June'      : '06',
+        'July'      : '07',
+        'August'    : '08',
+        'September' : '09',
+        'October'   : '10',
+        'November'  : '11',
+        'December'  : '12'
+    }
+    
+    
+    def sorting_key(self, entry):
+        
+        month = entry.fields.get('month', '');
+        if month in self.month_indices:
+            month_key = self.month_indices[month]
+        else:
+            month_key = '13'
+        
+        return (entry.fields.get('year', ''), month_key, entry.fields.get('title', ''))
+
 
 register_plugin('pybtex.style.formatting', 'customstyle', CustomStyle)
 register_plugin('pybtex.style.labels', 'customlabels', CustomLabelStyle)
+register_plugin('pybtex.style.sorting', 'customsorting', CustomSortingStyle)
 
 
 # -- General configuration ------------------------------------------------
