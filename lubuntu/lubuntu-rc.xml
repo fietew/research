@@ -1,0 +1,128 @@
+    <!-- Keybindings for running applications on Home + E -->
+    <keybind key="W-e">
+      <action name="Execute">
+        <startupnotify>
+          <enabled>true</enabled>
+          <name>PCManFM</name>
+        </startupnotify>
+        <command>pcmanfm</command>
+      </action>
+    </keybind>
+    <!-- Keybindings for lock screen on Home + L-->
+    <keybind key="W-l">
+      <action name="Execute">
+        <command>xscreensaver-command -lock</command>
+      </action>
+    </keybind>
+    <!-- Keybindings for start Thunderbird-->
+    <keybind key="W-m">
+      <action name="Execute">
+        <command>thunderbird</command>
+      </action>
+    </keybind>
+    <!-- Keybindings for start Firefox-->
+    <keybind key="W-i">
+      <action name="Execute">
+        <command>firefox</command>
+      </action>
+    </keybind>
+    <!-- Keybindings for start Geany-->
+    <keybind key="W-g">
+      <action name="Execute">
+        <command>geany</command>
+      </action>
+    </keybind>
+    <!-- Keybindings for start Texstudio-->
+    <keybind key="W-t">
+      <action name="Execute">
+        <command>texstudio</command>
+      </action>
+    </keybind>
+    <!-- Keybindings monitor switching-->
+    <keybind key="W-C-Left">
+      <action name="MoveResizeTo">
+        <monitor>next</monitor>
+      </action>
+    </keybind>
+    <keybind key="W-C-Right">
+      <action name="MoveResizeTo">
+        <monitor>prev</monitor>
+      </action>
+    </keybind>
+    <!-- Keybindings for window tiling -->
+    <keybind key="W-Left">        # HalfLeftScreen
+      <action name="UnmaximizeFull"/>
+      <action name="MoveResizeTo">
+        <x>0</x>
+        <y>0</y>
+        <height>100%</height>
+        <width>50%</width>
+      </action>
+    </keybind>
+    <keybind key="W-Right">        # HalfRightScreen
+      <action name="UnmaximizeFull"/>
+      <action name="MoveResizeTo">
+        <x>-0</x>
+        <y>0</y>
+        <height>100%</height>
+        <width>50%</width>
+      </action>
+    </keybind>
+    <keybind key="W-Up">        # HalfUpperScreen
+      <action name="UnmaximizeFull"/>
+      <action name="MoveResizeTo">
+        <x>0</x>
+        <y>0</y>
+        <width>100%</width>
+        <height>50%</height>
+      </action>
+    </keybind>
+    <keybind key="W-Down">        # HalfLowerScreen
+      <action name="UnmaximizeFull"/>
+      <action name="MoveResizeTo">
+        <x>0</x>
+        <y>-0</y>
+        <width>100%</width>
+        <height>50%</height>
+      </action>
+    </keybind>
+    <keybind key="W-A-Up">        # UpperLeftCornerScreen
+      <action name="UnmaximizeFull"/>
+      <action name="MoveResizeTo">
+        <x>0</x>
+        <y>0</y>
+        <width>50%</width>
+        <height>50%</height>
+      </action>
+    </keybind>
+    <keybind key="W-A-Left">        # BottomLeftCornerScreen
+      <action name="UnmaximizeFull"/>
+      <action name="MoveResizeTo">
+        <x>0</x>
+        <y>-0</y>
+        <width>50%</width>
+        <height>50%</height>
+      </action>
+    </keybind>
+    <keybind key="W-A-Down">        # BottomRightCornerScreen
+      <action name="UnmaximizeFull"/>
+      <action name="MoveResizeTo">
+        <x>-0</x>
+        <y>-0</y>
+        <width>50%</width>
+        <height>50%</height>
+      </action>
+    </keybind>
+    <keybind key="W-A-Right">        # UpperRightCornerScreen
+      <action name="UnmaximizeFull"/>
+      <action name="MoveResizeTo">
+        <x>-0</x>
+        <y>0</y>
+        <width>50%</width>
+        <height>50%</height>
+      </action>
+    </keybind>
+    <!-- Keybindings maximizing Window-->
+    <keybind key="W-Return">
+      <action name="ToggleMaximizeFull"/>
+    </keybind>
