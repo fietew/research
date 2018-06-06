@@ -27,16 +27,19 @@ import shlex
 from pybtex.style.formatting.alpha import Style
 from pybtex.style.labels.alpha import LabelStyle
 from pybtex.style.sorting.author_year_title import SortingStyle
+from pybtex.style.names.plain import NameStyle, name_part
 from pybtex.style.template import (
     join, words, together, field, optional, first_of,
     names, sentence, tag, optional_field, href
 )
+from pybtex.richtext import Text
 from pybtex.plugin import register_plugin
 
 class CustomStyle(Style):
     
     default_label_style = 'customlabels'
     default_sorting_style = 'customsorting'
+    default_name_style = 'customnames'
 
     def format_web_refs(self, e):
         return sentence [
@@ -115,11 +118,21 @@ class CustomSortingStyle(SortingStyle):
         
         return (entry.fields.get('year', ''), month_key, entry.fields.get('title', ''))
 
+class CustomNameStyle(NameStyle):
+    
+    def format(self, person, abbr=False):
+
+        res = super(CustomNameStyle, self).format(person, abbr=abbr)
+        
+        if person.rich_last_names == [Text('Winter')]:
+            res = tag('b')[res]
+            
+        return res
 
 register_plugin('pybtex.style.formatting', 'customstyle', CustomStyle)
 register_plugin('pybtex.style.labels', 'customlabels', CustomLabelStyle)
 register_plugin('pybtex.style.sorting', 'customsorting', CustomSortingStyle)
-
+register_plugin('pybtex.style.names', 'customnames', CustomNameStyle)
 
 # -- General configuration ------------------------------------------------
 
@@ -147,7 +160,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'Fiete Winter\'s Research'
-copyright = '2015-2017, Fiete Winter'
+copyright = '2015-2018, Fiete Winter'
 author = 'Fiete Winter'
 
 # The version info for the project you're documenting, acts as replacement for

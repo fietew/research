@@ -1,2 +1,2 @@
 sphinxcontrib-bibtex==0.4.0
-pybtex
+pybtex==0.21
