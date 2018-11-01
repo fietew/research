@@ -1,0 +1,4 @@
+
+# Surface 0 of 1 surfaces
+
+# Curve title: "'fS.dat' u 1:2:($3/1000) binary matrix"
