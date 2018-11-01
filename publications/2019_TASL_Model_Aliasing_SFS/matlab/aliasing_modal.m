@@ -20,7 +20,7 @@ function f = aliasing_modal(x0, kSx0, x, xc, M, conf)
 %
 
 %*****************************************************************************
-% Copyright (c) 2018      Fiete Winter                                       *
+% Copyright (c) 2013-2018 Fiete Winter                                       *
 %                         Institut fuer Nachrichtentechnik                   *
 %                         Universitaet Rostock                               *
 %                         Richard-Wagner-Strasse 31, 18119 Rostock, Germany  *
