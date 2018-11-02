@@ -28,6 +28,12 @@ List of Publications
 Scientific Papers
 -----------------
 
+.. rubric:: 2019
+
+.. bibliography:: ../publications.bib
+  :style: customstyle
+  :filter: (type != 'misc') and (type != 'unpublished') and (year == '2019')
+
 .. rubric:: 2018
 
 .. bibliography:: ../publications.bib

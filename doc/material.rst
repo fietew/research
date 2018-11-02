@@ -110,6 +110,8 @@ requirement. The shown versions or commits have to be interpreted as
 |                              +-----+-------+-------+-----------+-----------+---------+         |
 |                              | AMT | LTFAT | SOFiA | SFS       | MAT2TikZ  | EKF/UKF |         | 
 +==============================+=====+=======+=======+===========+===========+=========+=========+
+| :cite:`Winter2019-TASL`      |     |       |       | |2.4.3|_  |           |         | |5.0.3|_|
++------------------------------+-----+-------+-------+-----------+-----------+---------+---------+
 | :cite:`Winter2018-TASL`      |     |       |       | |2.4.2|_  |           |         | |5.0.3|_|
 +------------------------------+-----+-------+-------+-----------+-----------+---------+---------+
 | :cite:`Winter2018-DAGA`      |     |       |       | |2.4.2|_  |           |         | |5.0.3|_|
@@ -148,6 +150,7 @@ requirement. The shown versions or commits have to be interpreted as
 .. |2.3.0| replace:: 2.3.0
 .. |2.4.1| replace:: 2.4.1
 .. |2.4.2| replace:: 2.4.2
+.. |2.4.3| replace:: 2.4.3
 .. |7db339| replace:: 7db339
 .. |ef6c3a| replace:: ef6c3a
 
@@ -160,6 +163,7 @@ requirement. The shown versions or commits have to be interpreted as
 .. _2.3.0: http://dx.doi.org/10.5281/zenodo.345435
 .. _2.4.1: http://dx.doi.org/10.5281/zenodo.894640
 .. _2.4.2: http://dx.doi.org/10.5281/zenodo.1197733
+.. _2.4.3: http://dx.doi.org/10.5281/zenodo.1472172
 .. _7db339: https://github.com/sfstoolbox/sfs-matlab/tree/7db3395da99713f3a94bfcff0c1ff666283d63ce
 .. _ef6c3a: https://github.com/sfstoolbox/sfs-matlab/tree/ef6c3ab0b7816a62f289eebc74af735d5370b9d3
 
