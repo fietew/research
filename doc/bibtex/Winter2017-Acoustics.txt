@@ -1,0 +1,10 @@
+
+@Unpublished{Winter2017-Acoustics,
+  author        = {Winter, Fiete and Hahn, Nara and Wierstorf, Hagen and Spors, Sascha},
+  title         = {Azimuthal localisation in 2.5D near-field-compensated higher order ambisonics},
+  note          = {Acoustics '17},
+  month         = jun,
+  year          = {2017},
+  owner         = {winter},
+  timestamp     = {2017.07.04}
+}

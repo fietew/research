@@ -46,6 +46,7 @@ class CustomStyle(Style):
             optional [ self.format_url(e) ],
             optional [ self.format_doi(e) ],
             optional [ self.format_repo(e) ],
+            optional [ self.format_bibtex(e) ],
             ]
 
     def format_url(self, e):
@@ -78,6 +79,20 @@ class CustomStyle(Style):
             href [
                 field('repo'),
                 'REPO'
+                ],
+            ']'
+        ]
+        
+    def format_bibtex(self, e):
+        return words [
+            '[',
+            href [
+                join [
+                    'bibtex/',
+                    e.key,
+                    '.txt'
+                    ],
+                'BibTeX'
                 ],
             ']'
         ]
@@ -142,7 +157,10 @@ register_plugin('pybtex.style.names', 'customnames', CustomNameStyle)
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ['sphinxcontrib.bibtex']
+extensions = ['sphinxcontrib.bibtex', 'sphinxcontrib.rawfiles']
+
+# Files you want to copy
+rawfiles = ['bibtex']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']

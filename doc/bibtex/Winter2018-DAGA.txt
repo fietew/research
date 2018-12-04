@@ -1,0 +1,10 @@
+
+@InProceedings{Winter2018-DAGA,
+  author        = {Winter, Fiete and Ahrens, Jens and Spors, Sascha},
+  title         = {{A Geometric Model for Spatial Aliasing in Wave Field Synthesis}},
+  booktitle     = {German Annual Conference on Acoustics (DAGA)},
+  year          = {2018},
+  pages         = {1310--1313},
+  address       = {Munich, Germany},
+  month         = mar
+}

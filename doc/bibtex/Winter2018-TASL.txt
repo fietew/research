@@ -1,0 +1,14 @@
+
+@Article{Winter2018-TASL,
+  author        = {Winter, Fiete and Wierstorf, Hagen and Hold, Christoph and Krüger, Frank and Raake, Alexander and Spors, Sascha},
+  title         = {{Colouration in Local Wave Field Synthesis}},
+  journal       = {IEEE/ACM Transactions on Audio, Speech, and Language Processing},
+  year          = {2018},
+  volume        = {26},
+  number        = {10},
+  pages         = {1913-1924},
+  month         = oct,
+  issn          = {2329-9290},
+  doi           = {10.5281/zenodo.1158027},
+  url           = {https://doi.org/10.1109/TASLP.2018.2842435}
+}

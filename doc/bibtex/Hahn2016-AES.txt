@@ -1,0 +1,11 @@
+
+@InProceedings{Hahn2016-AES,
+  title         = {{Local Wave Field Synthesis by Spatial Band-Limitation in the Circular/Spherical Harmonics Domain}},
+  author        = {Hahn, Nara and Winter, Fiete and Spors, Sascha},
+  booktitle     = {Proc. of 140th Aud. Eng. Soc. Conv.},
+  year          = {2016},
+  address       = {Paris, France},
+  month         = jun,
+  pages         = {1--12},
+  url           = {http://www.aes.org/e-lib/browse.cfm?elib=18294}
+}

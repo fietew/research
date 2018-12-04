@@ -1,0 +1,8 @@
+
+@Article{Winter2019-TASL,
+  author        = {Winter, Fiete and Firtha, Gergely and Schultz, Frank and Spors, Sascha},
+  title         = {{A Geometric Model for Prediction of Spatial Aliasing in 2.5D Sound Field Synthesis}},
+  journal       = {IEEE/ACM Transactions on Audio, Speech, and Language Processing},
+  year          = {2019},
+  note          = {Under review}
+}

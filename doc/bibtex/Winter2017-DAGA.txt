@@ -1,0 +1,10 @@
+
+@InProceedings{Winter2017-DAGA,
+  title         = {{Time-Domain Realisations of 2.5-Dimensional Local Sound Field Synthesis}},
+  author        = {Winter, Fiete and Spors, Sascha},
+  booktitle     = {German Annual Conference on Acoustics (DAGA)},
+  year          = {2017},
+  address       = {Kiel, Germany},
+  month         = mar,
+  pages         = {1134--1137}
+}

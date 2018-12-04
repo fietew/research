@@ -1,0 +1,11 @@
+
+@InProceedings{Hahn2017-EUSIPCO,
+  author        = {Hahn, Nara and Winter, Fiete and Spors, Sascha},
+  title         = {Synthesis of a spatially band-limited plane wave in the time-domain using wave field synthesis},
+  booktitle     = {25th European Signal Processing Conference (EUSIPCO)},
+  year          = {2017},
+  pages         = {673-677},
+  address       = {Kos Island, Greece},
+  month         = aug,
+  url           = {https://doi.org/10.23919/EUSIPCO.2017.8081292}
+}

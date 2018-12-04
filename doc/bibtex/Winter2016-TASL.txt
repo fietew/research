@@ -1,0 +1,14 @@
+
+@Article{Winter2016-TASL,
+  title         = {{On Analytic Methods for 2.5D Local Sound Field Synthesis Using Circular Distributions of Secondary Sources}},
+  author        = {Winter, Fiete and Ahrens, Jens and Spors, Sascha},
+  journal       = {IEEE/ACM Transactions on Audio, Speech, and Language Processing},
+  month         = feb,
+  year          = {2016},
+  number        = {99},
+  pages         = {1-1},
+  volume        = {PP},
+  url           = {https://doi.org/10.1109/TASLP.2016.2531902},
+  issn          = {2329-9290},
+  keywords      = {Azimuth;Green's function methods;Harmonic analysis;IEEE transactions;Loudspeakers;Speech;Speech processing;Ambisonics;sound field synthesis;spatial aliasing}
+}
