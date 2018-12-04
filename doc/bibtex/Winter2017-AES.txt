@@ -1,14 +1,4 @@
 
-@InProceedings{Winter2017-AESb,
-  title         = {{The Two!Ears Database}},
-  author        = {Winter, Fiete and Raake, Alexander and Spors, Sascha and Wierstorf, Hagen},
-  booktitle     = {Proc. of 142nd Aud. Eng. Soc. Conv.},
-  year          = {2017},
-  address       = {Berlin, Germany},
-  month         = may,
-  url           = {http://www.aes.org/e-lib/browse.cfm?elib=18705}
-}
-
 @InProceedings{Winter2017-AES,
   title         = {{Improvement of the reporting method for closed-loop human localization experiments}},
   author        = {Winter, Fiete and Wierstorf, Hagen and Spors, Sascha},
