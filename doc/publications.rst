@@ -71,9 +71,10 @@ Talks
   :style: customstyle
   :filter: type == 'unpublished'
 
-Miscellaneous
--------------
+..
+    Miscellaneous
+    -------------
 
-.. bibliography:: ../publications.bib
-  :style: customstyle
-  :filter: type == 'misc'
+    .. bibliography:: ../publications.bib
+      :style: customstyle
+      :filter: type == 'misc'
