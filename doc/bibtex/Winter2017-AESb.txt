@@ -1,7 +1,7 @@
 
 @InProceedings{Winter2017-AESb,
+  author        = {Winter, Fiete and Wierstorf, Hagen and Raake, Alexander and Spors, Sascha},
   title         = {{The Two!Ears Database}},
-  author        = {Winter, Fiete and Raake, Alexander and Spors, Sascha and Wierstorf, Hagen},
   booktitle     = {Proc. of 142nd Aud. Eng. Soc. Conv.},
   year          = {2017},
   address       = {Berlin, Germany},
