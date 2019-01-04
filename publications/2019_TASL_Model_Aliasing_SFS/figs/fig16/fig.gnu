@@ -24,96 +24,224 @@
 # http://github.com/fietew/publications           fiete.winter@uni-rostock.de*
 #*****************************************************************************
 
-reset
+# reset
 set macros
 set loadpath '../../../../tools/gnuplot/'
+
+load 'border.cfg'
+load 'array.cfg'
 load 'standalone.cfg'
 
 ################################################################################
-set t epslatex size 8.9cm,5.0cm color colortext standalone header ieeetran10pt.normal
+set t epslatex size 18.7cm,8.0cm color colortext standalone header ieeetran10pt.normal
 set output 'fig.tex'
 
-unset key # deactivate legend
-
-load 'qualitative/Dark2.plt'
-set style line 10 lc rgb 'black'
-set style line 101
+# legend
+unset key
 # positioning
 load 'positions.cfg'
-SPACING_VERTICAL = 3.0
-OUTER_RATIO_B = 0.75
-# axes
-set format '\ft %g'
-# variables
-Nspec = 10
-offset = 40  # shift in dB
-Mlabel = '800 650 950 600 450 700 100 200 200 40'
-
-################################################################################
-set multiplot
-
-#### plot 1 #####
-# labels
-set label 1 '\scs $\sfRc = \sfRlocal$' at first 60, first 45 front center tc rgb 'red'
-# x-axis
-set xrange [0:100]
-set xtics 10 offset 0,0.5
-set xtics add ('$\ft \infty$' 100)
-set xlabel offset 0,1.0
-LABEL_X = '\ft $M$'
-# y-axis
-set ylabel offset 2,0
-set yrange [1:40]
-set ytics 10 offset 1.0,0
-set ytics add (40)
-set logscale y
-LABEL_Y = '\ft $\sffS_{\sfcirclelocal|\sfcirclec}\;/\;\mathrm{kHz}$'
-# positioning
-SPACING_HORIZONTAL = 5.0
-OUTER_RATIO_L = 0.9
-set size 0.7, 1.0
-set origin 0.0, 0.0
-@pos_bottom_left
-# border
-load 'xyborder.cfg'
-# arrows
-set arrow 1 from 94.3, graph -0.025 to 95.3, graph 0.025 nohead ls 101 # Inf break
-set arrow 2 from 95.3, graph -0.025 to 96.3, graph 0.025 nohead ls 101 #    "
-# plotting
-plot 'Ml.txt' u 2:($1/1000) with filledcurve y1 fc rgb '#FFCCCC',\
-  'Ml.txt' u 2:($1/1000) with lines lc rgb 'red',\
-  for[ii=1:Nspec] 'fS.txt' u 1:(column(ii+1)/1000) w l ls ii lw 2,\
-  for[ii=1:Nspec] 'fS.txt' every ::word(Mlabel,ii)-1::word(Mlabel,ii)-1 u 1:(column(ii+1)/1000):(sprintf('\\ft %d', ii-1)) with labels offset graph 0.005,graph 0.075 tc ls ii,\
-  for[ii=0:Nspec-1] 'fSr.txt' every ::ii::ii u 1:($2/1000) with points ls ii+1 pt 6 ps 1.5
-
-#### plot 2 #####
-# labels
-unset label 1
 # x-axis
 set xrange [-1.5:1.5]
-unset logscale
-LABEL_X = ''
+set xtics 1 offset 0,0.5
+set xlabel offset 0,1.2
+LABEL_X = '$x$ / m'
 # y-axis
-set yrange [-1.5:3.0]
-LABEL_Y = ''
-# positioning
-SPACING_HORIZONTAL = 2.0
-OUTER_RATIO_R = 0.5
-set size 0.3, 1.0
+set yrange [-1.5:1.5]
+set ytics 1 offset 0.5,0
+set ylabel offset 4,0
+LABEL_Y = '$y$ / m'
+# c-axis
+set cbtics offset -0.5,0
+# colorbar
+load 'colorbar.cfg'
+# axes
 set size ratio -1
-set origin 0.7, 0.0
-@pos_bottom_right
-# border
-load 'noborder.cfg'
-# grid
-unset grid
+set tics scale 0.75 out nomirror
+# style
+set style line 101 lc rgb 'black' lw 4
+# labels
+load 'labels.cfg'
+set label 1 at graph 0.5, 1.075 center front
+set label 2 at graph 0.0, 1.075 left front '\stepcounter{tmpcounter}(\alph{tmpcounter})'
+set label 3 center front tc rgb '#808080'
+# variables
+sx = 0.17
+sy = 0.45
+dx = 0.01
+oriy1 = 0.52
+oriy2 = 0.065
+orix1 = 0*sx + 1*dx + 0.04
+orix2 = 1*sx + 2*dx + 0.04
+orix3 = 2*sx + 3*dx + 0.04
+orix4 = 3*sx + 4*dx + 0.04
+orix5 = 4*sx + 5*dx + 0.06
+f = 0
+# functions
+db(x) = 20*log10(x)
+flabel = 'sprintf(''\footnotesize $f = %1.1f$ kHz'', f/1000.0)'
+
+################################################################################
+set multiplot layout 1,5
+
+set view map
+unset surface
+set contour base
+# set cntrlabel format '%8.3g' font ',7' start 0 interval 1000
+# set cntrparam order 4
+# set cntrparam points 5
+# set cntrparam bspline
+set format '%g'
+do for [f=1000:4000:1000] {
+  set cntrparam level incremental f, 1.0, f
+  set table sprintf('cont_f%d.txt', f)
+  splot 'fS.dat' u 1:2:3 binary matrix w l
+  unset table
+}
+
+#### plot 1 ####
+# c-axis
+set cbrange [-1:1]
+set cbtics 1
+# palette
+set palette negative
+set palette maxcolor 0
+load 'diverging/RdBu.plt'  # see gnuplot-colorbrewer
+# colorbar
+unset colorbox
+# positioning
+set size sx, sy
+set origin orix1, oriy1
+@pos_top_left
+# variables
+f = 1000
+# labels
+set label 1 @flabel
 # plotting
-load 'array.cfg' # for @array_active
-load 'localization.cfg' # @point_source
-plot 'array.txt' @array_active,\
-  set_point_source(0,2.5) @point_source,\
-  for[ii=0:Nspec-1] 'pos.txt' every ::ii::ii ls ii+1 lw 2 pt 2 ps 1.0,\
-  for[ii=0:Nspec-1] 'pos.txt' every ::ii::ii using 1:2:(sprintf('\\ft %d',ii)) with labels offset graph 0.065,-0.035 tc ls ii+1
+load 'plotP.gnu'
+
+#### plot 2 ####
+# positioning
+set size sx, sy
+set origin orix2, oriy1
+@pos_top
+# variables
+f = 2000
+# labels
+set label 1 @flabel
+# plotting
+load 'plotP.gnu'
+
+#### plot 3 ####
+# positioning
+set size sx, sy
+set origin orix3, oriy1
+@pos_top
+# variables
+f = 3000
+# labels
+set label 1 @flabel
+# plotting
+load 'plotP.gnu'
+
+#### plot 4 ####
+# positioning
+set size sx, sy
+set origin orix4, oriy1
+@pos_top
+# variables
+f = 4000
+# labels
+set label 1 @flabel
+set label 3 at screen 0.83, 0.965
+# colorbar
+set colorbox vert user origin screen 0.8, 0.5475 size graph 0.05,1.0
+# labels
+set label 1 @flabel
+# plotting
+load 'plotP.gnu'
+
+#### plot 5 ####
+# positioning
+set size sx, sy
+set origin orix1, oriy2
+@pos_bottom_left
+# c-axis
+set cbrange [-15:10]
+set cbtics 5
+# palette
+load 'sequential/Reds.plt'  # see gnuplot-colorbrewer
+set palette positive
+set palette maxcolors 0
+# colorbar
+unset colorbox
+# variables
+f = 1000
+# labels
+set label 1 @flabel
+# plotting
+load 'ploteps.gnu'
+
+#### plot 6 ####
+# positioning
+set size sx, sy
+set origin orix2, oriy2
+@pos_bottom
+# variables
+f = 2000
+# labels
+set label 1 @flabel
+# plotting
+load 'ploteps.gnu'
+
+#### plot 7 ####
+# positioning
+set size sx, sy
+set origin orix3, oriy2
+@pos_bottom
+# variables
+f = 3000
+# labels
+set label 1 @flabel
+set label 4 ''
+# plotting
+load 'ploteps.gnu'
+
+#### plot 8 ####
+# positioning
+set size sx, sy
+set origin orix4, oriy2
+@pos_bottom
+# colorbar
+set colorbox vert user origin screen 0.8625, 0.5475 size graph 0.05,1.0
+# variables
+f = 4000
+# labels
+set label 1 @flabel
+# labels
+set label 3 at screen 0.8675, 0.965 '\footnotesize dB'
+# plotting
+load 'ploteps.gnu'
+
+#### plot 9 ####
+# positioning
+set size sx, sy
+set origin orix5, oriy2
+@pos_bottom_right
+# c-axis
+set cbrange [1:5]
+set cbtics 1
+# labels
+set label 1 '\footnotesize $\sffS(\sfpos)$'
+set label 3 at screen 0.93, 0.965 '\footnotesize kHz'
+# palette
+set palette maxcolors 4
+load 'sequential/Blues.plt'  # see gnuplot-colorbrewer
+set palette positive
+# colorbar
+set colorbox vert user origin screen 0.925, 0.5475 size graph 0.05,1.0
+# plotting
+plot 'fS.dat' u 1:2:($3/1000) binary matrix with image,\
+  'array.txt' @array_active
 
 ################################################################################
 unset multiplot

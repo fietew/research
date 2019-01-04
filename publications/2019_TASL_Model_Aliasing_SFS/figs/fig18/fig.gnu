@@ -24,54 +24,172 @@
 # http://github.com/fietew/publications           fiete.winter@uni-rostock.de*
 #*****************************************************************************
 
-reset
+# reset
 set macros
 set loadpath '../../../../tools/gnuplot/'
+
+load 'border.cfg'
+load 'array.cfg'
 load 'standalone.cfg'
 
 ################################################################################
-set t epslatex size 8.9cm,3.0cm color colortext standalone header ieeetran10pt.normal
+set t epslatex size 8.7cm,8.5cm color colortext standalone header ieeetran10pt.normal
 set output 'fig.tex'
 
-unset key # deactivate legend
-
-load 'qualitative/Paired.plt'
-set style line 10 lc rgb 'black'
-set style line 101
-# border
-load 'xyborder.cfg'
-# grid
-load 'grid.cfg'
+# legend
+unset key
 # positioning
 load 'positions.cfg'
-SPACING_HORIZONTAL = 4.0
-OUTER_RATIO_L = 0.825
-SPACING_VERTICAL = 2.5
-OUTER_RATIO_B = 0.87
 # x-axis
-set xrange [0:3]
-set xtics 0.5 offset 0,0.5
-set xtics add ('$\ft \infty$' 3)
-set xlabel offset 0,1.0
-LABEL_X = '\ft $\sfRc \;/\;\mathrm{m}$'
+set xrange [-1.5:1.5]
+set xtics 1 offset 0,0.5
+set xlabel offset 0,1
+LABEL_X = '$x$ / m'
 # y-axis
+set yrange [-1.5:1.5]
+set ytics 1 offset 0.5,0
 set ylabel offset 4,0
-set yrange [1:3]
-set ytics 1 offset 1.0,0
-# set logscale y
-LABEL_Y = '\ft $\sffS_{\sfcirclelocal|\sfcirclec}\;/\;\mathrm{kHz}$'
+LABEL_Y = '$y$ / m'
+# c-axis
+set cbrange [-1:1]
+set cbtics 1
+# palette
+set palette negative
+set palette maxcolor 0
+load 'diverging/RdBu.plt'  # see gnuplot-colorbrewer
+# colorbar
+load 'colorbar.cfg'
+unset colorbox
 # axes
-set format '\ft %g'
+set size ratio -1
+set tics scale 0.75 out nomirror
+# style
+set style line 1 lc rgb 'black' lw 4
+set style line 2 lc rgb 'cyan' lw 3
+set style line 3 lc rgb 'cyan' lw 3 dt 3
+set style line 4 lc rgb 'magenta' lw 3
+set style line 5 lc rgb 'magenta' lw 3 dt 3
+set style line 6 lc rgb 'green' lw 3 pt 7 ps 1
+set style line 7 lc rgb 'green' lw 4
+
+# labels
+load 'labels.cfg'
+set label 1 at graph 0.5, 1.075 center front
+set label 2 at graph 1.1, 1.15 center front
+set label 3 center front tc rgb '#808080'
+set label 4 at graph 0.0, 1.075 left front '\stepcounter{tmpcounter}(\alph{tmpcounter})'
+# variables
+sx = 0.375
+sy = 0.4
+orix1 = 0.105
+orix2 = 0.5
+oriy1 = 0.55
+oriy2 = 0.095
 
 ################################################################################
+set multiplot
 
+#### plot 1 ####
+# labels
+set label 1 '\ft $\sfRc = 0.15$ m'
+# positioning
+@pos_top_left
+set size sx,sy
+set origin orix1,oriy1
+# variables
+prefix = '_Rc0.15'
+oldnew = 0
+# plotting
+plot 'P'.prefix.'.dat' binary matrix with image,\
+  'array.txt' @array_active,\
+  'Cl.txt' u 1:2 w l ls 1,\
+  'xl.txt' u 1:2 w p ls 1 pt 2 ps 1,\
+  'Cc'.prefix.'.txt' u 1:2 w l ls 2,\
+  'xc.txt' u 1:2 w p ls 2 pt 2 ps 1,\
+  'rays'.prefix.'.txt' u 1:2 w l ls 2,\
+  '' u 3:4 w l ls 3,\
+  '' u 5:6 w l ls 3,\
+  '' u  7+oldnew: 8+oldnew w l ls 4,\
+  '' u  9+oldnew:10+oldnew w l ls 5,\
+  '' u 11+oldnew:12+oldnew w l ls 5,\
+  '' every ::0::0 u 1:2 w p ls 6
+
+#### plot 2 ####
+# labels
+set label 1 '\ft $\sfRc = 0.15$ m'
+# positioning
+@pos_top_right
+set size sx,sy
+set origin orix2,oriy1
+# variables
+oldnew = 6
+# plotting
+plot 'P'.prefix.'.dat' binary matrix with image,\
+  'array.txt' @array_active,\
+  'Cl.txt' u 1:2 w l ls 1,\
+  'xl.txt' u 1:2 w p ls 1 pt 2 ps 1,\
+  'Cc'.prefix.'.txt' u 1:2 w l ls 2,\
+  'xc.txt' u 1:2 w p ls 2 pt 2 ps 1,\
+  'rays'.prefix.'.txt' u 1:2 w l ls 2,\
+  '' u 3:4 w l ls 3,\
+  '' u 5:6 w l ls 3,\
+  '' u  7+oldnew: 8+oldnew w l ls 4,\
+  '' u  9+oldnew:10+oldnew w l ls 5,\
+  '' u 11+oldnew:12+oldnew w l ls 5,\
+  'array_select'.prefix.'.txt' w l ls 7
+
+#### plot 3 ####
+# labels
+set label 1 '\ft $\sfRc = 0.5$ m'
 # positioning
 @pos_bottom_left
-# arrows
-set arrow 1 from 2.725, graph -0.05 to 2.75, graph 0.05 nohead ls 101 # Inf break
-set arrow 2 from 2.75, graph -0.05 to 2.775, graph 0.05 nohead ls 101 #    "
+set size sx,sy
+set origin orix1,oriy2
+# variables
+prefix = '_Rc0.50'
+oldnew = 0
 # plotting
-plot 'fS.txt' using 1:($2/1000) w l ls 6 lw 4,\
-  '' using 1:($3/1000) w l ls 2 lw 4
+plot 'P'.prefix.'.dat' binary matrix with image,\
+  'array.txt' @array_active,\
+  'Cl.txt' u 1:2 w l ls 1,\
+  'xl.txt' u 1:2 w p ls 1 pt 2 ps 1,\
+  'Cc'.prefix.'.txt' u 1:2 w l ls 2,\
+  'xc.txt' u 1:2 w p ls 2 pt 2 ps 1,\
+  'rays'.prefix.'.txt' u 1:2 w l ls 2,\
+  '' u 3:4 w l ls 3,\
+  '' u 5:6 w l ls 3,\
+  '' u  7+oldnew: 8+oldnew w l ls 4,\
+  '' u  9+oldnew:10+oldnew w l ls 5,\
+  '' u 11+oldnew:12+oldnew w l ls 5,\
+  '' every ::0::0 u 1:2 w p ls 6
+
+#### plot 4 ####
+# labels
+set label 1 '\ft $\sfRc = 0.5$ m'
+# colorbar
+set colorbox @colorbar_east
+# positioning
+@pos_bottom_right
+set size sx,sy
+set origin orix2,oriy2
+# variables
+oldnew = 6
+# plotting
+plot 'P'.prefix.'.dat' binary matrix with image,\
+  'array.txt' @array_active,\
+  'Cl.txt' u 1:2 w l ls 1,\
+  'xl.txt' u 1:2 w p ls 1 pt 2 ps 1,\
+  'Cc'.prefix.'.txt' u 1:2 w l ls 2,\
+  'xc.txt' u 1:2 w p ls 2 pt 2 ps 1,\
+  'rays'.prefix.'.txt' u 1:2 w l ls 2,\
+  '' u 3:4 w l ls 3,\
+  '' u 5:6 w l ls 3,\
+  '' u  7+oldnew: 8+oldnew w l ls 4,\
+  '' u  9+oldnew:10+oldnew w l ls 5,\
+  '' u 11+oldnew:12+oldnew w l ls 5,\
+  'array_select'.prefix.'.txt' w l ls 7
+
+################################################################################
+unset multiplot
 
 call 'pdflatex.gnu' 'fig'

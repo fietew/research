@@ -29,30 +29,31 @@ SFS_start;
 
 conf = SFS_config;
 
+conf.plot.usenormalisation = true;
+conf.plot.normalisation = 'center';
 conf.secondary_sources.geometry = 'circular';
 conf.secondary_sources.size = 3;
 conf.secondary_sources.center = [0,0,0];
 conf.c = 343;
 conf.resolution = 300;
+conf.xref = [-0.75,0.5,0];
 
-xs = [0,2.5,0];
-src = 'ps';
+conf.localwfs_sbl.Npw = 1024;
+conf.localwfs_sbl.order = 27;
+conf.localwfs_sbl.fc = 500;
 
-Lref = 2^16;
+Lref = 2048;
 L = 56;
 R = conf.secondary_sources.size/2;
-Rl = 0.085;
-Mvec = [0:0.1:90, 100];
+M = conf.localwfs_sbl.order;
+xc = conf.xref;
+xs = [0 2.5 0];
+src = 'ps';
+srcg = 'ps';
+fvec = [1000, 2000, 3000, 4000];
+xref = conf.xref;
 
-x = -1.0:0.5:0;
-y = -0.75:0.75:0.75;
-[y,x] = meshgrid(y,x);
-x = x(:);
-x = [x; 0];
-y = y(:);
-y = [y; 1.25];
-
-%% Aliasing Frequency for different xl==xc and M
+%% Aliasing Frequency
 % x0 and local wavenumber kS(x0) of virtual sound field at x0
 conf.secondary_sources.number = Lref;
 x0 = secondary_source_positions(conf);
@@ -63,58 +64,75 @@ x0(:,7) = 2.*pi.*R./L;  % sampling distance deltax0
 kSx0 = local_wavenumber_vector(x0(:,1:3), xs, src);
 
 % evaluation points x
+X = [-1.55, 1.55];
+Y = [-1.55, 1.55];
+Z = 0;
+[x,y,~] = xyz_grid(X,Y,Z,conf);
 xvec = [x(:), y(:)];
 xvec(:,3) = 0;
-xl = xvec;
 
-% aliasing frequency at x for M
-minmax_kGt_fun = @(x0p,xp) minmax_kt_circle(x0p,xp,Rl);
-fS = zeros(size(Mvec,2), size(xvec,1));
-
-for xdx = 1:size(xvec,1)
-    xl = xvec(xdx,:);
-    xc = xvec(xdx,:);
-    
-    mdx = 0;
-    for M = Mvec;
-        mdx = mdx + 1;
-        
-        fS(mdx,xdx) = aliasing_extended_modal(x0, kSx0, xl, minmax_kGt_fun, xc, M, conf);
-    end
-end
+% aliasing frequency at x
+fS = aliasing_modal(x0,kSx0,xvec, xc, M, conf);
+fS = reshape(fS, size(x));
 
 % plotting
 figure;
-plot(Mvec,fS.');
-set(gca, 'ColorOrderIndex', 1);
-xlim([1,100]);
-ylim([1000,20000]);
-xlabel('M');
-ylabel('f^S / Hz');
+imagesc(X,Y,fS)
+set(gca, 'YDir', 'normal');
+hold on;
+draw_loudspeakers(x0,[1 1 0], conf);
+hold off;
+title('aliasing frequency');
 
 % gnuplot
-gp_save('fS.txt',[Mvec.',fS]);
-gp_save('pos.txt', [x,y]);
+gp_save_matrix('fS.dat',x,y,fS);
 
-%% Aliasing Frequency near Rl=Rc
+%% Circle with R = M/k
+phiM = (0:1:359).';
 
-% RSr = M/kS
-RSr = bsxfun(@rdivide, Mvec.', 2*pi*fS./conf.c);
-% find M for which RSr which is very close to Rl
-[~, mdx] = min(abs(RSr - Rl), [],1);
-MSr = Mvec(mdx);
-% calculate frequency correspoding to kR == M
-fSr = MSr./(2*pi.*Rl)*conf.c;
-% gnuplot
-gp_save('fSr.txt', [MSr; fSr].');
+for f = fvec
+  RM = M.*conf.c./(2*pi*f);
+  xM = xref(1) + RM.*cosd(phiM);
+  yM = xref(2) + RM.*sind(phiM);
+  
+  gp_save(sprintf('RM_f%d.txt',f), [xM,yM]);
+end
 
-gS = fSr./fS(end,:)
+%% Sound Fields
+for f = fvec
+  filesuffix = sprintf('_f%d.dat', f);
+  
+  % normalisaton factor
+  g = sound_field_mono(xref(1), xref(2), xref(3), [xs, 0, 1, 0, 1], srcg, 1, f, conf);
+  
+  % synthesises sound field
+  conf.secondary_sources.number = L;
+  x0plot = secondary_source_positions(conf);
+  [P,x,y] = sound_field_mono_localwfs_sbl(X,Y,Z,xs,src,f,conf);
+  P = P./abs(g);
 
-%% Radius caused by Modal Bandwidth limitation
-f = logspace(0,6,100);
-Ml = 2.*pi.*f.*Rl/conf.c;
+  % ground truth sound field
+  conf.secondary_sources.number = Lref;
+  Pgt = sound_field_mono_localwfs_sbl(X,Y,Z,xs,src,f,conf);
+  Pgt = Pgt./abs(g);
+    
+  % error
+  eps = db((P-Pgt)./Pgt);
+  
+  % plot
+  conf.plot.usedb = false;
+  plot_sound_field(P,X,Y,Z,x0plot,conf);
+  title('sound field synthesised by discrete SSD');
 
-gp_save('Ml.txt',[f; Ml].');
+  conf.plot.usedb = true;
+  plot_sound_field(P./Pgt-1,X,Y,Z,x0plot,conf);
+  title('error between synthesised sound fields of discrete and continuous SSD');
+  
+  % gnuplot
+  gp_save_matrix(['P' filesuffix], x, y, real(P));
+  gp_save_matrix(['Pgt' filesuffix], x, y, real(Pgt));
+  gp_save_matrix(['eps' filesuffix], x, y, eps);
+end
 
 %% SSD
 conf.secondary_sources.number = L;

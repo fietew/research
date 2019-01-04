@@ -1,7 +1,7 @@
 #!/usr/bin/gnuplot
 
 #*****************************************************************************
-# Copyright (c) 2013-2018 Fiete Winter                                       *
+# Copyright (c) 2018      Fiete Winter                                       *
 #                         Institut fuer Nachrichtentechnik                   *
 #                         Universitaet Rostock                               *
 #                         Richard-Wagner-Strasse 31, 18119 Rostock, Germany  *
@@ -33,7 +33,7 @@ load 'array.cfg'
 load 'standalone.cfg'
 
 ################################################################################
-set t epslatex size 18.7cm,8.0cm color colortext standalone header ieeetran10pt.normal
+set t epslatex size 8.7cm,8.5cm color colortext standalone header ieeetran10pt.normal
 set output 'fig.tex'
 
 # legend
@@ -61,24 +61,20 @@ set tics scale 0.75 out nomirror
 set style line 101 lc rgb 'black' lw 4
 # labels
 load 'labels.cfg'
-set label 1 at graph 0.5, 1.075 center front
-set label 2 at graph 0.0, 1.075 left front '\stepcounter{tmpcounter}(\alph{tmpcounter})'
+set label 1 at graph 0.55, 1.07 center front
+set label 2 at graph 0.0, 1.07 left front '\stepcounter{tmpcounter}(\alph{tmpcounter})'
 set label 3 center front tc rgb '#808080'
 # variables
-sx = 0.17
-sy = 0.45
-dx = 0.01
-oriy1 = 0.52
-oriy2 = 0.065
-orix1 = 0*sx + 1*dx + 0.04
-orix2 = 1*sx + 2*dx + 0.04
-orix3 = 2*sx + 3*dx + 0.04
-orix4 = 3*sx + 4*dx + 0.04
-orix5 = 4*sx + 5*dx + 0.06
-f = 0
+sx = 0.375
+sy = 0.4
+orix1 = 0.105
+orix2 = 0.5
+oriy1 = 0.55
+oriy2 = 0.095
+f = 2000
 # functions
 db(x) = 20*log10(x)
-flabel = 'sprintf(''\footnotesize $f = %1.1f$ kHz'', f/1000.0)'
+flabel = 'sprintf(''\footnotesize $L = %d$, $\mu \approx %2.1f$'', L, mu)'
 
 ################################################################################
 set multiplot layout 1,5
@@ -91,10 +87,12 @@ set contour base
 # set cntrparam points 5
 # set cntrparam bspline
 set format '%g'
-do for [f=1000:4000:1000] {
-  set cntrparam level incremental f, 1.0, f
-  set table sprintf('cont_f%d.txt', f)
-  splot 'fS.dat' u 1:2:3 binary matrix w l
+Lvec = '36 896'
+
+do for [L in Lvec] {
+  set cntrparam level incremental f/1000.0, 500.0/1000.0, f/1000.0
+  set table sprintf('cont_L%s.txt', L)
+  splot sprintf('fS_L%s.dat', L) u 1:2:($3/1000) binary matrix w l
   unset table
 }
 
@@ -113,7 +111,8 @@ set size sx, sy
 set origin orix1, oriy1
 @pos_top_left
 # variables
-f = 1000
+L = 36
+mu = 1.40
 # labels
 set label 1 @flabel
 # plotting
@@ -123,44 +122,21 @@ load 'plotP.gnu'
 # positioning
 set size sx, sy
 set origin orix2, oriy1
-@pos_top
+@pos_top_right
 # variables
-f = 2000
+L = 896
+mu = -18.96
+# labels
+set label 1 @flabel
+set label 3 at screen 0.83, 0.965
+# colorbar
+set colorbox @colorbar_east
 # labels
 set label 1 @flabel
 # plotting
 load 'plotP.gnu'
 
 #### plot 3 ####
-# positioning
-set size sx, sy
-set origin orix3, oriy1
-@pos_top
-# variables
-f = 3000
-# labels
-set label 1 @flabel
-# plotting
-load 'plotP.gnu'
-
-#### plot 4 ####
-# positioning
-set size sx, sy
-set origin orix4, oriy1
-@pos_top
-# variables
-f = 4000
-# labels
-set label 1 @flabel
-set label 3 at screen 0.83, 0.965
-# colorbar
-set colorbox vert user origin screen 0.8, 0.5475 size graph 0.05,1.0
-# labels
-set label 1 @flabel
-# plotting
-load 'plotP.gnu'
-
-#### plot 5 ####
 # positioning
 set size sx, sy
 set origin orix1, oriy2
@@ -175,73 +151,29 @@ set palette maxcolors 0
 # colorbar
 unset colorbox
 # variables
-f = 1000
+L = 36
+mu = 1.40
 # labels
 set label 1 @flabel
 # plotting
 load 'ploteps.gnu'
 
-#### plot 6 ####
+#### plot 4 ####
 # positioning
 set size sx, sy
 set origin orix2, oriy2
 @pos_bottom
-# variables
-f = 2000
-# labels
-set label 1 @flabel
-# plotting
-load 'ploteps.gnu'
-
-#### plot 7 ####
-# positioning
-set size sx, sy
-set origin orix3, oriy2
-@pos_bottom
-# variables
-f = 3000
-# labels
-set label 1 @flabel
-set label 4 ''
-# plotting
-load 'ploteps.gnu'
-
-#### plot 8 ####
-# positioning
-set size sx, sy
-set origin orix4, oriy2
-@pos_bottom
 # colorbar
-set colorbox vert user origin screen 0.8625, 0.5475 size graph 0.05,1.0
+set colorbox @colorbar_east
 # variables
-f = 4000
+L = 896
+mu = -18.96
 # labels
 set label 1 @flabel
 # labels
-set label 3 at screen 0.8675, 0.965 '\footnotesize dB'
+set label 3 at graph 1.075, 1.05 '\footnotesize dB'
 # plotting
 load 'ploteps.gnu'
-
-#### plot 9 ####
-# positioning
-set size sx, sy
-set origin orix5, oriy2
-@pos_bottom_right
-# c-axis
-set cbrange [1:5]
-set cbtics 1
-# labels
-set label 1 '\footnotesize $\sffS(\sfpos)$'
-set label 3 at screen 0.93, 0.965 '\footnotesize kHz'
-# palette
-set palette maxcolors 4
-load 'sequential/Blues.plt'  # see gnuplot-colorbrewer
-set palette positive
-# colorbar
-set colorbox vert user origin screen 0.925, 0.5475 size graph 0.05,1.0
-# plotting
-plot 'fS.dat' u 1:2:($3/1000) binary matrix with image,\
-  'array.txt' @array_active
 
 ################################################################################
 unset multiplot

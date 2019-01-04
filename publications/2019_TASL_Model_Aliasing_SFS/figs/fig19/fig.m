@@ -1,4 +1,4 @@
-%
+% comparison of aliasing model of Donley and current approach
 
 %*****************************************************************************
 % Copyright (c) 2013-2018 Fiete Winter                                       *
@@ -27,33 +27,43 @@
 addpath('../../matlab');
 SFS_start;
 
+close all;
+clear variables;
+
 conf = SFS_config;
 
-conf.plot.usenormalisation = true;
-conf.plot.normalisation = 'center';
+conf.plot.usenormalisation = 0;
 conf.secondary_sources.geometry = 'circular';
 conf.secondary_sources.size = 3;
 conf.secondary_sources.center = [0,0,0];
 conf.c = 343;
 conf.resolution = 300;
-conf.xref = [-0.75,0.5,0];
 
+% conf.modal_window = 'max-rE';
 conf.localwfs_sbl.Npw = 1024;
-conf.localwfs_sbl.order = 27;
 conf.localwfs_sbl.fc = 500;
 
-Lref = 2048;
+xs = [0,-1,0];
+src = 'pw';
+
+Lref = 2^16;
 L = 56;
 R = conf.secondary_sources.size/2;
-M = conf.localwfs_sbl.order;
-xc = conf.xref;
-xs = [0 2.5 0];
-src = 'ps';
-srcg = 'ps';
-fvec = [1000, 2000, 3000, 4000];
-xref = conf.xref;
+f = 2500;
+k = 2*pi*f./conf.c;
 
-%% Aliasing Frequency
+RcVec = ([0:0.01:0.5 0.6:0.1:2*R])+0.01;
+Rl = 0.25;
+xc = [-0.9,   0, 0];
+xl = [ 0.5,-0.75, 0];
+conf.xref = xc;
+
+X = [-1.5, 1.5];
+Y = [-1.5, 1.5];
+Z = 0;
+
+
+%% Aliasing Frequencies
 % x0 and local wavenumber kS(x0) of virtual sound field at x0
 conf.secondary_sources.number = Lref;
 x0 = secondary_source_positions(conf);
@@ -63,78 +73,38 @@ x0(:,7) = 2.*pi.*R./L;  % sampling distance deltax0
 % local wavenumber of virtual sound field at x0
 kSx0 = local_wavenumber_vector(x0(:,1:3), xs, src);
 
-% evaluation points x
-X = [-1.55, 1.55];
-Y = [-1.55, 1.55];
-Z = 0;
-[x,y,~] = xyz_grid(X,Y,Z,conf);
-xvec = [x(:), y(:)];
-xvec(:,3) = 0;
+% 
+minmax_kGt_fun = @(x0p,xp) minmax_kt_circle(x0p,xp,Rl);
+% the old aliasing model only considers the centre line of the main lobe
+minmax_kSt_fun_old = @(x0p) minmax_kt_circle(x0p,xc,0.01);
 
-% aliasing frequency at x
-fS = aliasing_modal(x0,kSx0,xvec, xc, M, conf);
-fS = reshape(fS, size(x));
+fS = zeros(size(RcVec));
+fSdonley = fS;
+rdx = 0;
+for Rc = RcVec
+  rdx = rdx+1;
+  
+  % the old aliasing assumes, that the grating lobe has a width of Rc
+  % the aliasing frequency is reached if the distance between xl and the center
+  % line is (Rl + Rc)
+  minmax_kGt_fun_old = @(x0p,xp) minmax_kt_circle(x0p,xp,Rl+Rc);
+  
+  % 
+  minmax_kSt_fun = @(x0p) minmax_kt_circle(x0p,xc,Rc);
+  
+  fS(rdx)    = aliasing_extended_control(x0, kSx0, xl, minmax_kGt_fun, minmax_kSt_fun, conf);
+  fSdonley(rdx) = aliasing_extended_control(x0, kSx0, xl, minmax_kGt_fun_old, minmax_kSt_fun_old, conf);
+end
 
-% plotting
+%% plot 
 figure;
-imagesc(X,Y,fS)
-set(gca, 'YDir', 'normal');
-hold on;
-draw_loudspeakers(x0,[1 1 0], conf);
-hold off;
-title('aliasing frequency');
+plot(RcVec, fS, RcVec, fSdonley);
+title('estimated aliasing frequencies');
+legend('current approach', 'approach of Donley et al.');
+xlabel('R_c');
+ylabel('f^S');
+axis tight
 
-% gnuplot
-gp_save_matrix('fS.dat',x,y,fS);
+%% gnuplot
+gp_save('fS.txt', [RcVec; fSdonley; fS].');
 
-%% Circle with R = M/k
-phiM = (0:1:359).';
-
-for f = fvec
-  RM = M.*conf.c./(2*pi*f);
-  xM = xref(1) + RM.*cosd(phiM);
-  yM = xref(2) + RM.*sind(phiM);
-  
-  gp_save(sprintf('RM_f%d.txt',f), [xM,yM]);
-end
-
-%% Sound Fields
-for f = fvec
-  filesuffix = sprintf('_f%d.dat', f);
-  
-  % normalisaton factor
-  g = sound_field_mono(xref(1), xref(2), xref(3), [xs, 0, 1, 0, 1], srcg, 1, f, conf);
-  
-  % synthesises sound field
-  conf.secondary_sources.number = L;
-  x0plot = secondary_source_positions(conf);
-  [P,x,y] = sound_field_mono_localwfs_sbl(X,Y,Z,xs,src,f,conf);
-  P = P./abs(g);
-
-  % ground truth sound field
-  conf.secondary_sources.number = Lref;
-  Pgt = sound_field_mono_localwfs_sbl(X,Y,Z,xs,src,f,conf);
-  Pgt = Pgt./abs(g);
-    
-  % error
-  eps = db((P-Pgt)./Pgt);
-  
-  % plot
-  conf.plot.usedb = false;
-  plot_sound_field(P,X,Y,Z,x0plot,conf);
-  title('sound field synthesised by discrete SSD');
-
-  conf.plot.usedb = true;
-  plot_sound_field(P./Pgt-1,X,Y,Z,x0plot,conf);
-  title('error between synthesised sound fields of discrete and continuous SSD');
-  
-  % gnuplot
-  gp_save_matrix(['P' filesuffix], x, y, real(P));
-  gp_save_matrix(['Pgt' filesuffix], x, y, real(Pgt));
-  gp_save_matrix(['eps' filesuffix], x, y, eps);
-end
-
-%% SSD
-conf.secondary_sources.number = L;
-x0 = secondary_source_positions(conf);
-gp_save_loudspeakers('array.txt',x0);
