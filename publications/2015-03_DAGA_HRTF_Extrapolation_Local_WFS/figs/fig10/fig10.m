@@ -1,7 +1,7 @@
 % sound fields of point source and point source reproduced by NFC-HOA
 
 %*****************************************************************************
-% Copyright (c) 2013-2018 Fiete Winter                                       *
+% Copyright (c) 2013-2019 Fiete Winter                                       *
 %                         Institut fuer Nachrichtentechnik                   *
 %                         Universitaet Rostock                               *
 %                         Richard-Wagner-Strasse 31, 18119 Rostock, Germany  *

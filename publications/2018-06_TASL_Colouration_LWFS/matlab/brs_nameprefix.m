@@ -1,7 +1,7 @@
 function prefix = brs_nameprefix( conf )
 
 %*****************************************************************************
-% Copyright (c) 2013-2018 Fiete Winter                                       *
+% Copyright (c) 2013-2019 Fiete Winter                                       *
 %                         Institut fuer Nachrichtentechnik                   *
 %                         Universitaet Rostock                               *
 %                         Richard-Wagner-Strasse 31, 18119 Rostock, Germany  *

@@ -1,7 +1,7 @@
 function [w0, d0] = localwfs_weights_delays(x0, xv, xs, conf)
 
 %*****************************************************************************
-% Copyright (c) 2013-2018 Fiete Winter                                       *
+% Copyright (c) 2013-2019 Fiete Winter                                       *
 %                         Institut fuer Nachrichtentechnik                   *
 %                         Universitaet Rostock                               *
 %                         Richard-Wagner-Strasse 31, 18119 Rostock, Germany  *
