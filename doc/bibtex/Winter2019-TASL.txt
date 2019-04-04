@@ -4,5 +4,6 @@
   title         = {{A Geometric Model for Prediction of Spatial Aliasing in 2.5D Sound Field Synthesis}},
   journal       = {IEEE/ACM Transactions on Audio, Speech, and Language Processing},
   year          = {2019},
+  issn          = {2329-9290},
   url           = {https://doi.org/10.1109/TASLP.2019.2892895}
 }
