@@ -112,6 +112,10 @@ requirement. The shown versions or commits have to be interpreted as
 +==============================+=====+=======+=======+===========+===========+=========+=========+
 | :cite:`Winter2019-TASL`      |     |       |       | |2.4.3|_  |           |         | |5.0.3|_|
 +------------------------------+-----+-------+-------+-----------+-----------+---------+---------+
+| :cite:`Winter2019-DAGA`      |     |       |       | |2.5.0|_  |           |         | |5.0.3|_|
++------------------------------+-----+-------+-------+-----------+-----------+---------+---------+
+| :cite:`Winter2019-DAGA-Talk` |     |       |       | |2.5.0|_  |           |         | |5.0.3|_|
++------------------------------+-----+-------+-------+-----------+-----------+---------+---------+
 | :cite:`Winter2018-TASL`      |     |       |       | |2.4.2|_  |           |         | |5.0.3|_|
 +------------------------------+-----+-------+-------+-----------+-----------+---------+---------+
 | :cite:`Winter2018-DAGA`      |     |       |       | |2.4.2|_  |           |         | |5.0.3|_|
@@ -151,6 +155,7 @@ requirement. The shown versions or commits have to be interpreted as
 .. |2.4.1| replace:: 2.4.1
 .. |2.4.2| replace:: 2.4.2
 .. |2.4.3| replace:: 2.4.3
+.. |2.5.0| replace:: 2.5.0
 .. |7db339| replace:: 7db339
 .. |ef6c3a| replace:: ef6c3a
 
@@ -164,6 +169,7 @@ requirement. The shown versions or commits have to be interpreted as
 .. _2.4.1: http://dx.doi.org/10.5281/zenodo.894640
 .. _2.4.2: http://dx.doi.org/10.5281/zenodo.1197733
 .. _2.4.3: http://dx.doi.org/10.5281/zenodo.1472172
+.. _2.5.0: http://dx.doi.org/10.5281/zenodo.2597212
 .. _7db339: https://github.com/sfstoolbox/sfs-matlab/tree/7db3395da99713f3a94bfcff0c1ff666283d63ce
 .. _ef6c3a: https://github.com/sfstoolbox/sfs-matlab/tree/ef6c3ab0b7816a62f289eebc74af735d5370b9d3
 
