@@ -97,6 +97,18 @@ class CustomStyle(Style):
             ']'
         ]
         
+    def get_unpublished_template(self, e):
+        template = toplevel [
+            sentence [self.format_names('author')],
+            self.format_title(e, 'title'),
+            sentence [
+                self.format_btitle(e, 'note', as_sentence=False),
+                optional[ date ]
+            ],
+            self.format_web_refs(e),
+        ]
+        return template
+        
 class CustomLabelStyle(LabelStyle):
 
     # only year as label
@@ -108,18 +120,18 @@ class CustomSortingStyle(SortingStyle):
     
     
     month_indices = {
-        'January'   : '12',
-        'February'  : '11', 
-        'March'     : '10',
-        'April'     : '09',
-        'May'       : '08',
-        'June'      : '07',
-        'July'      : '06',
-        'August'    : '05',
-        'September' : '04',
-        'October'   : '03',
-        'November'  : '02',
-        'December'  : '01'
+        'January'   : '01',
+        'February'  : '02', 
+        'March'     : '03',
+        'April'     : '04',
+        'May'       : '05',
+        'June'      : '06',
+        'July'      : '07',
+        'August'    : '08',
+        'September' : '09',
+        'October'   : '10',
+        'November'  : '11',
+        'December'  : '12'
     }
     
     
@@ -129,9 +141,18 @@ class CustomSortingStyle(SortingStyle):
         if month in self.month_indices:
             month_key = self.month_indices[month]
         else:
-            month_key = '13'
+            month_key = '00'
         
         return (entry.fields.get('year', ''), month_key, entry.fields.get('title', ''))
+        
+    def sort(self, entries):
+        entry_dict = dict(
+            (self.sorting_key(entry), entry)
+            for entry in entries
+        )
+        sorted_keys = sorted(entry_dict, reverse = True)
+        sorted_entries = [entry_dict[key] for key in sorted_keys]
+        return sorted_entries
 
 class CustomNameStyle(NameStyle):
     
