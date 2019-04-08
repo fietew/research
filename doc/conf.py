@@ -24,6 +24,7 @@ import shlex
 
 # -- Custom Styles for BibTex ---------------------------------------------
 
+from pybtex.style.formatting import toplevel
 from pybtex.style.formatting.alpha import Style
 from pybtex.style.labels.alpha import LabelStyle
 from pybtex.style.sorting.author_year_title import SortingStyle
@@ -34,6 +35,8 @@ from pybtex.style.template import (
 )
 from pybtex.richtext import Text
 from pybtex.plugin import register_plugin
+
+date = words [optional_field('month'), field('year')]
 
 class CustomStyle(Style):
     
@@ -101,23 +104,20 @@ class CustomStyle(Style):
         template = toplevel [
             sentence [self.format_names('author')],
             self.format_title(e, 'title'),
-            sentence [
-                self.format_btitle(e, 'note', as_sentence=False),
-                optional[ date ]
-            ],
+            self.format_btitle(e, 'note'),
+            self.format_address_organization_publisher_date(e),
             self.format_web_refs(e),
         ]
         return template
         
 class CustomLabelStyle(LabelStyle):
-
+    
     # only year as label
     def format_label(self, entry):
         label = entry.fields["year"]
         return label
         
 class CustomSortingStyle(SortingStyle):
-    
     
     month_indices = {
         'January'   : '01',
@@ -199,7 +199,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'Fiete Winter\'s Research'
-copyright = '2015-2018, Fiete Winter'
+copyright = '2015-2019, Fiete Winter'
 author = 'Fiete Winter'
 
 # The version info for the project you're documenting, acts as replacement for
