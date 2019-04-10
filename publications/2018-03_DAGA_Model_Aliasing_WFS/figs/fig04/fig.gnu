@@ -30,10 +30,11 @@ set loadpath '../../../../tools/gnuplot/'
 
 load 'border.cfg'
 load 'array.cfg'
+load 'standalone.cfg'
 
 ################################################################################
-set t epslatex size 18.1cm,8cm color colortext header '\newcommand\ft\footnotesize\newcommand\st\scriptsize'
-set output 'tmp.tex'
+set t epslatex size 18.1cm,8cm color colortext standalone header daga.footnotesize
+set output 'fig.tex'
 
 # legend
 unset key
@@ -50,12 +51,12 @@ set tics scale 0.75 out nomirror
 # x-axis
 set xrange [-2:2]
 set xtics 1.5 offset 0,0.5
-set xlabel offset 0,1
+set xlabel offset 0,1.3
 LABEL_X = '$x$ / m'
 # y-axis
 set yrange [0:4]
 set ytics 1 offset 0.5,0
-set ylabel offset 3,0
+set ylabel offset 1,0
 LABEL_Y = '$y$ / m'
 # c-axis
 set cbtics offset -0.5,0
@@ -109,7 +110,7 @@ do for [f in freqs] {
 # labels
 set label 1 '\ft $\Delta_x \approx 23,5$ cm'
 set label 2 '\ft kHz'
-set label 3 at graph 0.5, 1.2 center front '\ft $\sff[superscript=sampled](\sfx,\sfy)$'
+set label 3 at graph 0.5, 1.15 center front '\ft $\sff[superscript=sampled](\sfx,\sfy)$'
 # positioning
 set size sx, sy
 set origin orix1, oriy1
@@ -181,7 +182,7 @@ plot filename.'_P.dat' binary matrix u 1:(-$2):3 with image,\
 #### plot 5 ####
 # labels
 set label 1 '\ft $f = 0.8$ kHz
-set label 3 at graph 1.1, 1.2 center front '\ft $ \sfpressure[superscript=sampled](\sfx,\sfy,\sfomega)$'
+set label 3 at graph 1.1, 1.15 center front '\ft $ \sfpressure[superscript=sampled](\sfx,\sfy,\sfomega)$'
 # positioning
 set size sx, sy
 set origin orix3, oriy1
@@ -262,8 +263,4 @@ plot filename.'_P.dat' binary matrix u 1:(-$2):3 with image,\
 ################################################################################
 unset multiplot
 
-# output
-set output # Closes the temporary output files.
-!sed 's|includegraphics{tmp}|includegraphics{fig}|' < tmp.tex > fig.tex
-!epstopdf tmp.eps --outfile='fig.pdf'
-set output 'tmp.tex'
+call 'pdflatex.gnu' 'fig'

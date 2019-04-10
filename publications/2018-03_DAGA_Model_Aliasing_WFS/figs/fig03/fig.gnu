@@ -30,10 +30,11 @@ set loadpath '../../../../tools/gnuplot/'
 
 load 'border.cfg'
 load 'array.cfg'
+load 'standalone.cfg'
 
 ################################################################################
-set t epslatex size 8.7cm,9cm color colortext header '\newcommand\ft\footnotesize\newcommand\st\scriptsize'
-set output 'tmp.tex'
+set t epslatex size 8.7cm,9cm color colortext standalone header daga.footnotesize
+set output 'fig.tex'
 
 # legend
 unset key
@@ -192,8 +193,4 @@ plot filename.'_PS.dat' binary matrix using 1:2:(color($3,$2)) with image,\
 ################################################################################
 unset multiplot
 
-# output
-set output # Closes the temporary output files.
-!sed 's|includegraphics{tmp}|includegraphics{fig}|' < tmp.tex > fig.tex
-!epstopdf tmp.eps --outfile='fig.pdf'
-set output 'tmp.tex'
+call 'pdflatex.gnu' 'fig'
