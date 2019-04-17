@@ -1,7 +1,7 @@
 
 @Unpublished{Winter2019-DAGA-Talk,
   author        = {Winter, Fiete},
-  title         = {Local Sound Field Synthesis - Physics and Perception},
+  title         = {{Local Sound Field Synthesis - Physics and Perception}},
   note          = {German Annual Conference on Acoustics (DAGA)},
   address       = {Rostock, Germany},
   month         = mar,
