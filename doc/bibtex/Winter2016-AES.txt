@@ -6,6 +6,6 @@
   year          = {2016},
   address       = {Paris, France},
   month         = may,
-  doi           = {10.5281/zenodo.49357},
+  data          = {10.5281/zenodo.49357},
   url           = {http://www.aes.org/e-lib/browse.cfm?elib=18156}
 }

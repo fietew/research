@@ -6,6 +6,6 @@
   year          = {2017},
   address       = {New Paltz, NY, USA},
   month         = oct,
-  doi           = {10.5281/zenodo.557196},
+  data          = {10.5281/zenodo.557196},
   url           = {https://doi.org/10.1109/WASPAA.2017.8170015}
 }

@@ -47,13 +47,13 @@ class CustomStyle(Style):
     def format_web_refs(self, e):
         return sentence [
             optional [ self.format_url(e) ],
-            optional [ self.format_doi(e) ],
+            optional [ self.format_data(e) ],
             optional [ self.format_repo(e) ],
             optional [ self.format_bibtex(e) ],
             ]
 
     def format_url(self, e):
-        return words [
+        return together [
             '[',
             href [
                 field('url'),
@@ -62,14 +62,14 @@ class CustomStyle(Style):
             ']'
         ]
         
-    def format_doi(self, e):
+    def format_data(self, e):
         # based on urlbst format.doi
-        return words [
+        return together [
             '[',
             href [
                 join [
                     'https://doi.org/',
-                    field('doi')
+                    field('data')
                     ],
                 'DATA'
                 ],
@@ -77,7 +77,7 @@ class CustomStyle(Style):
         ]
         
     def format_repo(self, e):
-        return words [
+        return together [
             '[',
             href [
                 field('repo'),
@@ -87,7 +87,7 @@ class CustomStyle(Style):
         ]
         
     def format_bibtex(self, e):
-        return words [
+        return together [
             '[',
             href [
                 join [

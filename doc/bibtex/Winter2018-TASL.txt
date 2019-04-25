@@ -9,6 +9,6 @@
   pages         = {1913-1924},
   month         = oct,
   issn          = {2329-9290},
-  doi           = {10.5281/zenodo.1158027},
+  data          = {10.5281/zenodo.1158027},
   url           = {https://doi.org/10.1109/TASLP.2018.2842435}
 }
