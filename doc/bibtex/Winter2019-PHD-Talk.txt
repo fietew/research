@@ -1,0 +1,9 @@
+
+@Unpublished{Winter2019-PHD-Talk,
+  author        = {Winter, Fiete},
+  title         = {{Local Sound Field Synthesis}},
+  note          = {PhD Defense},
+  address       = {Rostock, Germany},
+  month         = oct,
+  year          = {2019}
+}
