@@ -1,0 +1,61 @@
+% Illustration of 2.0 Stereophony
+
+%*****************************************************************************
+% Copyright (c) 2013-2019 Fiete Winter                                       *
+%                         Institut fuer Nachrichtentechnik                   *
+%                         Universitaet Rostock                               *
+%                         Richard-Wagner-Strasse 31, 18119 Rostock, Germany  *
+%                                                                            *
+% This file is part of the supplementary material for Fiete Winter's         *
+% scientific work and publications                                           *
+%                                                                            *
+% You can redistribute the material and/or modify it  under the terms of the *
+% GNU  General  Public  License as published by the Free Software Foundation *
+% , either version 3 of the License,  or (at your option) any later version. *
+%                                                                            *
+% This Material is distributed in the hope that it will be useful, but       *
+% WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY *
+% or FITNESS FOR A PARTICULAR PURPOSE.                                       *
+% See the GNU General Public License for more details.                       *
+%                                                                            *
+% You should  have received a copy of the GNU General Public License along   *
+% with this program. If not, see <http://www.gnu.org/licenses/>.             *
+%                                                                            *
+% http://github.com/fietew/publications           fiete.winter@uni-rostock.de*
+%*****************************************************************************
+
+\input{../standalone.tex}
+
+\begin{document}
+\begin{tikzpicture}
+  
+%\path[draw=black!80, thick, fill=black!20] (-3.7,-1.8) rectangle(3.7,4.2);
+
+% \useasboundingbox (-3.7,-1.8) rectangle(3.7,4.2);
+
+%\path[draw=black!80, thick, fill=red!10] (-3.5,-1.6) rectangle(3.5,4.0);
+
+\node[rotate=90] {\includegraphics[scale=0.2]{head.pdf}};
+\foreach \phi in {120, 60} {
+  \node[loudspeaker, anchor=cone, scale=2.0, fill=activecolor, rotate=\phi-180] 
+  (ls\phi) at (\phi:3){};
+}
+
+\pgfmathsetmacro{\anglewidth}{45}
+\foreach \phi in {120, 60} {
+  \foreach \R in {0.3, 0.5, 0.7}{
+    \draw[draw=black] ($(ls\phi.cone)+(\phi+\anglewidth:-\R)$) arc 
+      (\phi+\anglewidth:\phi-\anglewidth:-\R);
+  }
+}
+
+\pgfmathsetmacro\alphaArrowBegin{-30+90}
+\pgfmathsetmacro\alphaArrowEnd{30+90}  
+\draw<1>[triangle 45-triangle 45, thick, color=black!50] 
+(\alphaArrowBegin:3.4) arc (\alphaArrowBegin:\alphaArrowEnd:3.4) 
+node[pos=0.5, opacity=0.65, 
+rotate=-45]{\includegraphics[scale=0.20]{violin.pdf}};
+
+
+\end{tikzpicture}
+\end{document}

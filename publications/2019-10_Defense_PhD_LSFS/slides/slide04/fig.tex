@@ -1,0 +1,80 @@
+% Illustration of Sound Field Synthesis
+
+%*****************************************************************************
+% Copyright (c) 2013-2019 Fiete Winter                                       *
+%                         Institut fuer Nachrichtentechnik                   *
+%                         Universitaet Rostock                               *
+%                         Richard-Wagner-Strasse 31, 18119 Rostock, Germany  *
+%                                                                            *
+% This file is part of the supplementary material for Fiete Winter's         *
+% scientific work and publications                                           *
+%                                                                            *
+% You can redistribute the material and/or modify it  under the terms of the *
+% GNU  General  Public  License as published by the Free Software Foundation *
+% , either version 3 of the License,  or (at your option) any later version. *
+%                                                                            *
+% This Material is distributed in the hope that it will be useful, but       *
+% WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY *
+% or FITNESS FOR A PARTICULAR PURPOSE.                                       *
+% See the GNU General Public License for more details.                       *
+%                                                                            *
+% You should  have received a copy of the GNU General Public License along   *
+% with this program. If not, see <http://www.gnu.org/licenses/>.             *
+%                                                                            *
+% http://github.com/fietew/publications           fiete.winter@uni-rostock.de*
+%*****************************************************************************
+
+\input{../standalone.tex}
+
+\begin{document}
+\begin{tikzpicture}
+
+\node[circle, fill=black!50, minimum width=0.1] (source) at (-1,1) {};
+\node[below=0.25cm of source] {$\sfvirtualsource(\sfpos,\sfomega)$};
+\foreach \R in {0.3, 0.6, 0.9}
+{
+  \draw[draw=black!50] ($(source)+(-30:\R)$) arc (-30:50:\R);
+}
+
+\begin{scope}
+  \clip plot [anchor=south west, scale=7.0] file 
+  {fig.csv};
+  \node[anchor=south west, inner sep=0] at (0,0)  
+    {\includegraphics[scale=0.8]{soundfield}};
+\end{scope}
+
+\draw[draw=black!60,%
+  thick,%
+  add loudspeakers=30,
+  mark coordinate=(d0tmp) at 22.5/30,
+  mark coordinate=(Otmp) at 4/30,
+  mark coordinate=(g0tmp) at 12/30,
+  mark node=(normaltmp) at 1/30 with {%
+    sloped,%
+    minimum height=0.5cm,%
+    anchor=south west,%
+    inner sep=0cm,%
+    pos=0%
+  }
+  ]
+  plot[scale=7.0] file {fig.csv} -- cycle;
+
+\node[below of=d0tmp] (dO) {$\sfboundary$};
+\draw[-latex'] (dO) to[out=45,in=-45] (d0tmp);
+
+\node[above of=Otmp] {$\sfset$};
+
+\draw[-latex'] (normaltmp.south west) --
+  node[above, at end] {$\sfnormalsec(\sfpossec)$} (normaltmp.north west);
+  
+\node[below left of=normaltmp, node distance=0.75cm] {$\sfpossec$};
+
+% sound field of loudspeaker
+\foreach \R in {0.2, 0.4, 0.6}
+{
+  \draw[draw=black] ($(g0tmp)+(130:\R)$) arc (130:275:\R);
+}
+\node[right=0.25cm of g0tmp] {$\sfgreens(\sfpos - \sfpossec,\sfomega)$};
+
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,72 @@
+% Block diagram for sampling
+
+%*****************************************************************************
+% Copyright (c) 2013-2019 Fiete Winter                                       *
+%                         Institut fuer Nachrichtentechnik                   *
+%                         Universitaet Rostock                               *
+%                         Richard-Wagner-Strasse 31, 18119 Rostock, Germany  *
+%                                                                            *
+% This file is part of the supplementary material for Fiete Winter's         *
+% scientific work and publications                                           *
+%                                                                            *
+% You can redistribute the material and/or modify it  under the terms of the *
+% GNU  General  Public  License as published by the Free Software Foundation *
+% , either version 3 of the License,  or (at your option) any later version. *
+%                                                                            *
+% This Material is distributed in the hope that it will be useful, but       *
+% WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY *
+% or FITNESS FOR A PARTICULAR PURPOSE.                                       *
+% See the GNU General Public License for more details.                       *
+%                                                                            *
+% You should  have received a copy of the GNU General Public License along   *
+% with this program. If not, see <http://www.gnu.org/licenses/>.             *
+%                                                                            *
+% http://github.com/fietew/publications           fiete.winter@uni-rostock.de*
+%*****************************************************************************
+
+\input{../standalone}%
+\usepackage{trfsigns}%
+%
+\tikzstyle{op} = [draw, circle, inner sep=0pt,minimum size=12pt]%
+\tikzstyle{switch} = [draw, fill, shape=circle, minimum size=2pt, inner 
+sep=0pt]%
+\tikzstyle{block} = [draw=black, rectangle, minimum height=0.75cm, minimum 
+width=1.4cm]%
+\tikzstyle{connection} = [draw=black, -latex']%
+%
+\begin{document}
+%
+\begin{tikzpicture}[node distance = 2.15cm and 2.5cm]
+\pgfmathsetmacro\widthSampling{0.8}
+\pgfmathsetmacro\angleSampling{-60}
+
+\pgfmathsetmacro\offset{-4}
+
+%%%%% Spatial Domain %%%%%%
+
+% Input
+\coordinate (D) at (0,0);
+% Sampling
+\coordinate[below=of D] (sampling) {};
+\node[switch] (samplingIn) at ($(sampling)+(0,0.5*\widthSampling)$){};
+\node[switch] (samplingOut) at ($(sampling)+(0,-0.5*\widthSampling)$){};
+\draw(samplingIn) -- +(\angleSampling:\widthSampling);
+\path (samplingIn) -- (samplingOut) node[right=0.5cm,midway]{$\sfdelta_{\sfx}$};
+% Green's Function
+\node[block, below=of sampling, red] (G) {$\sfgreens(\sfpos,\sfomega)$};
+\node[left=0.0 of G, red]{Lautsprecher};
+% 
+\coordinate[below=1.85 of G] (P25D);
+ 
+\draw[connection] (D) -- (samplingIn) 
+  node[left, midway] {$\sfdriving(\sfpossec,\sfomega)$}
+  node[right, midway] {\shortstack{kontinuierliches\\Treibersignal}};
+\draw[connection] (samplingOut) -- (G) 
+  node[left, midway] {$\sfdriving[superscript=sampled](\sfpossec,\sfomega)$}
+  node[right, midway] {\shortstack{diskretisiertes\\Treibersignal}};
+\draw[connection] (G) -- (P25D) 
+  node[left, midway] {$\sfpressure(\sfpos,\sfomega)$}
+  node[right, midway] {\shortstack{rekonstruiertes\\Schallfeld}};
+\end{tikzpicture}
+%
+\end{document}

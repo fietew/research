@@ -1,0 +1,102 @@
+\documentclass[beamer, tikz, ignorerest, crop]{standalone}
+
+\usefonttheme{int}
+\usecolortheme{int}
+
+\usepackage{soundfield}
+
+%% Color
+\usepackage{color}
+\definecolor{activecolor}{RGB}{150, 150, 150}
+\definecolor{area}{RGB}{236, 236, 236}
+\definecolor{local}{RGB}{254, 204, 0}
+
+%% TikZ
+\usetikzlibrary{calc,%
+  decorations.pathreplacing,%
+  decorations.markings,%
+  calc,%
+  angles,%
+  arrows,%
+  arrows.meta,%
+  through,%
+  intersections,%
+  positioning,%
+  shapes.callouts}
+\usepackage{../audioicons}
+
+% loudspeaker
+\tikzstyle{loudspeaker} = [
+basic loudspeaker, 
+draw=black!70, 
+fill=white, 
+minimum height=3pt,
+minimum width=1.5pt,
+inner sep=0.5pt,
+relative cone width=1.5,
+relative cone height=2.5
+]
+
+% microphone
+\tikzstyle{microphone} = [
+  basic microphone,
+  draw, 
+  fill=gray!20, 
+  membrane style=very thick,
+  minimum width=8pt, 
+  minimum height=8pt,
+  inner sep=1pt
+]
+
+\tikzset{
+  mark coordinate/.style args={(#1) at #2}{
+    postaction={
+      decorate,
+      decoration={
+        markings,
+        mark=at position #2 with {\coordinate (#1);}
+      }
+    }
+  }
+}
+
+\tikzset{
+  mark node/.style args={(#1) at #2 with #3}{
+    postaction={
+      decorate,
+      decoration={
+        markings,
+        mark=at position #2 with {\node[#3](#1) {};}
+      }
+    }
+  }
+}
+
+\tikzset{
+  add loudspeakers/.style args={#1}{
+    postaction={
+      decorate,
+      decoration={
+        markings,
+        mark=between positions 0 and 1 step 1/#1 with {%
+          \node[loudspeaker,
+          fill=activecolor,
+          transform shape,
+          rotate=90,
+          anchor=cone] {};
+        },
+      }
+    }
+  }
+}
+
+\tikzstyle{superblock} = [fill=black!10, draw, very thick, rounded corners]
+\tikzstyle{block}[5.5cm] = [minimum height= 4cm, minimum width=#1, draw, very 
+thick, fill=white]
+\tikzstyle{both}[5.5cm] = [block=#1, fill=green!20]
+\tikzstyle{matlab}[5.5cm] = [block=#1, fill=red!20]
+\tikzstyle{python}[5.5cm] = [block=#1, fill=blue!20]
+\tikzstyle{planned}[5.5cm] = [block=#1, dashed]
+\tikzset{>={Stealth[inset=0pt,length=0.5cm,angle'=28,round]}}
+\tikzstyle{connect} = [draw=black, very thick, ->]
+\tikzstyle{exchange} = [draw=black, very thick, <->]

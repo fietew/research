@@ -1,0 +1,156 @@
+\ProvidesPackage{audioicons}
+\RequirePackage{tikz}
+\usetikzlibrary{calc}
+
+\makeatletter
+
+
+% Microphone ------------------------------------------------------------------
+\tikzset{membrane style/.initial={}}
+\pgfdeclareshape{basic microphone}{
+    \inheritsavedanchors[from=circle]
+    \inheritanchorborder[from=circle]
+    \inheritanchor[from=circle]{center}
+    \inheritanchor[from=circle]{south}
+    \inheritanchor[from=circle]{west}
+    \inheritanchor[from=circle]{north}
+    \inheritanchor[from=circle]{east}
+
+    \inheritbackgroundpath[from=circle]
+
+    \beforebackgroundpath{
+        \pgfkeys{/tikz/membrane style/.get=\tmp}
+        \expandafter\tikzset\expandafter{\tmp}
+        \tikz@options
+        
+		\setlength{\pgf@xa}{\radius}
+        \centerpoint \pgf@xb=\pgf@x \pgf@yb=\pgf@y
+		
+        \pgfpathmoveto{\pgfpoint{\pgf@xb -\pgf@xa}{\pgf@yb +\pgf@xa}}
+        \pgfpathlineto{\pgfpoint{\pgf@xb -\pgf@xa}{\pgf@yb - \pgf@xa}}
+
+        \pgfusepath{stroke,fill}
+    }
+}
+
+% Loudspeaker -----------------------------------------------------------------
+\tikzset{relative cone width/.initial={1}}
+\tikzset{relative cone height/.initial={2}}
+\pgfdeclareshape{basic loudspeaker}{
+  \inheritsavedanchors[from=rectangle]
+  \inheritanchorborder[from=rectangle]
+
+  \inheritanchor[from=rectangle]{center}
+  \inheritanchor[from=rectangle]{south east}
+  \inheritanchor[from=rectangle]{south}
+  \inheritanchor[from=rectangle]{south west}
+  \inheritanchor[from=rectangle]{west}
+  \inheritanchor[from=rectangle]{north west}
+  \inheritanchor[from=rectangle]{north}
+  \inheritanchor[from=rectangle]{north east}
+  \inheritanchor[from=rectangle]{east}
+
+  \backgroundpath{
+    \pgfkeys{/tikz/relative cone width/.get=\tmp}
+    \pgfmathsetlength \pgf@xc{\tmp*\pgfshapeminwidth}
+    \pgfkeys{/tikz/relative cone height/.get=\tmp}
+    \pgfmathsetlength \pgf@yc{0.5*(\tmp-1)*\pgfshapeminheight}
+    
+    \northeast \pgf@xa=\pgf@x \pgf@ya=\pgf@y
+    \southwest \pgf@xb=\pgf@x \pgf@yb=\pgf@y
+    
+    \pgfpathmoveto{\pgfpoint{\pgf@xa}{\pgf@ya}}
+    \pgfpathlineto{\pgfpoint{\pgf@xa + \pgf@xc}{\pgf@ya + \pgf@yc}}
+    \pgfpathlineto{\pgfpoint{\pgf@xa + \pgf@xc}{\pgf@yb - \pgf@yc}}
+    \pgfpathlineto{\pgfpoint{\pgf@xa}{\pgf@yb}}
+    \pgfpathlineto{\pgfpoint{\pgf@xa}{\pgf@ya}}
+    \pgfpathclose
+    \pgfpathlineto{\pgfpoint{\pgf@xb}{\pgf@ya}}
+    \pgfpathlineto{\pgfpoint{\pgf@xb}{\pgf@yb}}
+    \pgfpathlineto{\pgfpoint{\pgf@xa}{\pgf@yb}}
+    
+    \pgfusepath{stroke,fill}
+  }
+
+  % anchors for the cone
+  \savedanchor{\conenorth}{% needed cause 
+    \pgfkeys{/tikz/relative cone width/.get=\tmp}
+    \pgfmathsetlength{\pgf@xa}{\pgfshapeminwidth}
+    \pgfmathsetlength{\pgf@ya}{\pgfshapeminheight}
+    \pgfpoint{(\tmp+0.5)*\pgf@xa}{\pgf@ya}
+  }
+  \anchor{cone}{%
+    \conenorth
+    \pgf@y=0pt
+  }
+  \anchor{cone north}{%
+    \conenorth
+  }
+  \anchor{cone south}{%
+    \conenorth
+    \pgf@y=-\pgf@y
+  }
+}
+
+
+% Listener --------------------------------------------------------------------
+\pgfdeclareshape{basic listener}{
+	\inheritsavedanchors[from=circle]
+    \inheritanchorborder[from=circle]
+    \inheritanchor[from=circle]{center}
+    \inheritanchor[from=circle]{south}
+    \inheritanchor[from=circle]{west}
+    \inheritanchor[from=circle]{north}
+    \inheritanchor[from=circle]{east}
+
+    \inheritbackgroundpath[from=circle]
+
+	\beforebackgroundpath
+	{
+		\setlength{\pgf@xa}{\radius}		
+    	\centerpoint \pgf@xb=\pgf@x \pgf@yb=\pgf@y 		
+		\pgfpathmoveto{\pgfpoint{\pgf@xb -.4\pgf@xa}{\pgf@yb}}
+		\pgfpatharc{0}{360}{.1\pgf@xa}
+		\pgfpathmoveto{\pgfpoint{\pgf@xb +.4\pgf@xa}{\pgf@yb}}		
+		\pgfpatharc{180}{-180}{.1\pgf@xa}
+		\pgfpathmoveto{\pgfpoint{\pgf@xb}{\pgf@yb-.6\pgf@xa}}		
+		\pgfpatharc{270}{300}{.8\pgf@xa}
+		\pgfpathmoveto{\pgfpoint{\pgf@xb}{\pgf@yb-.6\pgf@xa}}		
+		\pgfpatharc{270}{240}{.8\pgf@xa}
+		\pgfusepath{stroke}
+	}    
+}
+
+
+% Plane wave --------------------------------------------------------------------
+\pgfdeclareshape{plane wave}{
+    \inheritsavedanchors[from=rectangle]
+    \inheritanchorborder[from=rectangle]
+
+    \inheritanchor[from=rectangle]{center}
+    \inheritanchor[from=rectangle]{south}
+    \inheritanchor[from=rectangle]{west}
+    \inheritanchor[from=rectangle]{north}
+    \inheritanchor[from=rectangle]{east}
+	
+	\backgroundpath{
+				       					
+        \pgfpathmoveto{\pgfpoint{-10}{-25}}
+		\pgfpathlineto{\pgfpoint{-10}{25}}
+		
+		\pgfpathmoveto{\pgfpoint{0}{-25}}
+		\pgfpathlineto{\pgfpoint{0}{25}}
+		
+		\pgfpathmoveto{\pgfpoint{10}{-25}}
+		\pgfpathlineto{\pgfpoint{10}{25}}
+		
+		\pgfpathmoveto{\pgfpoint{-15}{0}}
+		\pgfpathlineto{\pgfpoint{30}{0}}
+		\pgfsetarrowsstart{}
+        \pgfsetarrowsend{latex}
+
+		\pgfusepath{stroke}    
+	}
+}
+
+\makeatother

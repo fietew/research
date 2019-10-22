@@ -1,0 +1,46 @@
+% Measurement setup using dynamic binaural synthesis
+
+%*****************************************************************************
+% Copyright (c) 2013-2019 Fiete Winter                                       *
+%                         Institut fuer Nachrichtentechnik                   *
+%                         Universitaet Rostock                               *
+%                         Richard-Wagner-Strasse 31, 18119 Rostock, Germany  *
+%                                                                            *
+% This file is part of the supplementary material for Fiete Winter's         *
+% scientific work and publications                                           *
+%                                                                            *
+% You can redistribute the material and/or modify it  under the terms of the *
+% GNU  General  Public  License as published by the Free Software Foundation *
+% , either version 3 of the License,  or (at your option) any later version. *
+%                                                                            *
+% This Material is distributed in the hope that it will be useful, but       *
+% WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY *
+% or FITNESS FOR A PARTICULAR PURPOSE.                                       *
+% See the GNU General Public License for more details.                       *
+%                                                                            *
+% You should  have received a copy of the GNU General Public License along   *
+% with this program. If not, see <http://www.gnu.org/licenses/>.             *
+%                                                                            *
+% http://github.com/fietew/publications           fiete.winter@uni-rostock.de*
+%*****************************************************************************
+
+\begin{tikzpicture}
+
+%% SETUP OF 2017
+\node[anchor=north west,inner sep=0] (2017) at (0,0)
+  {\includegraphics[height=5cm]{fig_2017}};
+%
+\begin{scope}[shift={(2017.north west)}, 
+              x={(2017.north east)},
+              y={(2017.south west)}]
+  
+  \pgfmathsetmacro{\ratio}{5472/3648}
+  \pgfmathsetmacro{\offx}{0.04}
+  \pgfmathsetmacro{\offy}{\offx*\ratio}
+
+  \draw[color=white, latex'-] (630/5472, 413/3648) -- +(\offx,-\offy) 
+    node[right]{\color{white} Laserpointer};
+  \draw[latex'-] (2052/5472, 2787/3648) -- +(\offx,\offy) 
+    node[right]{Eingabegerät};
+\end{scope}
+\end{tikzpicture}

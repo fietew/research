@@ -1,0 +1,75 @@
+% Different path lengths in sterephonic setup
+
+%*****************************************************************************
+% Copyright (c) 2013-2019 Fiete Winter                                       *
+%                         Institut fuer Nachrichtentechnik                   *
+%                         Universitaet Rostock                               *
+%                         Richard-Wagner-Strasse 31, 18119 Rostock, Germany  *
+%                                                                            *
+% This file is part of the supplementary material for Fiete Winter's         *
+% scientific work and publications                                           *
+%                                                                            *
+% You can redistribute the material and/or modify it  under the terms of the *
+% GNU  General  Public  License as published by the Free Software Foundation *
+% , either version 3 of the License,  or (at your option) any later version. *
+%                                                                            *
+% This Material is distributed in the hope that it will be useful, but       *
+% WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY *
+% or FITNESS FOR A PARTICULAR PURPOSE.                                       *
+% See the GNU General Public License for more details.                       *
+%                                                                            *
+% You should  have received a copy of the GNU General Public License along   *
+% with this program. If not, see <http://www.gnu.org/licenses/>.             *
+%                                                                            *
+% http://github.com/fietew/publications           fiete.winter@uni-rostock.de*
+%*****************************************************************************
+
+\input{../standalone.tex}%
+%
+\tikzstyle{connection} = [draw=black, -latex']%
+%
+\begin{document}
+  \begin{tikzpicture}
+  \pgfmathsetmacro{\Rq}{3.0}
+  \pgfmathsetmacro{\Rls}{2.5}
+  \pgfmathsetmacro{\anglewidth}{45}
+  \pgfmathsetmacro{\phir}{0}
+  \pgfmathsetmacro{\Rr}{0.5}
+  \node (q) at (90:\Rq) {$q(t)$};  
+  \foreach \phils in {120, 60}
+  {
+    \node[loudspeaker,
+    fill=activecolor,
+    scale=2,
+    rotate=\phils-180,
+    anchor=cone] (ls\phils) at (\phils:\Rls)  {};
+    
+    \foreach \R in {0.3, 0.5, 0.7}{
+      \draw[draw=black] ($(ls\phils.cone)+(\phils+\anglewidth:-\R)$) arc 
+      (\phils+\anglewidth:\phils-\anglewidth:-\R);
+    }
+    
+    \draw[connection] (q) -| (ls\phils.west);
+  }  
+  %% point of evaluation
+  \coordinate[microphone, rotate=-90,
+  label={-90:Mikrofon}, label={90:$\sfpos$}] (pos) at (\phir:\Rr) {};
+  
+  \node[below=0.75cm of pos.center] (p) {$p(\sfpos,t)$};
+  \draw[connection] (pos) -- (p);
+  %%
+  \draw[blue, thick] (ls120.cone) -- node[right]{\color{blue}$d_{\mathrm L}$} 
+  (pos);
+  \draw[red, thick] (ls60.cone) -- node[right]{\color{red}$d_{\mathrm R}$} 
+  (pos);
+  
+  %\node at (105:1.65) {
+  %  $\begin{aligned}
+  %    \displaystyle
+  %    \Delta_{\tau_\phi} &= \tfrac{\Delta_d}{\sfspeedofsound} \\
+  %    &= \tfrac{d_2 - d_1}{\sfspeedofsound}
+  %  \end{aligned}$
+  %  };
+  
+  \end{tikzpicture}
+\end{document}
