@@ -6,7 +6,7 @@ if [ $# -ne 1 ]; then
 fi
 
 # find figure directories
-find $1 -iname "fig*" -type d | sort -n | while read -r directory ; do
+find $1 -type d \( -iname "fig*" -o -iname "slide*" \) | sort -n | while read -r directory ; do
     # 
     echo "Processing $directory"
 
@@ -17,7 +17,7 @@ find $1 -iname "fig*" -type d | sort -n | while read -r directory ; do
         pngfile=${pdffile%.pdf}.png
         pngfilelocal=`basename $pngfile`
         pdffilelocal=`basename $pdffile`        
-        echo "Converting $pdffilelocal to $pngfilelocal and creating README.md"
+        echo "Converting $pdffile to $pngfilelocal and creating README.md"
         convert -density 300 "$pdffile" -resize "800x800" -quality 100 "$pngfile"
         printf "![Fig]($pngfilelocal)\n" >> $directory/README.md
     done
