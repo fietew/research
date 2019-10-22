@@ -26,7 +26,7 @@
 
 unset output
 !pdflatex @ARG1.tex
-if (ARG2==2) { !pdflatex @ARG1.tex } # run LaTeX two times if requested
+!pdflatex @ARG1.tex
 !rm @ARG1.tex \
     @ARG1.aux \
     @ARG1-inc.eps \
