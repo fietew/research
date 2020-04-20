@@ -25,44 +25,26 @@
 List of Publications
 ====================
 
-Scientific Papers
------------------
-
-.. rubric:: 2019
+Journal Articles
+----------------
 
 .. bibliography:: ../publications.bib
   :style: customstyle
-  :filter: (type != 'misc') and (type != 'unpublished') and (year == '2019')
+  :filter: (type == 'article')
 
-.. rubric:: 2018
-
-.. bibliography:: ../publications.bib
-  :style: customstyle
-  :filter: (type != 'misc') and (type != 'unpublished') and (year == '2018')
-
-.. rubric:: 2017
+Peer-Reviewed Proceedings
+-------------------------
 
 .. bibliography:: ../publications.bib
   :style: customstyle
-  :filter: (type != 'misc') and (type != 'unpublished') and (year == '2017')
+  :filter: (type == 'inproceedings') and (keywords == 'reviewed')
 
-.. rubric:: 2016
-
-.. bibliography:: ../publications.bib
-  :style: customstyle
-  :filter: (type != 'misc') and (type != 'unpublished') and (year == '2016')
-
-.. rubric:: 2015
+Non-Peer-Reviewed Proceedings
+-----------------------------
 
 .. bibliography:: ../publications.bib
   :style: customstyle
-  :filter: (type != 'misc') and (type != 'unpublished') and (year == '2015')
-
-.. rubric:: 2014
-
-.. bibliography:: ../publications.bib
-  :style: customstyle
-  :filter: (type != 'misc') and (type != 'unpublished') and (year == '2014')
+  :filter: (type == 'inproceedings') and (keywords != 'reviewed')
 
 Talks
 -----
