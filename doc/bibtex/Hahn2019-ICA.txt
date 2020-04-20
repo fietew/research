@@ -1,0 +1,10 @@
+
+@InProceedings{Hahn2019-ICA,
+  author        = {Hahn, Nara and Winter, Fiete and Spors, Sascha},
+  booktitle     = {Proc. of 23rd International Congress on Acoustics (ICA)},
+  title         = {{2.5D Local wave field synthesis of a virtual plane wave using a time domain representation of spherical harmonics expansion}},
+  year          = {2019},
+  month         = sep,
+  address       = {Aachen, Germany},
+  pages         = {1132--1139}
+}

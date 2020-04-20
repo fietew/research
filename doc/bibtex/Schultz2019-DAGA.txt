@@ -1,0 +1,12 @@
+
+@InProceedings{Schultz2019-DAGA,
+  author        = {Schultz, Frank and Firtha, Gergely and Winter, Fiete and Spors, Sascha},
+  booktitle     = {Proc. of German Annual Conference on Acoustics (DAGA)},
+  title         = {{On the Connections of High-Frequency Approximated Ambisonics and Wave Field Synthesis}},
+  year          = {2019},
+  address       = {Rostock, Germany},
+  month         = mar,
+  pages         = {1446--1449},
+  file          = {:Schultz2019-DAGA - {On the Connections of High-Frequency Approximated Ambisonics and Wave Field Synthesis}.pdf:PDF},
+  location      = {Rostock, Germany}
+}
