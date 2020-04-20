@@ -25,6 +25,13 @@
 List of Publications
 ====================
 
+Doctoral Thesis
+---------------
+
+.. bibliography:: ../publications.bib
+  :style: customstyle
+  :filter: (type == 'phdthesis')
+
 Journal Articles
 ----------------
 
