@@ -1,10 +1,11 @@
 
 @InProceedings{Winter2017-EUSIPCO,
   author        = {Winter, Fiete and Hahn, Nara and Spors, Sascha},
+  booktitle     = {Proc. of 25th European Signal Processing Conference (EUSIPCO)},
   title         = {{Time-Domain Realisation of Model-Based Rendering for 2.5D Local Wave Field Synthesis Using Spatial Bandwidth-Limitation}},
-  booktitle     = {25th European Signal Processing Conference (EUSIPCO)},
   year          = {2017},
   address       = {Kos Island, Greece},
   month         = aug,
+  pages         = {688-692},
   url           = {https://doi.org/10.23919/EUSIPCO.2017.8081295}
 }

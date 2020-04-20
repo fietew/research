@@ -1,11 +1,12 @@
 
 @InProceedings{Winter2017-WASPAA,
   author        = {Winter, Fiete and Hold, Christoph and Wierstorf, Hagen and Raake, Alexander and Spors, Sascha},
+  booktitle     = {Proc. of IEEE Workshop on Applications of Signal Processing to Audio and Acoustics (WASPAA)},
   title         = {{Colouration in 2.5D local wave field synthesis using spatial bandwidth-limitation}},
-  booktitle     = {2017 IEEE Workshop on Applications of Signal Processing to Audio and Acoustics (WASPAA)},
   year          = {2017},
   address       = {New Paltz, NY, USA},
   month         = oct,
+  pages         = {160-164},
   data          = {10.5281/zenodo.557196},
   url           = {https://doi.org/10.1109/WASPAA.2017.8170015}
 }

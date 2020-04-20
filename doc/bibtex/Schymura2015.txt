@@ -1,10 +1,11 @@
 
 @InProceedings{Schymura2015,
   author        = {Schymura, Christopher and Winter, Fiete and Kolossa, Dorothea and Spors, Sascha},
+  booktitle     = {Proc. of Interspeech},
   title         = {{Binaural Sound Source Localisation and Tracking using a dynamic Spherical Head Model}},
-  booktitle     = {Interspeech},
   year          = {2015},
   month         = sep,
+  pages         = {165-169},
   location      = {Dresden, Germany},
   url           = {https://www.isca-speech.org/archive/interspeech_2015/i15_0165.html}
 }

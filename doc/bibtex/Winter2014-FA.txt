@@ -1,8 +1,8 @@
 
 @InProceedings{Winter2014-FA,
-  title         = {{Localization Properties of Data-based Binaural Synthesis including Translatory Head-Movements}},
   author        = {Winter, Fiete and Schultz, Frank and Spors, Sascha},
-  booktitle     = {Forum Acusticum},
+  booktitle     = {Proc. of Forum Acusticum},
+  title         = {{Localization Properties of Data-based Binaural Synthesis including Translatory Head-Movements}},
   year          = {2014},
   address       = {Krakow, Poland},
   month         = sep,

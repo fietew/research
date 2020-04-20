@@ -1,12 +1,11 @@
 
 @InProceedings{Winter2016-EUSIPCO,
-  title         = {{On Fractional Delay Interpolation for Local Wave Field Synthesis}},
   author        = {Winter, Fiete and Spors, Sascha},
-  booktitle     = {2016 24th European Signal Processing Conference (EUSIPCO)},
+  booktitle     = {Proc. of 24th European Signal Processing Conference (EUSIPCO)},
+  title         = {{On Fractional Delay Interpolation for Local Wave Field Synthesis}},
   year          = {2016},
   address       = {Budapest, Hungary},
   month         = aug,
   pages         = {2415--2419},
-  keywords      = {delay interpolation,fractional delay filter,local wave field synthesis,sound field synthesis,wave field synthesis},
   url           = {https://doi.org/10.1109/EUSIPCO.2016.7760682}
 }

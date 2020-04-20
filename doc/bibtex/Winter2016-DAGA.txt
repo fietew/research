@@ -1,8 +1,8 @@
 
 @InProceedings{Winter2016-DAGA,
-  title         = {{A Comparison of Sound Field Synthesis Techniques for Non-Smooth Secondary Source Distributions}},
   author        = {Winter, Fiete and Spors, Sascha},
-  booktitle     = {German Annual Conference on Acoustics (DAGA)},
+  booktitle     = {Proc. of German Annual Conference on Acoustics (DAGA)},
+  title         = {{A Comparison of Sound Field Synthesis Techniques for Non-Smooth Secondary Source Distributions}},
   year          = {2016},
   address       = {Aachen, Germany},
   month         = mar,

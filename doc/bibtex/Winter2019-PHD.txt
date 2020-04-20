@@ -1,9 +1,10 @@
 
 @PhDThesis{Winter2019-PHD,
   author        = {Winter, Fiete},
-  title         = {{Local Sound Field Synthesis}},
-  address       = {Rostock, Germany},
-  month         = nov,
+  title         = {Local Sound Field Synthesis},
   year          = {2019},
-  school        = {University of Rostock}
+  month         = nov,
+  school        = {Universität Rostock},
+  url           = {https://doi.org/10.18453/rosdok_id00002568},
+  address       = {Germany}
 }

@@ -1,8 +1,8 @@
 
 @InProceedings{Winter2016-AES,
-  title         = {{Database of binaural room impulse responses of an apartment-like environment}},
   author        = {Winter, Fiete and Wierstorf, Hagen and Podlubne, Ariel and Forgue, Thomas and Manh{\`{e}}s, J{\'{e}}rome and Herrb, Matthieu and Spors, Sascha and Raake, Alexander and Dan{\`{e}}s, Patrick},
   booktitle     = {Proc. of 140th Aud. Eng. Soc. Conv.},
+  title         = {{Database of binaural room impulse responses of an apartment-like environment}},
   year          = {2016},
   address       = {Paris, France},
   month         = may,

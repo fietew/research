@@ -4,3 +4,4 @@ print.use.tab = {off}
 pass.comments= {off}
 preserve.key.case = {on}
 delete.field = { repo }
+delete.field = { keywords }

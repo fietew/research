@@ -1,10 +1,11 @@
 
 @InProceedings{Winter2015-EuroNoise,
-  title         = {{Physical Properties of Local Wave Field Synthesis Using Circular Loudspeaker Arrays}},
   author        = {Winter, Fiete and Spors, Sascha},
-  booktitle     = {Proc. of the 10th European Congress and Exposition on Noise Control Engineering (EuroNoise)},
+  booktitle     = {Proc. of 10th European Congress and Exposition on Noise Control Engineering (EuroNoise)},
+  title         = {{Physical Properties of Local Wave Field Synthesis Using Circular Loudspeaker Arrays}},
   year          = {2015},
   address       = {Maastricht, The Netherlands},
   month         = may,
+  pages         = {263-268},
   url           = {http://www.int.uni-rostock.de/fileadmin/user_upload/publications/spors/2015/Winter_et_al_Euronoise_LWFS_Circular.pdf}
 }

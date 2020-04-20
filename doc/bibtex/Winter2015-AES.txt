@@ -1,8 +1,8 @@
 
 @InProceedings{Winter2015-AES,
-  title         = {{Physical Properties of Local Wave Field Synthesis Using Linear Loudspeaker Arrays}},
   author        = {Winter, Fiete and Spors, Sascha},
   booktitle     = {Proc. of 138th Aud. Eng. Soc. Conv.},
+  title         = {{Physical Properties of Local Wave Field Synthesis Using Linear Loudspeaker Arrays}},
   year          = {2015},
   address       = {Warsaw, Poland},
   month         = may,

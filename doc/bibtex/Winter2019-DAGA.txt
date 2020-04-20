@@ -1,9 +1,10 @@
 
 @InProceedings{Winter2019-DAGA,
   author        = {Winter, Fiete and Schultz, Frank and Spors, Sascha},
+  booktitle     = {Proc. of German Annual Conference on Acoustics (DAGA)},
   title         = {{Array Design for Increased Spatial Aliasing Frequency in Wave Field Synthesis Based on a Geometric Model}},
-  booktitle     = {German Annual Conference on Acoustics (DAGA)},
   year          = {2019},
   address       = {Rostock, Germany},
-  month         = mar
+  month         = mar,
+  pages         = {463--466}
 }
